@@ -58,14 +58,20 @@ export function Dropdown({
     };
   }, [open]);
 
-  const triggerElement = cloneElement(trigger, {
-    'aria-expanded': open,
-    'aria-haspopup': true,
-    onClick: (event: React.MouseEvent) => {
-      trigger.props.onClick?.(event);
-      setOpen((current) => !current);
+  const triggerElement = cloneElement(
+    trigger as ReactElement<Record<string, unknown>>,
+    {
+      'aria-expanded': open,
+      'aria-haspopup': true,
+      onClick: (event: React.MouseEvent) => {
+        const props = trigger.props as Record<string, unknown>;
+        if (typeof props.onClick === 'function') {
+          props.onClick(event);
+        }
+        setOpen((current) => !current);
+      },
     },
-  });
+  );
 
   return (
     <div ref={containerRef} className="relative inline-block">

@@ -1,19 +1,27 @@
 import { ChevronDown, LogOut, User } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import { Avatar } from '@/components/ui';
+import { useAuth } from '@/features/auth/context/useAuth';
 
 interface UserMenuProps {
   name?: string;
   email?: string;
-  onLogout?: () => void;
 }
 
 export function UserMenu({
   name = 'User',
   email = 'user@example.com',
-  onLogout,
 }: UserMenuProps) {
   const [open, setOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login', { replace: true });
+  };
 
   return (
     <div className="relative">
@@ -80,7 +88,7 @@ export function UserMenu({
               role="menuitem"
               onClick={() => {
                 setOpen(false);
-                onLogout?.();
+                void handleLogout();
               }}
               className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-danger-600 transition-colors hover:bg-danger-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
             >
