@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
 import App from './App';
+import { ToastProvider } from '@/components/ui';
+import { AuthProvider } from '@/features/auth/context/AuthProvider';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(
+  document.getElementById('root')!,
+).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider>
+        <ToastProvider>
+          <App />
+        </ToastProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
