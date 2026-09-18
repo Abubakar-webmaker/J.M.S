@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import { Loader2 } from 'lucide-react';
 
@@ -17,6 +17,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   loading?: boolean;
   fullWidth?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
 const baseStyles =
@@ -38,8 +40,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   danger:
     'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800',
 
-  link:
-    'text-green-600 hover:text-green-700 hover:underline',
+  link: 'text-green-600 hover:text-green-700 hover:underline',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -56,6 +57,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = 'md',
       loading = false,
       fullWidth = false,
+      leftIcon,
+      rightIcon,
       disabled,
       type = 'button',
       ...props
@@ -77,9 +80,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           .join(' ')}
         {...props}
       >
-        {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+        {loading ? (
+          <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+        ) : (
+          leftIcon && (
+            <span className="shrink-0" aria-hidden="true">
+              {leftIcon}
+            </span>
+          )
+        )}
 
         <span>{children}</span>
+
+        {!loading && rightIcon && (
+          <span className="shrink-0" aria-hidden="true">
+            {rightIcon}
+          </span>
+        )}
       </button>
     );
   },
