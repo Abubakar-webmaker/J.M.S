@@ -67,6 +67,7 @@ export function Sidebar({
               <NavLink
                 key={item.href}
                 to={item.href}
+                end={item.end}
                 onClick={onClose}
                 className={({ isActive }) =>
                   [

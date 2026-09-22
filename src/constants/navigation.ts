@@ -8,6 +8,8 @@ export interface NavigationItem {
   label: string;
   href: string;
   icon: typeof LayoutDashboard;
+  /** When true, NavLink only activates on an exact path match */
+  end?: boolean;
 }
 
 export const MAIN_NAVIGATION: NavigationItem[] = [
@@ -15,6 +17,7 @@ export const MAIN_NAVIGATION: NavigationItem[] = [
     label: 'Dashboard',
     href: '/app/dashboard',
     icon: LayoutDashboard,
+    end: true,
   },
   {
     label: 'Applications',
