@@ -1,80 +1,80 @@
 import { Navigate, Route, Routes } from 'react-router';
 
-function PlaceholderPage({ title }: { title: string }) {
-  return (
-    <div className="min-h-screen p-8">
-      <h1 className="text-2xl font-semibold">{title}</h1>
-    </div>
-  );
-}
+import { AppLayout } from '@/components/layout';
+import LoginPage from '@/pages/auth/LoginPage';
+import RegisterPage from '@/pages/auth/RegisterPage';
+import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
+import ApplicationsPage from '@/pages/app/ApplicationsPage';
+import AddApplicationPage from '@/pages/app/AddApplicationPage';
+import EditApplicationPage from '@/pages/app/EditApplicationPage';
+import ApplicationDetailsPage from '@/pages/app/ApplicationDetailsPage';
+import ResumesPage from '@/pages/app/ResumesPage';
+import ResumeDetailsPage from '@/pages/app/ResumeDetailsPage';
+import { DashboardPage } from '@/pages/app/dashboard/DashboardPage';
+import { PlaceholderPage } from '@/pages/app/PlaceholderPage';
+import { DesignSystemPage } from '@/pages/development/DesignSystemPage';
+
+import { ProtectedRoute } from './ProtectedRoute';
+import { PublicOnlyRoute } from './PublicOnlyRoute';
 
 export function AppRoutes() {
   return (
     <Routes>
-      {/* Public routes */}
-      <Route
-        path="/login"
-        element={<PlaceholderPage title="Login" />}
-      />
+      {/* Public */}
+      <Route element={<PublicOnlyRoute />}>
+        <Route path="/login" element={<LoginPage />} />
 
-      <Route
-        path="/register"
-        element={<PlaceholderPage title="Register" />}
-      />
+        <Route path="/register" element={<RegisterPage />} />
 
-      <Route
-        path="/forgot-password"
-        element={<PlaceholderPage title="Forgot Password" />}
-      />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
-      <Route
-        path="/reset-password"
-        element={<PlaceholderPage title="Reset Password" />}
-      />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+      </Route>
 
-      {/* Application routes */}
-      <Route
-        path="/app/dashboard"
-        element={<PlaceholderPage title="Dashboard" />}
-      />
+      {/* Protected */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/app" element={<AppLayout />}>
+          <Route
+            index
+            element={<Navigate to="dashboard" replace />}
+          />
 
-      <Route
-        path="/app/applications"
-        element={<PlaceholderPage title="Applications" />}
-      />
+          <Route path="dashboard" element={<DashboardPage />} />
 
-      <Route
-        path="/app/applications/new"
-        element={<PlaceholderPage title="Add Application" />}
-      />
+          {/* Applications — order matters: specific paths before :id */}
+          <Route path="applications" element={<ApplicationsPage />} />
 
-      <Route
-        path="/app/applications/:id"
-        element={<PlaceholderPage title="Application Details" />}
-      />
+          <Route path="applications/new" element={<AddApplicationPage />} />
 
-      <Route
-        path="/app/resumes"
-        element={<PlaceholderPage title="Resumes" />}
-      />
+          <Route
+            path="applications/:id/edit"
+            element={<EditApplicationPage />}
+          />
 
-      <Route
-        path="/app/profile"
-        element={<PlaceholderPage title="Profile" />}
-      />
+          <Route
+            path="applications/:id"
+            element={<ApplicationDetailsPage />}
+          />
 
-      <Route
-        path="/app/change-password"
-        element={<PlaceholderPage title="Change Password" />}
-      />
+          <Route path="resumes" element={<ResumesPage />} />
 
-      {/* Default */}
-      <Route
-        path="/"
-        element={<Navigate to="/login" replace />}
-      />
+          <Route path="resumes/:id" element={<ResumeDetailsPage />} />
 
-      {/* 404 */}
+          <Route
+            path="profile"
+            element={<PlaceholderPage title="Profile" />}
+          />
+
+          <Route
+            path="change-password"
+            element={<PlaceholderPage title="Change Password" />}
+          />
+        </Route>
+      </Route>
+
+      <Route path="/design-system" element={<DesignSystemPage />} />
+
       <Route
         path="*"
         element={<PlaceholderPage title="Page Not Found" />}

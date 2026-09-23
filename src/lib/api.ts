@@ -11,6 +11,15 @@ const api = axios.create({
   },
 });
 
+// Only set Content-Type: application/json when the request body is NOT FormData.
+// For FormData (file uploads) we let Axios set the multipart/form-data boundary automatically.
+api.interceptors.request.use((config) => {
+  if (config.data instanceof FormData) {
+    delete config.headers['Content-Type'];
+  }
+  return config;
+});
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
