@@ -5,6 +5,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { useNavigate } from 'react-router';
 
 import { authService } from '@/features/auth/services/auth.service';
 import type {
@@ -24,6 +25,7 @@ export function AuthProvider({
 }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const refreshSession = useCallback(async () => {
     try {
@@ -49,6 +51,22 @@ export function AuthProvider({
 
     void initializeAuth();
   }, [refreshSession]);
+
+  // Listen for session-expiry events fired by the Axios interceptor
+  useEffect(() => {
+    const handleSessionExpired = () => {
+      setUser(null);
+      navigate('/login', {
+        replace: true,
+        state: { sessionExpired: true },
+      });
+    };
+
+    window.addEventListener('auth:session-expired', handleSessionExpired);
+    return () => {
+      window.removeEventListener('auth:session-expired', handleSessionExpired);
+    };
+  }, [navigate]);
 
   const login = useCallback(
     async (data: LoginInput) => {
