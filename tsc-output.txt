@@ -1,0 +1,9 @@
+﻿npx : npm notice run client@0.0.0 npx
+At line:1 char:1
++ npx tsc --noEmit 2>&1 | Out-File -FilePath tsc-output.txt -Encoding u ...
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run client@0.0.0 npx:S 
+   tring) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run tsc --noEmit

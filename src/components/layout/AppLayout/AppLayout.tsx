@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
+
+import { useOnlineStatus } from '@/hooks/useOnlineStatus';
+
 import { Header } from '../Header/Header';
 import { Sidebar } from '../Sidebar/Sidebar';
 
 export function AppLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isOnline = useOnlineStatus();
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -35,9 +39,22 @@ export function AppLayout() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Offline banner */}
+      {!isOnline && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="border-b border-amber-200 bg-amber-50 px-4 py-2 text-center text-sm text-amber-800"
+        >
+          You're offline. Some actions may not work until your connection is
+          restored.
+        </div>
+      )}
+
       <div className="flex min-h-screen">
         <Sidebar />
 
+        {/* Mobile navigation drawer */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-overlay lg:hidden">
             <button
@@ -57,9 +74,7 @@ export function AppLayout() {
         )}
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <Header
-            onMenuClick={() => setMobileMenuOpen(true)}
-          />
+          <Header onMenuClick={() => setMobileMenuOpen(true)} />
 
           <main className="min-w-0 flex-1">
             <Outlet />

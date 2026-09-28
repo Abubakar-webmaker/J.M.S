@@ -1,5 +1,6 @@
 import { Menu } from 'lucide-react';
 import { useLocation } from 'react-router';
+
 import { UserMenu } from '../UserMenu/UserMenu';
 
 interface HeaderProps {
@@ -11,13 +12,13 @@ const PAGE_TITLES: Record<string, string> = {
   '/app/applications': 'Applications',
   '/app/resumes': 'Resumes',
   '/app/profile': 'Profile',
+  '/app/change-password': 'Change Password',
 };
 
 export function Header({ onMenuClick }: HeaderProps) {
   const location = useLocation();
 
-  const title =
-    PAGE_TITLES[location.pathname] ?? 'Job Tracker';
+  const title = PAGE_TITLES[location.pathname] ?? 'Job Tracker';
 
   return (
     <header className="sticky top-0 z-header h-16 border-b border-border bg-surface">
@@ -28,6 +29,7 @@ export function Header({ onMenuClick }: HeaderProps) {
             onClick={onMenuClick}
             className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-neutral-100 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
             aria-label="Open navigation menu"
+            aria-expanded={false}
           >
             <Menu className="h-5 w-5" aria-hidden="true" />
           </button>

@@ -25,13 +25,17 @@ export function LoginForm() {
   const from =
     (
       location.state as
-        | { from?: { pathname?: string }; passwordReset?: boolean }
+        | { from?: { pathname?: string }; passwordReset?: boolean; sessionExpired?: boolean }
         | null
     )?.from?.pathname ?? '/app/dashboard';
 
   const passwordReset =
     (location.state as { passwordReset?: boolean } | null)
       ?.passwordReset === true;
+
+  const sessionExpired =
+    (location.state as { sessionExpired?: boolean } | null)
+      ?.sessionExpired === true;
 
   const {
     register,
@@ -71,6 +75,15 @@ export function LoginForm() {
 
   return (
     <>
+      {sessionExpired && (
+        <div
+          role="alert"
+          className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800"
+        >
+          Your session has expired. Please sign in again.
+        </div>
+      )}
+
       {passwordReset && (
         <div
           role="status"

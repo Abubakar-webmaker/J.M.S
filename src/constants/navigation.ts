@@ -1,5 +1,7 @@
 import {
+  BriefcaseBusiness,
   FileText,
+  KeyRound,
   LayoutDashboard,
   User,
 } from 'lucide-react';
@@ -22,7 +24,7 @@ export const MAIN_NAVIGATION: NavigationItem[] = [
   {
     label: 'Applications',
     href: '/app/applications',
-    icon: FileText,
+    icon: BriefcaseBusiness,
   },
   {
     label: 'Resumes',
@@ -36,5 +38,12 @@ export const ACCOUNT_NAVIGATION: NavigationItem[] = [
     label: 'Profile',
     href: '/app/profile',
     icon: User,
+    end: true,
+  },
+  {
+    label: 'Change Password',
+    href: '/app/change-password',
+    icon: KeyRound,
+    end: true,
   },
 ];
