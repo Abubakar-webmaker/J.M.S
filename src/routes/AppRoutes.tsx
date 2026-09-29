@@ -12,7 +12,9 @@ import ApplicationDetailsPage from '@/pages/app/ApplicationDetailsPage';
 import ResumesPage from '@/pages/app/ResumesPage';
 import ResumeDetailsPage from '@/pages/app/ResumeDetailsPage';
 import { DashboardPage } from '@/pages/app/dashboard/DashboardPage';
-import { PlaceholderPage } from '@/pages/app/PlaceholderPage';
+import { ProfilePage } from '@/pages/app/profile/ProfilePage';
+import { ChangePasswordPage } from '@/pages/app/change-password/ChangePasswordPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/development/DesignSystemPage';
 
 import { ProtectedRoute } from './ProtectedRoute';
@@ -21,64 +23,45 @@ import { PublicOnlyRoute } from './PublicOnlyRoute';
 export function AppRoutes() {
   return (
     <Routes>
-      {/* Public */}
+      {/* Public-only routes — redirect to dashboard if already logged in */}
       <Route element={<PublicOnlyRoute />}>
         <Route path="/login" element={<LoginPage />} />
-
         <Route path="/register" element={<RegisterPage />} />
-
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-
         <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Route>
 
-      {/* Protected */}
+      {/* Protected routes — redirect to login if not authenticated */}
       <Route element={<ProtectedRoute />}>
         <Route path="/app" element={<AppLayout />}>
-          <Route
-            index
-            element={<Navigate to="dashboard" replace />}
-          />
+          <Route index element={<Navigate to="dashboard" replace />} />
 
           <Route path="dashboard" element={<DashboardPage />} />
 
-          {/* Applications — order matters: specific paths before :id */}
+          {/* Applications — specific paths must come before :id */}
           <Route path="applications" element={<ApplicationsPage />} />
-
           <Route path="applications/new" element={<AddApplicationPage />} />
+          <Route path="applications/:id/edit" element={<EditApplicationPage />} />
+          <Route path="applications/:id" element={<ApplicationDetailsPage />} />
 
-          <Route
-            path="applications/:id/edit"
-            element={<EditApplicationPage />}
-          />
-
-          <Route
-            path="applications/:id"
-            element={<ApplicationDetailsPage />}
-          />
-
+          {/* Resumes */}
           <Route path="resumes" element={<ResumesPage />} />
-
           <Route path="resumes/:id" element={<ResumeDetailsPage />} />
 
-          <Route
-            path="profile"
-            element={<PlaceholderPage title="Profile" />}
-          />
+          {/* Profile & Account */}
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="change-password" element={<ChangePasswordPage />} />
 
-          <Route
-            path="change-password"
-            element={<PlaceholderPage title="Change Password" />}
-          />
+          {/* Any unknown /app/* route → 404 */}
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
+      {/* Dev-only */}
       <Route path="/design-system" element={<DesignSystemPage />} />
 
-      <Route
-        path="*"
-        element={<PlaceholderPage title="Page Not Found" />}
-      />
+      {/* Global 404 */}
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
