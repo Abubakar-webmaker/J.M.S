@@ -10,6 +10,7 @@ export { ErrorState } from './ErrorState';
 export { FormField } from './FormField';
 export { Input } from './Input';
 export { Modal } from './Modal';
+export { OtpInput } from './OtpInput';
 export { PasswordInput } from './PasswordInput';
 export { SearchInput } from './SearchInput';
 export { Select } from './Select';

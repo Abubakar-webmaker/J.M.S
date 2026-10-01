@@ -11,6 +11,8 @@ import { authService } from '@/features/auth/services/auth.service';
 import type {
   LoginInput,
   RegisterInput,
+  ResendOtpInput,
+  VerifyOtpInput,
 } from '@/features/auth/types/auth.types';
 import type { User } from '@/types';
 
@@ -79,9 +81,25 @@ export function AuthProvider({
 
   const register = useCallback(
     async (data: RegisterInput) => {
-      const response = await authService.register(data);
+      // Account is created but not yet active. No session is issued
+      // until the emailed OTP is verified.
+      return authService.register(data);
+    },
+    [],
+  );
+
+  const verifyOtp = useCallback(
+    async (data: VerifyOtpInput) => {
+      const response = await authService.verifyOtp(data);
       setUser(response.user);
-      return response.user;
+      return response;
+    },
+    [],
+  );
+
+  const resendOtp = useCallback(
+    async (data: ResendOtpInput) => {
+      return authService.resendOtp(data);
     },
     [],
   );
@@ -101,10 +119,12 @@ export function AuthProvider({
       isLoading,
       login,
       register,
+      verifyOtp,
+      resendOtp,
       logout,
       refreshSession,
     }),
-    [user, isLoading, login, register, logout, refreshSession],
+    [user, isLoading, login, register, verifyOtp, resendOtp, logout, refreshSession],
   );
 
   return (

@@ -6,7 +6,10 @@
 const AUTH_ENDPOINTS = [
   '/auth/login',
   '/auth/register',
+  '/auth/verify-otp',
+  '/auth/resend-otp',
   '/auth/forgot-password',
+  '/auth/verify-reset-otp',
   '/auth/reset-password',
   '/auth/me',
 ];

@@ -15,6 +15,7 @@ import {
   registerSchema,
   type RegisterFormValues,
 } from '../../schemas/register.schema';
+import { OTP_LENGTH } from '../../schemas/verify-otp.schema';
 
 export function RegisterForm() {
   const navigate = useNavigate();
@@ -39,17 +40,18 @@ export function RegisterForm() {
 
   const onSubmit = async (values: RegisterFormValues) => {
     try {
-      await registerUser(values);
+      const result = await registerUser(values);
 
       showToast({
         variant: 'success',
-        title: 'Account created',
-        message: 'Your account has been created successfully.',
+        title: 'Verify your email',
+        message: `We sent a ${OTP_LENGTH}-digit code to ${result.email}.`,
       });
 
-      navigate('/app/dashboard', {
-        replace: true,
-      });
+      navigate(
+        `/verify-otp?email=${encodeURIComponent(result.email)}`,
+        { replace: true },
+      );
     } catch (error) {
       if (error instanceof AppApiError) {
         showToast({ variant: 'error', title: 'Error', message: error.message });

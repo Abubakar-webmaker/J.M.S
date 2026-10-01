@@ -8,7 +8,7 @@ export default function ResetPasswordPage() {
   return (
     <AuthLayout
       title="Reset Your Password"
-      subtitle="Enter your new password"
+      subtitle="Reset codes are now handled from the forgot-password page"
       illustration={resetImg}
     >
       <ResetPasswordForm />

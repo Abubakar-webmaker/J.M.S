@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router';
 import { AppLayout } from '@/components/layout';
 import LoginPage from '@/pages/auth/LoginPage';
 import RegisterPage from '@/pages/auth/RegisterPage';
+import VerifyOtpPage from '@/pages/auth/VerifyOtpPage';
 import ForgotPasswordPage from '@/pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from '@/pages/auth/ResetPasswordPage';
 import ApplicationsPage from '@/pages/app/ApplicationsPage';
@@ -27,6 +28,7 @@ export function AppRoutes() {
       <Route element={<PublicOnlyRoute />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-otp" element={<VerifyOtpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Route>
