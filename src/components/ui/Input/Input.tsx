@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="mb-1.5 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-medium text-neutral-900"
           >
             {label}
           </label>
@@ -26,7 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <div className={leftIcon ? 'relative' : undefined}>
           {leftIcon && (
             <span
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"
               aria-hidden="true"
             >
               {leftIcon}
@@ -45,15 +45,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                   : undefined
             }
             className={[
-              'min-h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900',
-              'placeholder:text-slate-400',
-              'transition-colors duration-200',
-              'focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-100',
-              'disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400',
+              'min-h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm text-neutral-900',
+              'placeholder:text-neutral-500',
+              'transition-all duration-200',
+              'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100 focus:ring-offset-1',
+              'disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-500',
               leftIcon ? 'pl-9' : '',
               error
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
-                : 'border-slate-300',
+                ? 'border-danger-500 focus:border-danger-500 focus:ring-danger-100'
+                : 'border-neutral-300',
               className,
             ]
               .filter(Boolean)
@@ -65,7 +65,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && (
           <p
             id={`${inputId}-error`}
-            className="mt-1.5 text-sm text-red-600"
+            className="mt-2 text-sm text-danger-600"
           >
             {error}
           </p>
@@ -74,7 +74,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {!error && hint && (
           <p
             id={`${inputId}-hint`}
-            className="mt-1.5 text-sm text-slate-500"
+            className="mt-2 text-sm text-neutral-600"
           >
             {hint}
           </p>

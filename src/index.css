@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+@layer base {
+  @import "tailwindcss/theme" layer;
+}
+
+@layer components {
+  @layer utilities {
+    .text-primary {
+      @apply text-green-600;
+    }
+    
+    .text-text {
+      color: var(--color-text);
+    }
+    
+    .text-text-muted {
+      color: var(--color-text-muted);
+    }
+    
+    .text-text-secondary {
+      color: var(--color-text-secondary);
+    }
+    
+    .bg-primary\/10 {
+      background-color: rgb(34 197 94 / 0.1);
+    }
+  }
+}
+
 :root {
   /* ========================================
      COLORS
@@ -50,12 +78,22 @@
   --color-info-600: #2563eb;
   --color-info-700: #1d4ed8;
 
+  /* Job Status Colors */
+  --color-status-applied: #3b82f6;
+  --color-status-screening: #f59e0b;
+  --color-status-interview: #8b5cf6;
+  --color-status-offer: #10b981;
+  --color-status-rejected: #ef4444;
+  --color-status-ghosted: #6b7280;
+  --color-status-withdrawn: #94a3b8;
+
   /* App */
   --color-background: #f8fafc;
   --color-surface: #ffffff;
 
   --color-text-primary: #17251f;
   --color-text-secondary: #475569;
+  --color-text: #17251f;
   --color-text-muted: #64748b;
   --color-text-disabled: #94a3b8;
 

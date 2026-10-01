@@ -20,19 +20,19 @@ export function RecentApplications({
   return (
     <section
       aria-labelledby="recent-apps-heading"
-      className="rounded-xl border border-border bg-surface p-5 shadow-sm"
+      className="rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm"
     >
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-6 flex items-center justify-between">
         <h2
           id="recent-apps-heading"
-          className="text-sm font-semibold text-text"
+          className="text-lg font-semibold text-neutral-900"
         >
           Recent applications
         </h2>
 
         <Link
           to="/app/applications"
-          className="text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-600"
         >
           View all
         </Link>
@@ -52,7 +52,7 @@ export function RecentApplications({
           }
         />
       ) : (
-        <ul className="divide-y divide-border" aria-label="Recent applications">
+        <ul className="divide-y divide-neutral-100" aria-label="Recent applications">
           {applications.map((app) => {
             const statusConfig =
               APPLICATION_STATUS_CONFIG[
@@ -63,13 +63,13 @@ export function RecentApplications({
               <li key={app.id}>
                 <Link
                   to={`/app/applications/${app.id}`}
-                  className="flex items-center justify-between gap-4 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 py-4 px-1 transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
                 >
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-text">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-neutral-900">
                       {app.jobTitle}
                     </p>
-                    <p className="truncate text-xs text-text-muted">
+                    <p className="truncate text-xs text-neutral-600 mt-1">
                       {app.companyName}
                     </p>
                   </div>
@@ -77,7 +77,7 @@ export function RecentApplications({
                   <div className="flex shrink-0 items-center gap-3">
                     <time
                       dateTime={app.applicationDate}
-                      className="hidden text-xs text-text-muted sm:block"
+                      className="hidden text-xs text-neutral-600 sm:block"
                     >
                       {new Date(app.applicationDate).toLocaleDateString(
                         'en-US',

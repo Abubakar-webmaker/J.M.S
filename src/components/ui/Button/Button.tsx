@@ -22,25 +22,25 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const baseStyles =
-  'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+  'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-green-600 text-white shadow-sm hover:bg-green-700 active:bg-green-800',
+    'bg-primary-600 text-white shadow-md hover:bg-primary-700 active:bg-primary-800 hover:shadow-lg hover:translate-y-0.5',
 
   secondary:
-    'bg-slate-100 text-slate-800 hover:bg-slate-200 active:bg-slate-300',
+    'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300 hover:shadow-sm',
 
   outline:
-    'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 active:bg-slate-100',
+    'border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 active:bg-neutral-100 shadow-sm',
 
   ghost:
-    'text-slate-600 hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200',
+    'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-200',
 
   danger:
-    'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800',
+    'bg-danger-600 text-white shadow-md hover:bg-danger-700 active:bg-danger-800 hover:shadow-lg',
 
-  link: 'text-green-600 hover:text-green-700 hover:underline',
+  link: 'text-primary-600 hover:text-primary-700 hover:underline',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

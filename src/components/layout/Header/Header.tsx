@@ -21,20 +21,20 @@ export function Header({ onMenuClick }: HeaderProps) {
   const title = PAGE_TITLES[location.pathname] ?? 'Job Tracker';
 
   return (
-    <header className="sticky top-0 z-header h-16 border-b border-border bg-surface">
+    <header className="sticky top-0 z-40 h-16 border-b border-neutral-100 bg-white/95 backdrop-blur-sm">
       <div className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
           <button
             type="button"
             onClick={onMenuClick}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-neutral-100 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-neutral-600 transition-all hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 lg:hidden"
             aria-label="Open navigation menu"
             aria-expanded={false}
           >
             <Menu className="h-5 w-5" aria-hidden="true" />
           </button>
 
-          <h2 className="truncate text-lg font-semibold text-text">
+          <h2 className="truncate text-base font-semibold tracking-tight text-neutral-900 sm:text-lg">
             {title}
           </h2>
         </div>

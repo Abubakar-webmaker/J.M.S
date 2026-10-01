@@ -20,8 +20,8 @@ export function DashboardFilters({
   onRefresh,
 }: DashboardFiltersProps) {
   return (
-    <div className="flex shrink-0 items-center gap-3">
-      <div className="w-40">
+    <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:gap-3 md:w-auto md:gap-4">
+      <div className="w-full sm:w-auto sm:min-w-max">
         <Select
           aria-label="Select time period"
           value={period}
@@ -43,9 +43,11 @@ export function DashboardFilters({
         onClick={onRefresh}
         disabled={isRefreshing}
         aria-label="Refresh dashboard"
+        fullWidth
+        className="sm:w-auto"
         leftIcon={
           <RefreshCw
-            className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`}
+            className={`h-5 w-5 ${isRefreshing ? 'animate-spin' : ''}`}
             aria-hidden="true"
           />
         }

@@ -28,11 +28,11 @@ export function ApplicationTrendChart({ data }: ApplicationTrendChartProps) {
   return (
     <section
       aria-labelledby="trend-chart-heading"
-      className="rounded-xl border border-border bg-surface p-5 shadow-sm"
+      className="rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm"
     >
       <h2
         id="trend-chart-heading"
-        className="mb-4 text-sm font-semibold text-text"
+        className="mb-6 text-lg font-semibold text-neutral-900"
       >
         Application trend
       </h2>
@@ -56,18 +56,18 @@ export function ApplicationTrendChart({ data }: ApplicationTrendChartProps) {
               >
                 <CartesianGrid
                   strokeDasharray="3 3"
-                  stroke="var(--color-border)"
+                  stroke="var(--color-neutral-200)"
                 />
                 <XAxis
                   dataKey="date"
                   tickFormatter={formatAxisDate}
-                  tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }}
+                  tick={{ fontSize: 11, fill: 'var(--color-neutral-600)' }}
                   tickLine={false}
                   axisLine={false}
                 />
                 <YAxis
                   allowDecimals={false}
-                  tick={{ fontSize: 11, fill: 'var(--color-text-muted)' }}
+                  tick={{ fontSize: 11, fill: 'var(--color-neutral-600)' }}
                   tickLine={false}
                   axisLine={false}
                 />
@@ -78,16 +78,16 @@ export function ApplicationTrendChart({ data }: ApplicationTrendChartProps) {
                   contentStyle={{
                     fontSize: 12,
                     borderRadius: '8px',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid var(--color-neutral-200)',
                     background: 'var(--color-surface)',
-                    color: 'var(--color-text)',
+                    color: 'var(--color-neutral-900)',
                   }}
                 />
                 <Line
                   type="monotone"
                   dataKey="count"
                   name="Applications"
-                  stroke="var(--color-primary)"
+                  stroke="var(--color-primary-600)"
                   strokeWidth={2}
                   dot={false}
                   activeDot={{ r: 4 }}
@@ -98,7 +98,7 @@ export function ApplicationTrendChart({ data }: ApplicationTrendChartProps) {
         </>
       ) : (
         <div className="flex h-72 items-center justify-center">
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-neutral-600">
             No application activity for this period.
           </p>
         </div>

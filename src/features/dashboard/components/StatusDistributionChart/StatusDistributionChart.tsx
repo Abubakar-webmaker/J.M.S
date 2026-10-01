@@ -17,11 +17,11 @@ export function StatusDistributionChart({
   return (
     <section
       aria-labelledby="status-chart-heading"
-      className="rounded-xl border border-border bg-surface p-5 shadow-sm"
+      className="rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm"
     >
       <h2
         id="status-chart-heading"
-        className="mb-4 text-sm font-semibold text-text"
+        className="mb-6 text-lg font-semibold text-neutral-900"
       >
         Status distribution
       </h2>
@@ -58,7 +58,7 @@ export function StatusDistributionChart({
                       key={item.status}
                       fill={
                         DASHBOARD_STATUS_TOKENS[item.status] ??
-                        'var(--color-border)'
+                        'var(--color-neutral-300)'
                       }
                     />
                   ))}
@@ -72,9 +72,9 @@ export function StatusDistributionChart({
                   contentStyle={{
                     fontSize: 12,
                     borderRadius: '8px',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid var(--color-neutral-200)',
                     background: 'var(--color-surface)',
-                    color: 'var(--color-text)',
+                    color: 'var(--color-neutral-900)',
                   }}
                 />
               </PieChart>
@@ -82,7 +82,7 @@ export function StatusDistributionChart({
           </div>
 
           {/* Textual legend */}
-          <ul className="mt-4 space-y-1.5" aria-label="Status counts">
+          <ul className="mt-6 space-y-2" aria-label="Status counts">
             {data.map((item) => {
               const config =
                 APPLICATION_STATUS_CONFIG[
@@ -91,7 +91,7 @@ export function StatusDistributionChart({
               const label = config?.label ?? item.status;
               const color =
                 DASHBOARD_STATUS_TOKENS[item.status] ??
-                'var(--color-border)';
+                'var(--color-neutral-300)';
 
               return (
                 <li
@@ -100,13 +100,13 @@ export function StatusDistributionChart({
                 >
                   <span className="flex items-center gap-2">
                     <span
-                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      className="h-3 w-3 shrink-0 rounded-full"
                       style={{ backgroundColor: color }}
                       aria-hidden="true"
                     />
-                    <span className="text-text-muted">{label}</span>
+                    <span className="text-neutral-600">{label}</span>
                   </span>
-                  <span className="font-medium text-text">{item.count}</span>
+                  <span className="font-semibold text-neutral-900">{item.count}</span>
                 </li>
               );
             })}
@@ -114,7 +114,7 @@ export function StatusDistributionChart({
         </>
       ) : (
         <div className="flex h-56 items-center justify-center">
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-neutral-600">
             No application status data available.
           </p>
         </div>

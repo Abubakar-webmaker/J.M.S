@@ -7,7 +7,7 @@ export function Skeleton({ className = '' }: SkeletonProps) {
     <div
       aria-hidden="true"
       className={[
-        'animate-pulse rounded-md bg-slate-200',
+        'animate-pulse rounded-md bg-neutral-200',
         className,
       ]
         .filter(Boolean)
