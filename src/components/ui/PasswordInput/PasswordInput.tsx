@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, type ReactNode } from 'react';
 import type { InputHTMLAttributes } from 'react';
 import {
   Eye,
@@ -10,8 +10,20 @@ interface PasswordInputProps
   label?: string;
   error?: string;
   hint?: string;
+  required?: boolean;
+  leftIcon?: ReactNode;
 }
 
+/**
+ * Professional Password Input Component
+ * 
+ * Features:
+ * - Show/hide password toggle
+ * - Consistent sizing (h-10)
+ * - Error states
+ * - Optional icons
+ * - Accessibility support
+ */
 export const PasswordInput = forwardRef<
   HTMLInputElement,
   PasswordInputProps
@@ -23,6 +35,8 @@ export const PasswordInput = forwardRef<
       hint,
       id,
       className = '',
+      required = false,
+      leftIcon,
       ...props
     },
     ref,
@@ -36,13 +50,27 @@ export const PasswordInput = forwardRef<
         {label && (
           <label
             htmlFor={inputId}
-            className="mb-1.5 block text-sm font-medium text-slate-700"
+            className="mb-2 block text-sm font-semibold text-neutral-900"
           >
             {label}
+            {required && (
+              <span aria-hidden="true" className="ml-1 text-danger-600">
+                *
+              </span>
+            )}
           </label>
         )}
 
-        <div className="relative">
+        <div className={leftIcon ? 'relative' : 'relative'}>
+          {leftIcon && (
+            <span
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
+              aria-hidden="true"
+            >
+              {leftIcon}
+            </span>
+          )}
+
           <input
             ref={ref}
             id={inputId}
@@ -56,14 +84,16 @@ export const PasswordInput = forwardRef<
                   : undefined
             }
             className={[
-              'min-h-10 w-full rounded-lg border bg-white px-3 py-2 pr-11',
-              'text-sm text-slate-900 placeholder:text-slate-400',
-              'transition-colors duration-200',
-              'focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-100',
-              'disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400',
+              'h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm text-neutral-900',
+              'placeholder:text-neutral-500',
+              'transition-all duration-200',
+              'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100',
+              'disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-500',
+              leftIcon ? 'pl-9' : '',
+              'pr-11',
               error
-                ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
-                : 'border-slate-300',
+                ? 'border-danger-500 focus:border-danger-500 focus:ring-danger-100'
+                : 'border-neutral-300 hover:border-neutral-400 focus:border-primary-600',
               className,
             ]
               .filter(Boolean)
@@ -79,7 +109,7 @@ export const PasswordInput = forwardRef<
                 : 'Show password'
             }
             onClick={() => setVisible((current) => !current)}
-            className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600"
+            className="absolute right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center text-neutral-400 transition-colors hover:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
           >
             {visible ? (
               <EyeOff className="h-4 w-4" />
@@ -92,7 +122,7 @@ export const PasswordInput = forwardRef<
         {error && (
           <p
             id={`${inputId}-error`}
-            className="mt-1.5 text-sm text-red-600"
+            className="mt-2 text-sm font-medium text-danger-600"
           >
             {error}
           </p>
@@ -101,7 +131,7 @@ export const PasswordInput = forwardRef<
         {!error && hint && (
           <p
             id={`${inputId}-hint`}
-            className="mt-1.5 text-sm text-slate-500"
+            className="mt-2 text-sm text-neutral-600"
           >
             {hint}
           </p>

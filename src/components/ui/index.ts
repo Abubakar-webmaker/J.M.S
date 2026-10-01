@@ -4,6 +4,7 @@ export { Button } from './Button';
 export { Card } from './Card';
 export { Checkbox } from './Checkbox';
 export { Alert } from './Alert';
+export { Divider } from './Divider';
 export { EmptyState } from './EmptyState';
 export { ErrorState } from './ErrorState';
 export { FormField } from './FormField';

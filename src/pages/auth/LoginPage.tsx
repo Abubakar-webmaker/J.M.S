@@ -1,11 +1,12 @@
 import { AuthLayout, LoginForm } from '@/features/auth/components';
+import loginImg from '@/assets/Login.png';
 
 export default function LoginPage() {
   return (
     <AuthLayout
       title="Welcome Back"
       subtitle="Sign in to manage your job applications"
-      illustration="/assets/Login.png"
+      illustration={loginImg}
     >
       <LoginForm />
     </AuthLayout>
