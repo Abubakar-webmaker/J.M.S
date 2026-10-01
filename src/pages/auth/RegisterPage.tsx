@@ -6,8 +6,9 @@ import {
 export default function RegisterPage() {
   return (
     <AuthLayout
-      title="Create your account"
-      subtitle="Start tracking your job search in one place."
+      title="Create Your Account"
+      subtitle="Start tracking your job search in one place"
+      illustration="/assets/Register.png"
     >
       <RegisterForm />
     </AuthLayout>
