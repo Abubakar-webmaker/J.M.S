@@ -1,3 +1,5 @@
+import type { BadgeVariant } from '@/components/ui/Badge';
+
 export const APPLICATION_STATUSES = [
   'Applied',
   'Screening',
@@ -15,12 +17,7 @@ export const APPLICATION_STATUS_CONFIG: Record<
   ApplicationStatus,
   {
     label: string;
-    variant:
-      | 'neutral'
-      | 'success'
-      | 'warning'
-      | 'danger'
-      | 'info';
+    variant: BadgeVariant;
   }
 > = {
   Applied: {

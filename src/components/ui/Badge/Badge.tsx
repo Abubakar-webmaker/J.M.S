@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
 
-type BadgeVariant =
+export type BadgeVariant =
   | 'neutral'
   | 'success'
   | 'warning'
@@ -14,7 +14,7 @@ type BadgeVariant =
   | 'ghosted'
   | 'withdrawn';
 
-interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
 }
 

@@ -98,7 +98,7 @@ export function ApplicationTable({
                   </td>
 
                   <td className="px-6 py-4">
-                    <Badge variant={statusConfig.variant as any}>
+                    <Badge variant={statusConfig.variant}>
                       {statusConfig.label}
                     </Badge>
                   </td>

@@ -29,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="mb-2 block text-sm font-semibold text-neutral-900"
+            className="mb-1 block text-xs font-semibold text-neutral-900 sm:text-sm"
           >
             {label}
             {required && (
@@ -82,7 +82,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && (
           <p
             id={`${inputId}-error`}
-            className="mt-2 text-sm font-medium text-danger-600"
+            className="mt-1 text-xs font-medium text-danger-600"
           >
             {error}
           </p>
@@ -91,7 +91,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {!error && hint && (
           <p
             id={`${inputId}-hint`}
-            className="mt-2 text-sm text-neutral-600"
+            className="mt-1.5 text-xs text-neutral-600"
           >
             {hint}
           </p>

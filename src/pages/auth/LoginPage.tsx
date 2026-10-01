@@ -1,5 +1,5 @@
 import { AuthLayout, LoginForm } from '@/features/auth/components';
-import loginImg from '@/assets/Login.png';
+import loginImg from '@/assets/Login.webp';
 
 export default function LoginPage() {
   return (

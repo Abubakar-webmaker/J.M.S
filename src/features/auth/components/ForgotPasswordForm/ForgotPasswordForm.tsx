@@ -62,7 +62,7 @@ export function ForgotPasswordForm() {
           Didn't receive the email? Check your spam folder or try again.
         </p>
 
-        <div className="mt-6 space-y-3">
+        <div className="mt-4 space-y-3">
           <Link
             to="/login"
             className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-primary-600 hover:bg-primary-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
@@ -80,10 +80,10 @@ export function ForgotPasswordForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="space-y-5"
+        className="space-y-3"
       >
         <div>
-          <p className="mb-4 text-sm text-neutral-600">
+          <p className="mb-3 text-sm leading-relaxed text-neutral-600">
             Enter your email address and we'll send you a link to reset your password.
           </p>
         </div>
@@ -108,7 +108,7 @@ export function ForgotPasswordForm() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-neutral-600">
+      <p className="mt-3 text-center text-sm text-neutral-600">
         Remember your password?{' '}
         <Link
           to="/login"

@@ -80,12 +80,12 @@ export function LoginForm() {
       {sessionExpired && (
         <div
           role="alert"
-          className="mb-6 flex gap-3 rounded-lg border border-warning-200 bg-warning-50 p-4 text-warning-800"
+          className="mb-5 flex gap-2.5 rounded-lg border border-warning-200 bg-warning-50 p-3.5 text-warning-800 sm:gap-3 sm:p-4"
         >
-          <AlertCircle className="h-5 w-5 shrink-0 text-warning-600" aria-hidden="true" />
-          <div>
-            <p className="font-medium">Session Expired</p>
-            <p className="text-sm text-warning-700">Please sign in again to continue.</p>
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-warning-600" aria-hidden="true" />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold">Session Expired</p>
+            <p className="text-xs text-warning-700 sm:text-sm">Please sign in again to continue.</p>
           </div>
         </div>
       )}
@@ -94,12 +94,12 @@ export function LoginForm() {
       {passwordReset && (
         <div
           role="status"
-          className="mb-6 flex gap-3 rounded-lg border border-success-200 bg-success-50 p-4 text-success-800"
+          className="mb-5 flex gap-2.5 rounded-lg border border-success-200 bg-success-50 p-3.5 text-success-800 sm:gap-3 sm:p-4"
         >
-          <CheckCircle className="h-5 w-5 shrink-0 text-success-600" aria-hidden="true" />
-          <div>
-            <p className="font-medium">Password Reset</p>
-            <p className="text-sm text-success-700">Your password has been reset successfully.</p>
+          <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-success-600" aria-hidden="true" />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold">Password Reset</p>
+            <p className="text-xs text-success-700 sm:text-sm">Your password has been reset successfully.</p>
           </div>
         </div>
       )}
@@ -108,7 +108,7 @@ export function LoginForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="space-y-5"
+        className="space-y-4 sm:space-y-5"
       >
         {/* Email field */}
         <Input
@@ -161,7 +161,7 @@ export function LoginForm() {
       </form>
 
       {/* Register link */}
-      <p className="mt-6 text-center text-sm text-neutral-600">
+      <p className="mt-5 text-center text-sm text-neutral-600 sm:mt-6">
         Don't have an account?{' '}
         <Link
           to="/register"

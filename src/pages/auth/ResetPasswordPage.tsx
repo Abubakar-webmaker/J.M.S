@@ -2,7 +2,7 @@ import {
   AuthLayout,
   ResetPasswordForm,
 } from '@/features/auth/components';
-import resetImg from '@/assets/Reset.png';
+import resetImg from '@/assets/Reset.webp';
 
 export default function ResetPasswordPage() {
   return (

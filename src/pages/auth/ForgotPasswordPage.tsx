@@ -2,7 +2,7 @@ import {
   AuthLayout,
   ForgotPasswordForm,
 } from '@/features/auth/components';
-import forgotImg from '@/assets/Forgot.png';
+import forgotImg from '@/assets/Forgot.webp';
 
 export default function ForgotPasswordPage() {
   return (

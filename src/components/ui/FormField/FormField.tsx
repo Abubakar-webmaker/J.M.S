@@ -51,13 +51,13 @@ export function FormField({
       {children}
 
       {error && (
-        <p className="mt-2 text-sm font-medium text-danger-600">
+        <p className="mt-1.5 text-xs font-medium text-danger-600">
           {error}
         </p>
       )}
 
       {!error && hint && (
-        <p className="mt-2 text-sm text-neutral-600">
+        <p className="mt-1.5 text-xs text-neutral-600">
           {hint}
         </p>
       )}

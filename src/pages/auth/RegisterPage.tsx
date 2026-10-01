@@ -2,7 +2,7 @@ import {
   AuthLayout,
   RegisterForm,
 } from '@/features/auth/components';
-import registerImg from '@/assets/Register.png';
+import registerImg from '@/assets/Register.webp';
 
 export default function RegisterPage() {
   return (

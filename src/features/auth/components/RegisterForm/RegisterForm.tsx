@@ -69,7 +69,7 @@ export function RegisterForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="space-y-5"
+        className="space-y-2.5"
       >
         <Input
           label="Full name"
@@ -119,7 +119,7 @@ export function RegisterForm() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-neutral-600">
+      <p className="mt-2.5 text-center text-sm text-neutral-600">
         Already have an account?{' '}
         <Link
           to="/login"

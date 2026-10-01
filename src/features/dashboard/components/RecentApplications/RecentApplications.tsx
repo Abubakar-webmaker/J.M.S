@@ -98,7 +98,7 @@ export function RecentApplications({
                     </time>
 
                     {statusConfig && (
-                      <Badge variant={statusConfig.variant as any}>
+                      <Badge variant={statusConfig.variant}>
                         {statusConfig.label}
                       </Badge>
                     )}

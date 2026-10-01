@@ -77,7 +77,7 @@ export function ResetPasswordForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="space-y-5"
+        className="space-y-3"
       >
         <PasswordInput
           label="New password"
