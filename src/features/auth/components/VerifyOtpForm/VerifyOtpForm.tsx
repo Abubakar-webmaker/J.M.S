@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MailCheck } from 'lucide-react';
 
-import { Button, useToast } from '@/components/ui';
+import { Button, OtpInput, useToast } from '@/components/ui';
 
 import { AppApiError } from '@/types/api';
 import { useAuth } from '../../context/useAuth';
@@ -129,34 +129,13 @@ export function VerifyOtpForm() {
         noValidate
         className="space-y-2.5"
       >
-        <label
-          htmlFor="otp"
-          className="block text-sm font-semibold text-neutral-900"
-        >
-          Verification code
-        </label>
-
-        <input
-          id="otp"
-          type="text"
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          maxLength={OTP_LENGTH}
-          placeholder={'0'.repeat(OTP_LENGTH)}
-          aria-invalid={Boolean(errors.otp)}
-          className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2.5 text-center text-lg font-semibold tracking-[0.5em] text-neutral-900 placeholder:tracking-[0.5em] placeholder:text-neutral-400 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/30 aria-[invalid=true]:border-error-500"
-          {...register('otp', {
-            onChange: (e) => {
-              e.target.value = e.target.value.replace(/\D/g, '');
-            },
-          })}
+        <OtpInput
+          label="Verification code"
+          length={OTP_LENGTH}
+          error={errors.otp?.message}
+          required
+          {...register('otp')}
         />
-
-        {errors.otp?.message && (
-          <p className="text-xs text-error-600 sm:text-sm" role="alert">
-            {errors.otp.message}
-          </p>
-        )}
 
         <Button
           type="submit"
