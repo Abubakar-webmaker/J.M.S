@@ -1,0 +1,446 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "name": "Admin User",
+      "email": "admin@demo.com",
+      "password": "Admin@123",
+      "avatarUrl": null,
+      "createdAt": "2024-01-15T08:00:00.000Z",
+      "updatedAt": "2024-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "user-002",
+      "name": "Demo User",
+      "email": "demo@demo.com",
+      "password": "Demo@123",
+      "avatarUrl": null,
+      "createdAt": "2024-02-10T09:30:00.000Z",
+      "updatedAt": "2024-02-10T09:30:00.000Z"
+    },
+    {
+      "id": "user-eaa40638c2",
+      "name": "Jane Tester",
+      "email": "jane.tester@example.com",
+      "password": "TestPass@123",
+      "avatarUrl": null,
+      "createdAt": "2026-10-01T21:53:25.383Z",
+      "updatedAt": "2026-10-01T21:53:25.383Z"
+    }
+  ],
+  "applications": [
+    {
+      "id": "app-001",
+      "userId": "user-001",
+      "companyName": "Google",
+      "jobTitle": "Senior Frontend Engineer",
+      "jobUrl": "https://careers.google.com/jobs/1",
+      "location": "Mountain View, CA",
+      "jobType": "Full-time",
+      "applicationDate": "2026-09-01",
+      "status": "Interview",
+      "salaryMin": 150000,
+      "salaryMax": 200000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build and scale web applications.",
+      "notes": "Referred by a friend on the team.",
+      "submittedResume": {
+        "id": "res-001",
+        "name": "My Resume v2",
+        "fileName": "resume_v2.pdf",
+        "url": "/resumes/res-001/download"
+      },
+      "createdAt": "2026-09-01T10:00:00.000Z",
+      "updatedAt": "2026-09-15T14:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-001",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-01T10:00:00.000Z"
+        },
+        {
+          "id": "hist-002",
+          "action": "status_changed",
+          "status": "Screening",
+          "previousStatus": "Applied",
+          "note": null,
+          "createdAt": "2026-09-05T09:00:00.000Z"
+        },
+        {
+          "id": "hist-003",
+          "action": "status_changed",
+          "status": "Interview",
+          "previousStatus": "Screening",
+          "note": "Technical round scheduled.",
+          "createdAt": "2026-09-15T14:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-002",
+      "userId": "user-001",
+      "companyName": "Meta",
+      "jobTitle": "React Developer",
+      "jobUrl": "https://www.metacareers.com/jobs/2",
+      "location": "Menlo Park, CA",
+      "jobType": "Full-time",
+      "applicationDate": "2026-09-05",
+      "status": "Applied",
+      "salaryMin": 130000,
+      "salaryMax": 170000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Work on React infrastructure.",
+      "notes": null,
+      "submittedResume": null,
+      "createdAt": "2026-09-05T11:00:00.000Z",
+      "updatedAt": "2026-09-05T11:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-004",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-05T11:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-003",
+      "userId": "user-001",
+      "companyName": "Stripe",
+      "jobTitle": "UI Engineer",
+      "jobUrl": "https://stripe.com/jobs/3",
+      "location": "Remote",
+      "jobType": "Remote",
+      "applicationDate": "2026-08-20",
+      "status": "Offer",
+      "salaryMin": 160000,
+      "salaryMax": 190000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build payment UI flows.",
+      "notes": "Offer letter received!",
+      "submittedResume": {
+        "id": "res-001",
+        "name": "My Resume v2",
+        "fileName": "resume_v2.pdf",
+        "url": "/resumes/res-001/download"
+      },
+      "createdAt": "2026-08-20T08:00:00.000Z",
+      "updatedAt": "2026-09-20T10:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-005",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-08-20T08:00:00.000Z"
+        },
+        {
+          "id": "hist-006",
+          "action": "status_changed",
+          "status": "Interview",
+          "previousStatus": "Applied",
+          "note": null,
+          "createdAt": "2026-08-28T12:00:00.000Z"
+        },
+        {
+          "id": "hist-007",
+          "action": "status_changed",
+          "status": "Offer",
+          "previousStatus": "Interview",
+          "note": "Offer letter received!",
+          "createdAt": "2026-09-20T10:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-004",
+      "userId": "user-001",
+      "companyName": "Amazon",
+      "jobTitle": "Software Development Engineer II",
+      "jobUrl": "https://amazon.jobs/4",
+      "location": "Seattle, WA",
+      "jobType": "Full-time",
+      "applicationDate": "2026-08-10",
+      "status": "Rejected",
+      "salaryMin": 140000,
+      "salaryMax": 180000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Backend services for e-commerce.",
+      "notes": "Did not pass the bar raiser round.",
+      "submittedResume": null,
+      "createdAt": "2026-08-10T09:00:00.000Z",
+      "updatedAt": "2026-09-10T16:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-008",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-08-10T09:00:00.000Z"
+        },
+        {
+          "id": "hist-009",
+          "action": "status_changed",
+          "status": "Interview",
+          "previousStatus": "Applied",
+          "note": null,
+          "createdAt": "2026-08-25T11:00:00.000Z"
+        },
+        {
+          "id": "hist-010",
+          "action": "status_changed",
+          "status": "Rejected",
+          "previousStatus": "Interview",
+          "note": "Did not pass the bar raiser round.",
+          "createdAt": "2026-09-10T16:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-005",
+      "userId": "user-001",
+      "companyName": "Airbnb",
+      "jobTitle": "Frontend Engineer",
+      "jobUrl": "https://careers.airbnb.com/jobs/5",
+      "location": "San Francisco, CA",
+      "jobType": "Hybrid",
+      "applicationDate": "2026-09-10",
+      "status": "Screening",
+      "salaryMin": 145000,
+      "salaryMax": 175000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build Airbnb's host-facing tools.",
+      "notes": null,
+      "submittedResume": null,
+      "createdAt": "2026-09-10T13:00:00.000Z",
+      "updatedAt": "2026-09-18T10:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-011",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-10T13:00:00.000Z"
+        },
+        {
+          "id": "hist-012",
+          "action": "status_changed",
+          "status": "Screening",
+          "previousStatus": "Applied",
+          "note": null,
+          "createdAt": "2026-09-18T10:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-006",
+      "userId": "user-001",
+      "companyName": "Netflix",
+      "jobTitle": "Senior Software Engineer",
+      "jobUrl": "https://jobs.netflix.com/6",
+      "location": "Los Gatos, CA",
+      "jobType": "Full-time",
+      "applicationDate": "2026-09-15",
+      "status": "Applied",
+      "salaryMin": 200000,
+      "salaryMax": 300000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build streaming infrastructure.",
+      "notes": null,
+      "submittedResume": null,
+      "createdAt": "2026-09-15T09:00:00.000Z",
+      "updatedAt": "2026-09-15T09:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-013",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-15T09:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-007",
+      "userId": "user-001",
+      "companyName": "Uber",
+      "jobTitle": "Staff Engineer",
+      "jobUrl": "https://www.uber.com/careers/7",
+      "location": "San Francisco, CA",
+      "jobType": "Hybrid",
+      "applicationDate": "2026-09-20",
+      "status": "Applied",
+      "salaryMin": 170000,
+      "salaryMax": 220000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Lead platform engineering initiatives.",
+      "notes": null,
+      "submittedResume": null,
+      "createdAt": "2026-09-20T11:00:00.000Z",
+      "updatedAt": "2026-09-20T11:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-014",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-20T11:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-009",
+      "userId": "user-002",
+      "companyName": "Microsoft",
+      "jobTitle": "Frontend Developer",
+      "jobUrl": "https://careers.microsoft.com/jobs/9",
+      "location": "Redmond, WA",
+      "jobType": "Full-time",
+      "applicationDate": "2026-09-10",
+      "status": "Interview",
+      "salaryMin": 130000,
+      "salaryMax": 160000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build Microsoft's web products.",
+      "notes": "Teams call scheduled.",
+      "submittedResume": null,
+      "createdAt": "2026-09-10T10:00:00.000Z",
+      "updatedAt": "2026-09-22T14:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-017",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-10T10:00:00.000Z"
+        },
+        {
+          "id": "hist-018",
+          "action": "status_changed",
+          "status": "Interview",
+          "previousStatus": "Applied",
+          "note": "Teams call scheduled.",
+          "createdAt": "2026-09-22T14:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-010",
+      "userId": "user-002",
+      "companyName": "LinkedIn",
+      "jobTitle": "React Engineer",
+      "jobUrl": "https://careers.linkedin.com/jobs/10",
+      "location": "Sunnyvale, CA",
+      "jobType": "Hybrid",
+      "applicationDate": "2026-09-20",
+      "status": "Applied",
+      "salaryMin": 140000,
+      "salaryMax": 170000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build LinkedIn's feed features.",
+      "notes": null,
+      "submittedResume": null,
+      "createdAt": "2026-09-20T09:00:00.000Z",
+      "updatedAt": "2026-09-20T09:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-019",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-09-20T09:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "app-008",
+      "userId": "user-001",
+      "companyName": "Spotify",
+      "jobTitle": "Web Engineer",
+      "jobUrl": "https://www.lifeatspotify.com/jobs/8",
+      "location": "Remote",
+      "jobType": "Remote",
+      "applicationDate": "2026-08-01",
+      "status": "Ghosted",
+      "salaryMin": 120000,
+      "salaryMax": 150000,
+      "salaryCurrency": "USD",
+      "jobDescription": "Build Spotify's web player features.",
+      "notes": "No response after 2 months.",
+      "submittedResume": null,
+      "createdAt": "2026-08-01T09:00:00.000Z",
+      "updatedAt": "2026-08-01T09:00:00.000Z",
+      "statusHistory": [
+        {
+          "id": "hist-015",
+          "action": "created",
+          "status": "Applied",
+          "previousStatus": null,
+          "note": null,
+          "createdAt": "2026-08-01T09:00:00.000Z"
+        },
+        {
+          "id": "hist-016",
+          "action": "status_changed",
+          "status": "Ghosted",
+          "previousStatus": "Applied",
+          "note": "No response after 2 months.",
+          "createdAt": "2026-09-28T09:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "resumes": [
+    {
+      "id": "res-001",
+      "userId": "user-001",
+      "name": "My Resume v2",
+      "fileName": "resume_v2.pdf",
+      "fileUrl": "/resumes/res-001/download",
+      "mimeType": "application/pdf",
+      "fileSize": 204800,
+      "applicationCount": 2,
+      "createdAt": "2026-07-01T10:00:00.000Z",
+      "updatedAt": "2026-07-01T10:00:00.000Z",
+      "applicationReferences": [
+        {
+          "applicationId": "app-001",
+          "companyName": "Google",
+          "jobTitle": "Senior Frontend Engineer",
+          "status": "Interview"
+        },
+        {
+          "applicationId": "app-003",
+          "companyName": "Stripe",
+          "jobTitle": "UI Engineer",
+          "status": "Offer"
+        }
+      ]
+    },
+    {
+      "id": "res-002",
+      "userId": "user-001",
+      "name": "Senior Dev Resume",
+      "fileName": "senior_dev_resume.pdf",
+      "fileUrl": "/resumes/res-002/download",
+      "mimeType": "application/pdf",
+      "fileSize": 153600,
+      "applicationCount": 0,
+      "createdAt": "2026-08-15T08:00:00.000Z",
+      "updatedAt": "2026-08-15T08:00:00.000Z",
+      "applicationReferences": []
+    }
+  ]
+}
