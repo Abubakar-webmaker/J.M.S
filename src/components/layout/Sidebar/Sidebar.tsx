@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { NavLink } from 'react-router';
 import {
   ACCOUNT_NAVIGATION,
@@ -10,6 +10,26 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
+/**
+ * Professional Sidebar Navigation
+ * 
+ * Desktop:
+ * - Always visible on the left
+ * - Width: 256px (w-64)
+ * - Shows full navigation
+ * 
+ * Mobile:
+ * - Drawer overlay
+ * - Width: 288px (w-72)
+ * - Close button in header
+ * 
+ * Structure:
+ * - Brand/Logo section (60px height, h-15)
+ * - Main navigation
+ * - Divider
+ * - Account navigation
+ * - App version footer
+ */
 export function Sidebar({
   mobile = false,
   onClose,
@@ -18,32 +38,35 @@ export function Sidebar({
     <aside
       className={
         mobile
-          ? 'flex h-full w-72 flex-col bg-white'
-          : 'hidden h-screen w-64 shrink-0 border-r border-neutral-100 bg-white lg:flex'
+          ? 'flex w-72 flex-col border-r border-neutral-200 bg-white'
+          : 'hidden w-64 shrink-0 flex-col border-r border-neutral-200 bg-white lg:flex'
       }
     >
-      <div className="flex h-16 items-center justify-between border-b border-neutral-100 px-5">
+      {/* Brand section - fixed height */}
+      <div className="flex h-15 items-center justify-between border-b border-neutral-200 px-4">
         <a
           href="/app/dashboard"
-          className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg"
+          className="flex flex-1 items-center gap-2 rounded-lg px-1 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-600 text-white">
-            <BriefcaseBusiness
-              className="h-5 w-5"
-              aria-hidden="true"
-            />
-          </span>
+          {/* Brand logo */}
+          <img 
+            src="/favicon.svg" 
+            alt="JobManager" 
+            className="h-8 w-8 object-contain"
+          />
 
-          <span className="text-base font-bold tracking-tight text-neutral-900">
-            JobTracker
+          {/* Brand text */}
+          <span className="text-sm font-bold tracking-tight text-neutral-900">
+            JobManager
           </span>
         </a>
 
+        {/* Mobile close button */}
         {mobile && (
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
             aria-label="Close navigation menu"
           >
             <X className="h-5 w-5" aria-hidden="true" />
@@ -51,103 +74,111 @@ export function Sidebar({
         )}
       </div>
 
+      {/* Navigation sections - scrollable */}
       <nav
-        className="flex-1 overflow-y-auto px-3 py-5"
+        className="flex-1 overflow-y-auto px-2 py-4"
         aria-label="Main navigation"
       >
-        <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-neutral-600">
-          Workspace
-        </p>
+        {/* Main navigation section */}
+        <div>
+          <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-neutral-600">
+            Workspace
+          </p>
 
-        <div className="space-y-1">
-          {MAIN_NAVIGATION.map((item) => {
-            const Icon = item.icon;
+          <div className="space-y-1">
+            {MAIN_NAVIGATION.map((item) => {
+              const Icon = item.icon;
 
-            return (
-              <NavLink
-                key={item.href}
-                to={item.href}
-                end={item.end}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  [
-                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
-                    isActive
-                      ? 'bg-primary-50 text-primary-700'
-                      : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
-                  ].join(' ')
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <Icon
-                      className={`h-5 w-5 shrink-0 ${
-                        isActive
-                          ? 'text-primary-600'
-                          : 'text-neutral-600'
-                      }`}
-                      aria-hidden="true"
-                    />
-                    <span>{item.label}</span>
-                  </>
-                )}
-              </NavLink>
-            );
-          })}
+              return (
+                <NavLink
+                  key={item.href}
+                  to={item.href}
+                  end={item.end}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    [
+                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
+                      isActive
+                        ? 'bg-primary-50 text-primary-700'
+                        : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
+                    ].join(' ')
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <Icon
+                        className={`h-5 w-5 shrink-0 transition-colors ${
+                          isActive
+                            ? 'text-primary-600'
+                            : 'text-neutral-600'
+                        }`}
+                        aria-hidden="true"
+                        strokeWidth={2}
+                      />
+                      <span>{item.label}</span>
+                    </>
+                  )}
+                </NavLink>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="my-6 border-t border-neutral-100" />
+        {/* Account navigation section */}
+        <div className="mt-6">
+          <div className="mb-4 border-t border-neutral-200" />
 
-        <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-neutral-600">
-          Account
-        </p>
+          <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-neutral-600">
+            Account
+          </p>
 
-        <div className="space-y-1">
-          {ACCOUNT_NAVIGATION.map((item) => {
-            const Icon = item.icon;
+          <div className="space-y-1">
+            {ACCOUNT_NAVIGATION.map((item) => {
+              const Icon = item.icon;
 
-            return (
-              <NavLink
-                key={item.href}
-                to={item.href}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  [
-                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
-                    isActive
-                      ? 'bg-primary-50 text-primary-700'
-                      : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
-                  ].join(' ')
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <Icon
-                      className={`h-5 w-5 shrink-0 ${
-                        isActive
-                          ? 'text-primary-600'
-                          : 'text-neutral-600'
-                      }`}
-                      aria-hidden="true"
-                    />
-                    <span>{item.label}</span>
-                  </>
-                )}
-              </NavLink>
-            );
-          })}
+              return (
+                <NavLink
+                  key={item.href}
+                  to={item.href}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    [
+                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
+                      isActive
+                        ? 'bg-primary-50 text-primary-700'
+                        : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
+                    ].join(' ')
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <Icon
+                        className={`h-5 w-5 shrink-0 transition-colors ${
+                          isActive
+                            ? 'text-primary-600'
+                            : 'text-neutral-600'
+                        }`}
+                        aria-hidden="true"
+                        strokeWidth={2}
+                      />
+                      <span>{item.label}</span>
+                    </>
+                  )}
+                </NavLink>
+              );
+            })}
+          </div>
         </div>
       </nav>
 
-      <div className="border-t border-neutral-100 p-4">
+      {/* Footer section - version info */}
+      <div className="border-t border-neutral-200 p-4">
         <div className="rounded-lg bg-neutral-50 px-3 py-2.5">
           <p className="text-xs font-semibold text-neutral-900">
-            JobTracker
+            JobManager
           </p>
           <p className="mt-1 text-xs text-neutral-600">
-            V1
+            v1.0.0
           </p>
         </div>
       </div>

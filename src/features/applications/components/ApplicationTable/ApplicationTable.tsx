@@ -13,31 +13,38 @@ function formatDate(value: string) {
   return new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',
-    year: 'numeric',
   }).format(new Date(value));
 }
 
+/**
+ * Applications Table - Desktop View
+ * 
+ * Professional data table with:
+ * - Company, position, location, job type, applied date, status
+ * - Hover effects and interactive elements
+ * - Hidden on tablet/mobile (cards view instead)
+ */
 export function ApplicationTable({
   applications,
 }: ApplicationTableProps) {
   return (
-    <div className="hidden overflow-hidden rounded-xl border border-border bg-surface md:block">
+    <div className="hidden overflow-hidden rounded-lg border border-neutral-200 bg-white md:block shadow-sm">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[900px] text-left">
+        <table className="w-full min-w-[900px] text-left text-sm">
           <caption className="sr-only">Job applications</caption>
-          <thead className="border-b border-border bg-neutral-50">
-            <tr className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-              <th className="px-5 py-3.5">Company</th>
-              <th className="px-5 py-3.5">Position</th>
-              <th className="px-5 py-3.5">Location</th>
-              <th className="px-5 py-3.5">Job type</th>
-              <th className="px-5 py-3.5">Applied</th>
-              <th className="px-5 py-3.5">Status</th>
-              <th className="px-5 py-3.5 text-right">Actions</th>
+          <thead className="border-b border-neutral-200 bg-neutral-50">
+            <tr className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
+              <th className="px-6 py-4">Company</th>
+              <th className="px-6 py-4">Position</th>
+              <th className="px-6 py-4">Location</th>
+              <th className="px-6 py-4">Job type</th>
+              <th className="px-6 py-4">Applied</th>
+              <th className="px-6 py-4">Status</th>
+              <th className="px-6 py-4 text-right">Actions</th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-border">
+          <tbody className="divide-y divide-neutral-200">
             {applications.map((application) => {
               const statusConfig =
                 APPLICATION_STATUS_CONFIG[application.status];
@@ -47,8 +54,8 @@ export function ApplicationTable({
                   key={application.id}
                   className="transition-colors hover:bg-neutral-50"
                 >
-                  <td className="px-5 py-4">
-                    <div className="font-medium text-text">
+                  <td className="px-6 py-4">
+                    <div className="font-semibold text-neutral-900">
                       {application.companyName}
                     </div>
 
@@ -57,53 +64,55 @@ export function ApplicationTable({
                         href={application.jobUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-1 inline-flex items-center gap-1 text-xs text-text-muted hover:text-primary-600"
+                        className="mt-1.5 inline-flex items-center gap-1.5 text-xs text-primary-600 hover:text-primary-700 transition-colors"
                       >
                         Job posting
                         <ExternalLink
                           className="h-3 w-3"
                           aria-hidden="true"
+                          strokeWidth={2}
                         />
                       </a>
                     )}
                   </td>
 
-                  <td className="px-5 py-4">
+                  <td className="px-6 py-4">
                     <Link
                       to={`/app/applications/${application.id}`}
-                      className="font-medium text-text hover:text-primary-600"
+                      className="font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                     >
                       {application.jobTitle}
                     </Link>
                   </td>
 
-                  <td className="px-5 py-4 text-sm text-text-muted">
+                  <td className="px-6 py-4 text-neutral-600">
                     {application.location || '—'}
                   </td>
 
-                  <td className="px-5 py-4 text-sm text-text-muted">
+                  <td className="px-6 py-4 text-neutral-600">
                     {application.jobType}
                   </td>
 
-                  <td className="whitespace-nowrap px-5 py-4 text-sm text-text-muted">
+                  <td className="px-6 py-4 text-neutral-600 whitespace-nowrap">
                     {formatDate(application.applicationDate)}
                   </td>
 
-                  <td className="px-5 py-4">
-                    <Badge variant={statusConfig.variant}>
+                  <td className="px-6 py-4">
+                    <Badge variant={statusConfig.variant as any}>
                       {statusConfig.label}
                     </Badge>
                   </td>
 
-                  <td className="px-5 py-4 text-right">
+                  <td className="px-6 py-4 text-right">
                     <Link
                       to={`/app/applications/${application.id}`}
                       aria-label={`View ${application.jobTitle} at ${application.companyName}`}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-muted transition-colors hover:bg-neutral-100 hover:text-text focus:outline-none focus:ring-2 focus:ring-primary-500"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
                     >
                       <MoreHorizontal
                         className="h-4 w-4"
                         aria-hidden="true"
+                        strokeWidth={2}
                       />
                     </Link>
                   </td>

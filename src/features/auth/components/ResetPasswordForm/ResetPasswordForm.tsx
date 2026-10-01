@@ -1,6 +1,7 @@
 import { Link, useNavigate, useSearchParams } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircle } from 'lucide-react';
 
 import { Button, PasswordInput, useToast } from '@/components/ui';
 import { AppApiError } from '@/types/api';
@@ -27,11 +28,21 @@ export function ResetPasswordForm() {
 
   if (!token) {
     return (
-      <div className="text-center text-sm text-text-muted">
-        Invalid or missing reset token.{' '}
+      <div className="text-center">
+        <div className="mb-4 flex justify-center">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-danger-100 text-danger-600">
+            <AlertCircle className="h-6 w-6" strokeWidth={2} />
+          </div>
+        </div>
+
+        <p className="text-lg font-semibold text-neutral-900">Link Expired</p>
+        <p className="mt-2 text-sm text-neutral-600">
+          The password reset link is invalid or has expired.
+        </p>
+
         <Link
           to="/forgot-password"
-          className="font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
         >
           Request a new link
         </Link>
@@ -73,6 +84,7 @@ export function ResetPasswordForm() {
           autoComplete="new-password"
           placeholder="Create a new password"
           error={errors.password?.message}
+          required
           {...register('password')}
         />
 
@@ -81,10 +93,16 @@ export function ResetPasswordForm() {
           autoComplete="new-password"
           placeholder="Confirm your new password"
           error={errors.confirmPassword?.message}
+          required
           {...register('confirmPassword')}
         />
 
-        <Button type="submit" fullWidth loading={isSubmitting}>
+        <Button
+          type="submit"
+          fullWidth
+          loading={isSubmitting}
+          size="md"
+        >
           Reset password
         </Button>
       </form>

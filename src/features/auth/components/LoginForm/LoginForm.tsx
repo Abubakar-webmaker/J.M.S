@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircle, CheckCircle } from 'lucide-react';
 
 import {
   Button,
@@ -75,51 +76,64 @@ export function LoginForm() {
 
   return (
     <>
+      {/* Session expired alert */}
       {sessionExpired && (
         <div
           role="alert"
-          className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800"
+          className="mb-6 flex gap-3 rounded-lg border border-warning-200 bg-warning-50 p-4 text-warning-800"
         >
-          Your session has expired. Please sign in again.
+          <AlertCircle className="h-5 w-5 shrink-0 text-warning-600" aria-hidden="true" />
+          <div>
+            <p className="font-medium">Session Expired</p>
+            <p className="text-sm text-warning-700">Please sign in again to continue.</p>
+          </div>
         </div>
       )}
 
+      {/* Password reset success alert */}
       {passwordReset && (
         <div
           role="status"
-          className="mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700"
+          className="mb-6 flex gap-3 rounded-lg border border-success-200 bg-success-50 p-4 text-success-800"
         >
-          Your password has been reset successfully. You can now log
-          in.
+          <CheckCircle className="h-5 w-5 shrink-0 text-success-600" aria-hidden="true" />
+          <div>
+            <p className="font-medium">Password Reset</p>
+            <p className="text-sm text-success-700">Your password has been reset successfully.</p>
+          </div>
         </div>
       )}
 
+      {/* Login form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
         className="space-y-5"
       >
+        {/* Email field */}
         <Input
           label="Email address"
           type="email"
           autoComplete="email"
           placeholder="you@example.com"
           error={errors.email?.message}
+          required
           {...register('email')}
         />
 
-        <div>
-          <div className="mb-2 flex items-center justify-between">
+        {/* Password field with forgot link */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between gap-2">
             <label
               htmlFor="login-password"
-              className="text-sm font-medium text-text"
+              className="text-sm font-semibold text-neutral-900"
             >
               Password
             </label>
 
             <Link
               to="/forgot-password"
-              className="text-sm font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+              className="text-xs font-semibold text-primary-600 hover:text-primary-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded px-1 py-0.5"
             >
               Forgot password?
             </Link>
@@ -130,26 +144,30 @@ export function LoginForm() {
             autoComplete="current-password"
             placeholder="Enter your password"
             error={errors.password?.message}
+            required
             {...register('password')}
           />
         </div>
 
+        {/* Submit button */}
         <Button
           type="submit"
           fullWidth
           loading={isSubmitting}
+          size="md"
         >
           Sign in
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-text-muted">
+      {/* Register link */}
+      <p className="mt-6 text-center text-sm text-neutral-600">
         Don't have an account?{' '}
         <Link
           to="/register"
-          className="font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          className="font-semibold text-primary-600 hover:text-primary-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded px-1 py-0.5"
         >
-          Create one
+          Create account
         </Link>
       </p>
     </>

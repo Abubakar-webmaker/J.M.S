@@ -9,6 +9,12 @@ interface StatusDistributionChartProps {
   data: StatusDistributionItem[];
 }
 
+/**
+ * Status Distribution Chart
+ * 
+ * Donut chart showing application breakdown by status
+ * Includes legend with count for each status
+ */
 export function StatusDistributionChart({
   data,
 }: StatusDistributionChartProps) {
@@ -17,11 +23,11 @@ export function StatusDistributionChart({
   return (
     <section
       aria-labelledby="status-chart-heading"
-      className="rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm"
+      className="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm"
     >
       <h2
         id="status-chart-heading"
-        className="mb-6 text-lg font-semibold text-neutral-900"
+        className="mb-6 text-lg font-bold text-neutral-900"
       >
         Status distribution
       </h2>
@@ -40,7 +46,7 @@ export function StatusDistributionChart({
             .
           </p>
 
-          <div className="h-56">
+          <div className="h-56 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -49,9 +55,10 @@ export function StatusDistributionChart({
                   nameKey="status"
                   cx="50%"
                   cy="50%"
-                  innerRadius="58%"
-                  outerRadius="80%"
+                  innerRadius="60%"
+                  outerRadius="85%"
                   paddingAngle={2}
+                  isAnimationActive={true}
                 >
                   {data.map((item) => (
                     <Cell
@@ -75,6 +82,7 @@ export function StatusDistributionChart({
                     border: '1px solid var(--color-neutral-200)',
                     background: 'var(--color-surface)',
                     color: 'var(--color-neutral-900)',
+                    boxShadow: 'var(--shadow-sm)',
                   }}
                 />
               </PieChart>
@@ -82,7 +90,7 @@ export function StatusDistributionChart({
           </div>
 
           {/* Textual legend */}
-          <ul className="mt-6 space-y-2" aria-label="Status counts">
+          <ul className="mt-8 space-y-2.5" aria-label="Status counts">
             {data.map((item) => {
               const config =
                 APPLICATION_STATUS_CONFIG[
@@ -96,17 +104,17 @@ export function StatusDistributionChart({
               return (
                 <li
                   key={item.status}
-                  className="flex items-center justify-between text-sm"
+                  className="flex items-center justify-between"
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-3">
                     <span
-                      className="h-3 w-3 shrink-0 rounded-full"
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
                       style={{ backgroundColor: color }}
                       aria-hidden="true"
                     />
-                    <span className="text-neutral-600">{label}</span>
+                    <span className="text-sm text-neutral-600">{label}</span>
                   </span>
-                  <span className="font-semibold text-neutral-900">{item.count}</span>
+                  <span className="text-sm font-semibold text-neutral-900">{item.count}</span>
                 </li>
               );
             })}

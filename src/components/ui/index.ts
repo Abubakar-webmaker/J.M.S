@@ -2,6 +2,8 @@ export { Avatar } from './Avatar';
 export { Badge } from './Badge';
 export { Button } from './Button';
 export { Card } from './Card';
+export { Checkbox } from './Checkbox';
+export { Alert } from './Alert';
 export { EmptyState } from './EmptyState';
 export { ErrorState } from './ErrorState';
 export { FormField } from './FormField';
@@ -14,6 +16,16 @@ export { Skeleton } from './Skeleton';
 export { Spinner } from './Spinner';
 export { Textarea } from './Textarea';
 export { Tooltip } from './Tooltip';
+export { Pagination } from './Pagination';
+export {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeader,
+  TableCell,
+  TableEmpty,
+} from './Table';
 
 export {
   Dropdown,
@@ -22,6 +34,19 @@ export {
 export type {
   DropdownItem,
 } from './Dropdown';
+
+export type {
+  CheckboxProps,
+} from './Checkbox';
+
+export type {
+  AlertProps,
+  AlertVariant,
+} from './Alert';
+
+export type {
+  PaginationProps,
+} from './Pagination';
 
 export {
   Toast,

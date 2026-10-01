@@ -75,6 +75,7 @@ export function RegisterForm() {
           autoComplete="name"
           placeholder="John Doe"
           error={errors.name?.message}
+          required
           {...register('name')}
         />
 
@@ -84,6 +85,7 @@ export function RegisterForm() {
           autoComplete="email"
           placeholder="you@example.com"
           error={errors.email?.message}
+          required
           {...register('email')}
         />
 
@@ -92,6 +94,7 @@ export function RegisterForm() {
           autoComplete="new-password"
           placeholder="Create a password"
           error={errors.password?.message}
+          required
           {...register('password')}
         />
 
@@ -100,6 +103,7 @@ export function RegisterForm() {
           autoComplete="new-password"
           placeholder="Confirm your password"
           error={errors.confirmPassword?.message}
+          required
           {...register('confirmPassword')}
         />
 
@@ -107,16 +111,17 @@ export function RegisterForm() {
           type="submit"
           fullWidth
           loading={isSubmitting}
+          size="md"
         >
           Create account
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-text-muted">
+      <p className="mt-6 text-center text-sm text-neutral-600">
         Already have an account?{' '}
         <Link
           to="/login"
-          className="font-medium text-primary-600 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+          className="font-semibold text-primary-600 hover:text-primary-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded px-1 py-0.5"
         >
           Sign in
         </Link>

@@ -14,6 +14,16 @@ interface ApplicationFiltersProps {
   disabled?: boolean;
 }
 
+/**
+ * Application Filters Panel
+ * 
+ * Provides filtering for applications by:
+ * - Search (company or job title)
+ * - Status
+ * - Job type
+ * - Location
+ * - Application date range
+ */
 export function ApplicationFilters({
   filters,
   onChange,
@@ -21,25 +31,19 @@ export function ApplicationFilters({
   disabled = false,
 }: ApplicationFiltersProps) {
   return (
-    <div className="rounded-xl border border-border bg-surface p-4">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {/* Search with inline icon */}
-        <div className="relative w-full">
-          <Search
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-            aria-hidden="true"
-          />
-          <Input
-            label="Search"
-            placeholder="Company or job title"
-            value={filters.search ?? ''}
-            onChange={(event) =>
-              onChange({ ...filters, search: event.target.value })
-            }
-            disabled={disabled}
-            className="pl-9"
-          />
-        </div>
+        <Input
+          label="Search"
+          placeholder="Company or job title"
+          value={filters.search ?? ''}
+          onChange={(event) =>
+            onChange({ ...filters, search: event.target.value })
+          }
+          disabled={disabled}
+          leftIcon={<Search className="h-4 w-4" />}
+        />
 
         <Select
           label="Status"
@@ -89,7 +93,7 @@ export function ApplicationFilters({
 
         <Input
           label="Location"
-          placeholder="e.g. Remote"
+          placeholder="e.g. Remote, New York"
           value={filters.location ?? ''}
           onChange={(event) =>
             onChange({ ...filters, location: event.target.value })
@@ -124,15 +128,15 @@ export function ApplicationFilters({
         />
       </div>
 
-      <div className="mt-4 flex justify-end">
+      <div className="mt-5 flex justify-end">
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={onReset}
           disabled={disabled}
+          leftIcon={<RotateCcw className="h-4 w-4" strokeWidth={2} />}
         >
-          <RotateCcw className="h-4 w-4" aria-hidden="true" />
           Reset filters
         </Button>
       </div>

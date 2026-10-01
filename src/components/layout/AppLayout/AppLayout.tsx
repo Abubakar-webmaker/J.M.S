@@ -6,10 +6,32 @@ import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { Header } from '../Header/Header';
 import { Sidebar } from '../Sidebar/Sidebar';
 
+/**
+ * Professional SaaS Application Shell
+ * 
+ * Desktop layout:
+ * ┌─────────┬─────────────────────┐
+ * │ Sidebar │ Header              │
+ * ├─────────┼─────────────────────┤
+ * │         │ Main Content        │
+ * │         │                     │
+ * └─────────┴─────────────────────┘
+ * 
+ * Mobile layout:
+ * ┌─────────────────────┐
+ * │ Header (menu icon)  │
+ * ├─────────────────────┤
+ * │ Main Content        │
+ * │                     │
+ * └─────────────────────┘
+ * 
+ * Sidebar drawer on mobile when menu opened
+ */
 export function AppLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isOnline = useOnlineStatus();
 
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (!mobileMenuOpen) {
       document.body.style.overflow = '';
@@ -23,9 +45,10 @@ export function AppLayout() {
     };
   }, [mobileMenuOpen]);
 
+  // Close menu on Escape key
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === 'Escape' && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
@@ -35,36 +58,40 @@ export function AppLayout() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [mobileMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Offline banner */}
+    <div className="min-h-screen bg-neutral-50">
+      {/* Offline banner - always at top */}
       {!isOnline && (
         <div
           role="status"
           aria-live="polite"
-          className="border-b border-amber-200 bg-amber-50 px-4 py-2 text-center text-sm text-amber-800"
+          className="border-b border-warning-200 bg-warning-50 px-4 py-3 text-center text-sm font-medium text-warning-800"
         >
-          You're offline. Some actions may not work until your connection is
-          restored.
+          You're offline. Some actions may not work until your connection is restored.
         </div>
       )}
 
-      <div className="flex min-h-screen">
+      {/* Main app container */}
+      <div className="flex h-screen flex-col lg:flex-row">
+        {/* Desktop Sidebar - hidden on mobile, flex on desktop */}
         <Sidebar />
 
-        {/* Mobile navigation drawer */}
+        {/* Mobile navigation drawer - overlay on mobile, hidden on desktop */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-overlay lg:hidden">
+          <div className="fixed inset-0 z-40 lg:hidden">
+            {/* Backdrop */}
             <button
               type="button"
-              className="absolute inset-0 bg-black/40"
+              className="absolute inset-0 bg-black/50 transition-opacity"
               aria-label="Close navigation menu"
               onClick={() => setMobileMenuOpen(false)}
+              aria-hidden="false"
             />
 
-            <div className="relative z-modal h-full">
+            {/* Sidebar drawer */}
+            <div className="relative z-50 h-full">
               <Sidebar
                 mobile
                 onClose={() => setMobileMenuOpen(false)}
@@ -73,10 +100,13 @@ export function AppLayout() {
           </div>
         )}
 
-        <div className="flex min-w-0 flex-1 flex-col">
+        {/* Main content area - takes up remaining space */}
+        <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
+          {/* Header - fixed height, contains title and user menu */}
           <Header onMenuClick={() => setMobileMenuOpen(true)} />
 
-          <main className="min-w-0 flex-1">
+          {/* Content area - scrollable, flexible height */}
+          <main className="min-w-0 flex-1 overflow-auto">
             <Outlet />
           </main>
         </div>

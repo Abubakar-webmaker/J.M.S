@@ -31,24 +31,26 @@ export function DashboardPage() {
 
   return (
     <PageContainer>
-      <div className="space-y-8">
+      <div className="space-y-6">
         {/* Page header */}
-        <header className="flex flex-col gap-4 sm:gap-6 md:gap-8 md:flex-row md:items-center md:justify-between">
+        <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl md:text-4xl">
+            <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
               Dashboard
             </h1>
-            <p className="mt-1 text-sm sm:text-base text-neutral-600">
+            <p className="mt-1 text-sm text-neutral-600">
               Track your job search at a glance.
             </p>
           </div>
 
-          <DashboardFilters
-            period={period}
-            onPeriodChange={handlePeriodChange}
-            isRefreshing={isRefreshing}
-            onRefresh={() => void refresh()}
-          />
+          <div className="flex shrink-0 items-center gap-3">
+            <DashboardFilters
+              period={period}
+              onPeriodChange={handlePeriodChange}
+              isRefreshing={isRefreshing}
+              onRefresh={() => void refresh()}
+            />
+          </div>
         </header>
 
         {/* Loading — first fetch only */}
@@ -66,10 +68,10 @@ export function DashboardPage() {
               isRefreshing ? 'opacity-70 transition-opacity' : undefined
             }
           >
-            <div className="space-y-8">
+            <div className="space-y-6">
               <StatsGrid summary={data.summary} />
 
-              <div className="grid grid-cols-1 gap-6 lg:gap-8 xl:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <ApplicationTrendChart data={data.applicationTrend} />
                 <StatusDistributionChart data={data.statusDistribution} />
               </div>

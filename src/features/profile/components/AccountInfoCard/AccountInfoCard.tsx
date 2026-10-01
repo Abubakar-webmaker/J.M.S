@@ -9,27 +9,27 @@ interface AccountInfoCardProps {
 export function AccountInfoCard({ profile }: AccountInfoCardProps) {
   return (
     <Card>
-      <h2 className="text-base font-semibold text-slate-900">Account</h2>
+      <h2 className="text-lg font-bold text-neutral-900 border-b border-neutral-200 pb-4">Account information</h2>
 
       <div className="mt-6 space-y-6">
         <div>
-          <p className="text-sm font-medium text-slate-700">Email</p>
-          <p className="mt-1 break-all text-sm text-slate-500">
+          <p className="text-sm font-semibold text-neutral-900">Email address</p>
+          <p className="mt-2 break-all text-sm text-neutral-700">
             {profile.email}
           </p>
-          <p className="mt-1 text-xs text-slate-400">
-            Email changes are not available in V1.
+          <p className="mt-2 text-xs text-neutral-500">
+            Email changes are not available in v1.
           </p>
         </div>
 
-        <div>
-          <p className="text-sm font-medium text-slate-700">Member since</p>
+        <div className="border-t border-neutral-200 pt-6">
+          <p className="text-sm font-semibold text-neutral-900">Member since</p>
           <time
             dateTime={profile.createdAt}
-            className="mt-1 block text-sm text-slate-500"
+            className="mt-2 block text-sm text-neutral-700"
           >
             {new Intl.DateTimeFormat(undefined, {
-              dateStyle: 'medium',
+              dateStyle: 'long',
             }).format(new Date(profile.createdAt))}
           </time>
         </div>

@@ -6,6 +6,7 @@ import {
   Percent,
   RotateCcw,
   XCircle,
+  TrendingUp,
 } from 'lucide-react';
 
 import type { DashboardSummary } from '../../types/dashboard.types';
@@ -15,6 +16,25 @@ interface StatsGridProps {
   summary: DashboardSummary;
 }
 
+/**
+ * Dashboard Statistics Grid
+ * 
+ * Displays 8 key metrics in a responsive grid:
+ * - Total applications
+ * - Applications this week
+ * - Active interviews
+ * - Offer count
+ * - Applications this month
+ * - Rejections
+ * - Ghosted applications
+ * - Response rate percentage
+ * 
+ * Grid layout:
+ * - Mobile: 1 column
+ * - Tablet: 2 columns
+ * - Desktop: 3 columns
+ * - Ultra-wide: 4 columns
+ */
 export function StatsGrid({ summary }: StatsGridProps) {
   // Ensure no negative values leak through
   const safe = (n: number) => Math.max(0, n);
@@ -29,50 +49,52 @@ export function StatsGrid({ summary }: StatsGridProps) {
         <StatCard
           title="Total applications"
           value={safe(summary.totalApplications)}
-          icon={<BriefcaseBusiness className="h-6 w-6" />}
+          icon={<BriefcaseBusiness className="h-5 w-5" strokeWidth={2} />}
+          variant="accent"
         />
 
         <StatCard
           title="This week"
           value={safe(summary.applicationsThisWeek)}
-          icon={<CalendarDays className="h-6 w-6" />}
+          icon={<CalendarDays className="h-5 w-5" strokeWidth={2} />}
         />
 
         <StatCard
           title="Interviews"
           value={safe(summary.interviews)}
-          icon={<MessageSquare className="h-6 w-6" />}
+          icon={<MessageSquare className="h-5 w-5" strokeWidth={2} />}
         />
 
         <StatCard
           title="Offers"
           value={safe(summary.offers)}
-          icon={<CircleCheck className="h-6 w-6" />}
+          icon={<CircleCheck className="h-5 w-5" strokeWidth={2} />}
+          variant="accent"
         />
 
         <StatCard
           title="This month"
           value={safe(summary.applicationsThisMonth)}
-          icon={<CalendarDays className="h-6 w-6" />}
+          icon={<TrendingUp className="h-5 w-5" strokeWidth={2} />}
         />
 
         <StatCard
           title="Rejections"
           value={safe(summary.rejections)}
-          icon={<XCircle className="h-6 w-6" />}
+          icon={<XCircle className="h-5 w-5" strokeWidth={2} />}
         />
 
         <StatCard
           title="Ghosted"
           value={safe(summary.ghosted)}
-          icon={<RotateCcw className="h-6 w-6" />}
+          icon={<RotateCcw className="h-5 w-5" strokeWidth={2} />}
         />
 
         <StatCard
           title="Response rate"
           value={`${Math.max(0, summary.responseRate).toFixed(1)}%`}
-          icon={<Percent className="h-6 w-6" />}
-          description="Applications with an employer response"
+          icon={<Percent className="h-5 w-5" strokeWidth={2} />}
+          description="Applications with response"
         />
       </div>
     </section>

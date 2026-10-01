@@ -9,6 +9,17 @@ interface FormFieldProps {
   children: ReactNode;
 }
 
+/**
+ * Form Field Wrapper Component
+ * 
+ * Provides consistent styling for form labels, inputs, errors, and hints
+ * 
+ * Features:
+ * - Consistent spacing
+ * - Required indicator
+ * - Error and hint text
+ * - Accessibility attributes
+ */
 export function FormField({
   label,
   htmlFor,
@@ -22,14 +33,14 @@ export function FormField({
       {label && (
         <label
           htmlFor={htmlFor}
-          className="mb-1.5 block text-sm font-medium text-slate-700"
+          className="mb-2 block text-sm font-semibold text-neutral-900"
         >
           {label}
 
           {required && (
             <span
               aria-hidden="true"
-              className="ml-1 text-red-500"
+              className="ml-1 text-danger-600"
             >
               *
             </span>
@@ -40,13 +51,13 @@ export function FormField({
       {children}
 
       {error && (
-        <p className="mt-1.5 text-sm text-red-600">
+        <p className="mt-2 text-sm font-medium text-danger-600">
           {error}
         </p>
       )}
 
       {!error && hint && (
-        <p className="mt-1.5 text-sm text-slate-500">
+        <p className="mt-2 text-sm text-neutral-600">
           {hint}
         </p>
       )}

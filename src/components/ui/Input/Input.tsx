@@ -6,10 +6,22 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   hint?: string;
   leftIcon?: ReactNode;
+  required?: boolean;
 }
 
+/**
+ * Professional Input Component
+ * 
+ * Features:
+ * - Consistent sizing (h-10)
+ * - Rounded corners (rounded-lg)
+ * - Subtle borders
+ * - Error states
+ * - Optional icons
+ * - Accessibility support
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, hint, id, className = '', leftIcon, ...props }, ref) => {
+  ({ label, error, hint, id, className = '', leftIcon, required = false, ...props }, ref) => {
     const inputId = id ?? props.name;
 
     return (
@@ -17,16 +29,21 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="mb-2 block text-sm font-medium text-neutral-900"
+            className="mb-2 block text-sm font-semibold text-neutral-900"
           >
             {label}
+            {required && (
+              <span aria-hidden="true" className="ml-1 text-danger-600">
+                *
+              </span>
+            )}
           </label>
         )}
 
         <div className={leftIcon ? 'relative' : undefined}>
           {leftIcon && (
             <span
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400"
               aria-hidden="true"
             >
               {leftIcon}
@@ -45,15 +62,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                   : undefined
             }
             className={[
-              'min-h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm text-neutral-900',
+              'h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm text-neutral-900',
               'placeholder:text-neutral-500',
               'transition-all duration-200',
-              'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100 focus:ring-offset-1',
+              'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100',
               'disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-500',
               leftIcon ? 'pl-9' : '',
               error
                 ? 'border-danger-500 focus:border-danger-500 focus:ring-danger-100'
-                : 'border-neutral-300',
+                : 'border-neutral-300 hover:border-neutral-400 focus:border-primary-600',
               className,
             ]
               .filter(Boolean)
@@ -65,7 +82,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && (
           <p
             id={`${inputId}-error`}
-            className="mt-2 text-sm text-danger-600"
+            className="mt-2 text-sm font-medium text-danger-600"
           >
             {error}
           </p>

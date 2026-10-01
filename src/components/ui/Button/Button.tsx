@@ -24,12 +24,22 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const baseStyles =
   'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
 
+/**
+ * Button Variants
+ * 
+ * primary: Main actions, green background
+ * secondary: Secondary actions, neutral background
+ * outline: Tertiary actions, border only
+ * ghost: Minimal, text only with hover background
+ * danger: Destructive actions, red background
+ * link: Text link style
+ */
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-primary-600 text-white shadow-md hover:bg-primary-700 active:bg-primary-800 hover:shadow-lg hover:translate-y-0.5',
+    'bg-primary-600 text-white shadow-sm hover:bg-primary-700 active:bg-primary-800 hover:shadow-md',
 
   secondary:
-    'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300 hover:shadow-sm',
+    'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300',
 
   outline:
     'border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 active:bg-neutral-100 shadow-sm',
@@ -38,17 +48,39 @@ const variantStyles: Record<ButtonVariant, string> = {
     'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-200',
 
   danger:
-    'bg-danger-600 text-white shadow-md hover:bg-danger-700 active:bg-danger-800 hover:shadow-lg',
+    'bg-danger-600 text-white shadow-sm hover:bg-danger-700 active:bg-danger-800 hover:shadow-md',
 
   link: 'text-primary-600 hover:text-primary-700 hover:underline',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: 'min-h-8 px-3 text-sm',
-  md: 'min-h-10 px-4 text-sm',
-  lg: 'min-h-11 px-5 text-base',
+  sm: 'h-8 px-3 text-sm',
+  md: 'h-10 px-4 text-sm',
+  lg: 'h-12 px-6 text-base',
 };
 
+/**
+ * Professional Button Component
+ * 
+ * Variants:
+ * - primary: main CTAs (green)
+ * - secondary: secondary actions (gray)
+ * - outline: tertiary (bordered)
+ * - ghost: minimal (no background)
+ * - danger: destructive (red)
+ * - link: text only
+ * 
+ * Sizes:
+ * - sm: 32px height
+ * - md: 40px height (default)
+ * - lg: 48px height
+ * 
+ * Features:
+ * - Loading state with spinner
+ * - Icon support (left/right)
+ * - Full width option
+ * - Disabled state
+ */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
