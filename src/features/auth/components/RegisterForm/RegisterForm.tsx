@@ -25,7 +25,6 @@ export function RegisterForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    trigger,
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     mode: 'onTouched',
@@ -79,7 +78,6 @@ export function RegisterForm() {
           placeholder="John Doe"
           error={errors.name?.message}
           required
-          onBlur={() => trigger('name')}
           {...register('name')}
         />
 
@@ -90,7 +88,6 @@ export function RegisterForm() {
           placeholder="you@example.com"
           error={errors.email?.message}
           required
-          onBlur={() => trigger('email')}
           {...register('email')}
         />
 
@@ -100,7 +97,6 @@ export function RegisterForm() {
           placeholder="Create a password"
           error={errors.password?.message}
           required
-          onBlur={() => trigger('password')}
           {...register('password')}
         />
 
@@ -110,7 +106,6 @@ export function RegisterForm() {
           placeholder="Confirm your password"
           error={errors.confirmPassword?.message}
           required
-          onBlur={() => trigger('confirmPassword')}
           {...register('confirmPassword')}
         />
 

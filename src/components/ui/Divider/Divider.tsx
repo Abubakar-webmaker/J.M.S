@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react';
-
 interface DividerProps {
   text?: string;
   className?: string;

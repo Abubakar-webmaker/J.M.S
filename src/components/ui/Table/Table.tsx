@@ -9,7 +9,7 @@ import {
    Table Component
    ======================================== */
 
-interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
+export interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   children: ReactNode;
 }
 
@@ -30,7 +30,7 @@ export function Table({ children, className, ...props }: TableProps) {
    TableHead
    ======================================== */
 
-interface TableHeadProps extends TableHTMLAttributes<HTMLTableSectionElement> {
+export interface TableHeadProps extends TableHTMLAttributes<HTMLTableSectionElement> {
   children: ReactNode;
 }
 
@@ -46,7 +46,7 @@ export function TableHead({ children, className, ...props }: TableHeadProps) {
    TableBody
    ======================================== */
 
-interface TableBodyProps extends TableHTMLAttributes<HTMLTableSectionElement> {
+export interface TableBodyProps extends TableHTMLAttributes<HTMLTableSectionElement> {
   children: ReactNode;
 }
 
@@ -62,7 +62,7 @@ export function TableBody({ children, className, ...props }: TableBodyProps) {
    TableRow
    ======================================== */
 
-interface TableRowProps extends TableHTMLAttributes<HTMLTableRowElement> {
+export interface TableRowProps extends TableHTMLAttributes<HTMLTableRowElement> {
   children: ReactNode;
   isHoverable?: boolean;
 }
@@ -89,7 +89,7 @@ export function TableRow({
    TableHeader (th)
    ======================================== */
 
-interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
+export interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {
   children: ReactNode;
   sortable?: boolean;
   onSort?: () => void;
@@ -119,7 +119,7 @@ export function TableHeader({
    TableCell (td)
    ======================================== */
 
-interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
+export interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {
   children: ReactNode;
 }
 
