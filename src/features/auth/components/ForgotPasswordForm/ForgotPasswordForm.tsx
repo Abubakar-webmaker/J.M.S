@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Mail, ShieldCheck, ArrowLeft } from 'lucide-react';
 
@@ -193,12 +193,21 @@ export function ForgotPasswordForm() {
           noValidate
           className="space-y-3"
         >
-          <OtpInput
-            label="Reset code"
-            length={OTP_LENGTH}
-            error={otpForm.formState.errors.otp?.message}
-            required
-            {...otpForm.register('otp')}
+          <Controller
+            name="otp"
+            control={otpForm.control}
+            render={({ field }) => (
+              <OtpInput
+                label="Reset code"
+                length={OTP_LENGTH}
+                error={otpForm.formState.errors.otp?.message}
+                required
+                name="otp"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+              />
+            )}
           />
 
           <Button

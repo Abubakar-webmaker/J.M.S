@@ -11,12 +11,12 @@
     },
     {
       "id": "user-002",
-      "name": "Demo User",
+      "name": "Demo khan",
       "email": "demo@demo.com",
       "password": "Demo@123",
       "avatarUrl": null,
       "createdAt": "2024-02-10T09:30:00.000Z",
-      "updatedAt": "2024-02-10T09:30:00.000Z"
+      "updatedAt": "2026-10-02T02:09:38.750Z"
     },
     {
       "id": "user-eaa40638c2",

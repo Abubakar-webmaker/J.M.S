@@ -1,6 +1,6 @@
-import { ChevronDown, KeyRound, LogOut, User } from 'lucide-react';
+import { ChevronDown, LogOut } from 'lucide-react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { Avatar } from '@/components/ui';
 import { useAuth } from '@/features/auth/context/useAuth';
@@ -66,7 +66,7 @@ export function UserMenu() {
           />
 
           <div
-            className="absolute right-0 top-full z-50 mt-3 w-64 rounded-2xl border border-neutral-200 bg-white shadow-xl shadow-black/10 ring-1 ring-black/5"
+            className="absolute right-0 top-full z-50 mt-3 w-64 rounded-2xl border border-neutral-200 bg-surface shadow-xl shadow-black/10 ring-1 ring-black/5"
             role="menu"
             aria-label="User menu"
           >
@@ -75,33 +75,6 @@ export function UserMenu() {
               <p className="truncate text-sm font-semibold text-neutral-900">{name}</p>
               <p className="truncate text-xs text-neutral-600 mt-1">{email}</p>
             </div>
-
-            {/* Menu items */}
-            <nav className="space-y-1 p-2" role="menugroup">
-              {/* Profile link */}
-              <Link
-                to="/app/profile"
-                role="menuitem"
-                className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
-                onClick={() => setOpen(false)}
-              >
-                <User className="h-5 w-5 shrink-0 text-neutral-600" aria-hidden="true" />
-                <span>Profile</span>
-              </Link>
-
-              {/* Change password link */}
-              <Link
-                to="/app/change-password"
-                role="menuitem"
-                className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
-                onClick={() => setOpen(false)}
-              >
-                <KeyRound className="h-5 w-5 shrink-0 text-neutral-600" aria-hidden="true" />
-                <span>Change Password</span>
-              </Link>
-            </nav>
-
-            <div className="border-t border-neutral-100" />
 
             {/* Logout */}
             <div className="p-2">

@@ -44,7 +44,7 @@ export function SocialLoginButtons({
         type="button"
         onClick={handleGoogleClick}
         disabled={loading || disabled}
-        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-900 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 active:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
+        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-300 bg-surface px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-900 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 active:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
         aria-label="Sign in with Google"
       >
         <svg
@@ -78,7 +78,7 @@ export function SocialLoginButtons({
         type="button"
         onClick={handleLinkedInClick}
         disabled={loading || disabled}
-        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-900 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 active:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
+        className="flex items-center justify-center gap-2 rounded-lg border border-neutral-300 bg-surface px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold text-neutral-900 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 active:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
         aria-label="Sign in with LinkedIn"
       >
         <svg

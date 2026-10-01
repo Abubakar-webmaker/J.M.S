@@ -62,7 +62,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                   : undefined
             }
             className={[
-              'h-10 w-full rounded-lg border bg-white px-3 py-2 text-sm text-neutral-900',
+              'h-10 w-full rounded-lg border bg-surface px-3 py-2 text-sm text-neutral-900',
               'placeholder:text-neutral-500',
               'transition-all duration-200',
               'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100',

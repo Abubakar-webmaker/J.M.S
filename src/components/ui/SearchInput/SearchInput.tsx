@@ -29,7 +29,7 @@ export const SearchInput = forwardRef<
       <div className="relative w-full">
         <Search
           aria-hidden="true"
-          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400"
         />
 
         <input
@@ -37,11 +37,11 @@ export const SearchInput = forwardRef<
           type="search"
           value={value}
           className={[
-            'min-h-10 w-full rounded-lg border border-slate-300 bg-white',
-            'py-2 pl-9 pr-10 text-sm text-slate-900',
-            'placeholder:text-slate-400',
+            'min-h-10 w-full rounded-lg border border-neutral-300 bg-surface',
+            'py-2 pl-9 pr-10 text-sm text-neutral-900',
+            'placeholder:text-neutral-400',
             'transition-colors duration-200',
-            'focus:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-100',
+            'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100',
             '[&::-webkit-search-cancel-button]:appearance-none',
             className,
           ]
@@ -55,7 +55,7 @@ export const SearchInput = forwardRef<
             type="button"
             onClick={onClear}
             aria-label="Clear search"
-            className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600"
+            className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
           >
             <X className="h-4 w-4" />
           </button>

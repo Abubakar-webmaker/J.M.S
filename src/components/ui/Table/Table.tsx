@@ -76,7 +76,7 @@ export function TableRow({
   return (
     <tr
       className={`border-b border-neutral-200 transition-colors ${
-        isHoverable ? 'hover:bg-neutral-50' : ''
+        isHoverable ? 'hover:bg-neutral-100' : ''
       } ${className || ''}`}
       {...props}
     >
@@ -105,7 +105,7 @@ export function TableHeader({
   return (
     <th
       className={`px-6 py-3 text-xs font-semibold uppercase tracking-wide text-neutral-700 ${
-        sortable ? 'cursor-pointer select-none hover:bg-neutral-100' : ''
+        sortable ? 'cursor-pointer select-none hover:bg-neutral-200' : ''
       } ${className || ''}`}
       onClick={sortable ? onSort : undefined}
       {...props}

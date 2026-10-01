@@ -1,9 +1,8 @@
-import { X } from 'lucide-react';
+import { Settings, X } from 'lucide-react';
 import { NavLink } from 'react-router';
-import {
-  ACCOUNT_NAVIGATION,
-  MAIN_NAVIGATION,
-} from '@/constants/navigation';
+
+import logo from '@/assets/logo.png';
+import { MAIN_NAVIGATION } from '@/constants/navigation';
 
 interface SidebarProps {
   mobile?: boolean;
@@ -38,27 +37,25 @@ export function Sidebar({
     <aside
       className={
         mobile
-          ? 'flex w-72 flex-col border-r border-neutral-200 bg-white'
-          : 'hidden w-64 shrink-0 flex-col border-r border-neutral-200 bg-white lg:flex'
+          ? 'flex w-72 flex-col border-r border-neutral-200 bg-surface'
+          : 'hidden w-64 shrink-0 flex-col border-r border-neutral-200 bg-surface lg:flex'
       }
     >
       {/* Brand section - fixed height */}
-      <div className="flex h-15 items-center justify-between border-b border-neutral-200 px-4">
+      <div className="flex h-18 shrink-0 items-center justify-between border-b border-neutral-200 px-4">
         <a
           href="/app/dashboard"
-          className="flex flex-1 items-center gap-2 rounded-lg px-1 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
+          className="flex min-w-0 flex-1 items-center rounded-lg transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
+          aria-label="JobManager home"
         >
           {/* Brand logo */}
-          <img 
-            src="/favicon.svg" 
-            alt="JobManager" 
-            className="h-8 w-8 object-contain"
+          <img
+            src={logo}
+            alt="JobManager"
+            className="h-11 w-auto max-w-full object-contain sm:h-12"
+            width={2172}
+            height={724}
           />
-
-          {/* Brand text */}
-          <span className="text-sm font-bold tracking-tight text-neutral-900">
-            JobManager
-          </span>
         </a>
 
         {/* Mobile close button */}
@@ -124,63 +121,36 @@ export function Sidebar({
           </div>
         </div>
 
-        {/* Account navigation section */}
-        <div className="mt-6">
-          <div className="mb-4 border-t border-neutral-200" />
-
-          <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-neutral-600">
-            Account
-          </p>
-
-          <div className="space-y-1">
-            {ACCOUNT_NAVIGATION.map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <NavLink
-                  key={item.href}
-                  to={item.href}
-                  onClick={onClose}
-                  className={({ isActive }) =>
-                    [
-                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
-                      isActive
-                        ? 'bg-primary-50 text-primary-700'
-                        : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
-                    ].join(' ')
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      <Icon
-                        className={`h-5 w-5 shrink-0 transition-colors ${
-                          isActive
-                            ? 'text-primary-600'
-                            : 'text-neutral-600'
-                        }`}
-                        aria-hidden="true"
-                        strokeWidth={2}
-                      />
-                      <span>{item.label}</span>
-                    </>
-                  )}
-                </NavLink>
-              );
-            })}
-          </div>
-        </div>
       </nav>
 
-      {/* Footer section - version info */}
-      <div className="border-t border-neutral-200 p-4">
-        <div className="rounded-lg bg-neutral-50 px-3 py-2.5">
-          <p className="text-xs font-semibold text-neutral-900">
-            JobManager
-          </p>
-          <p className="mt-1 text-xs text-neutral-600">
-            v1.0.0
-          </p>
-        </div>
+      {/* Footer section - pinned Settings item */}
+      <div className="border-t border-neutral-200 px-2 py-3">
+        <NavLink
+          to="/app/settings"
+          end
+          onClick={onClose}
+          className={({ isActive }) =>
+            [
+              'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
+              isActive
+                ? 'bg-primary-50 text-primary-700'
+                : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
+            ].join(' ')
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <Settings
+                className={`h-5 w-5 shrink-0 transition-colors ${
+                  isActive ? 'text-primary-600' : 'text-neutral-600'
+                }`}
+                aria-hidden="true"
+                strokeWidth={2}
+              />
+              <span>Settings</span>
+            </>
+          )}
+        </NavLink>
       </div>
     </aside>
   );

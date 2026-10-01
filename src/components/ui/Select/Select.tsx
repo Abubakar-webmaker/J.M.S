@@ -52,7 +52,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                   : undefined
             }
             className={[
-              'h-10 w-full appearance-none rounded-lg border bg-white',
+              'h-10 w-full appearance-none rounded-lg border bg-surface',
               'px-3 py-2 pr-10 text-sm text-neutral-900',
               'transition-all duration-200',
               'focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100',

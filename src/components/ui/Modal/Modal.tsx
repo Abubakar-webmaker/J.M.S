@@ -64,7 +64,7 @@ export function Modal({
         }
       }}
     >
-      <div className="absolute inset-0 bg-slate-900/40" />
+      <div className="absolute inset-0 bg-neutral-950/50" />
 
       <div
         role="dialog"
@@ -72,21 +72,21 @@ export function Modal({
         aria-labelledby="modal-title"
         className={[
           'relative z-10 w-full overflow-hidden rounded-xl',
-          'border border-slate-200 bg-white shadow-xl',
+          'border border-neutral-200 bg-surface shadow-xl',
           sizeStyles[size],
         ].join(' ')}
       >
-        <div className="flex items-start justify-between border-b border-slate-200 px-5 py-4">
+        <div className="flex items-start justify-between border-b border-neutral-200 px-5 py-4">
           <div className="pr-4">
             <h2
               id="modal-title"
-              className="text-lg font-semibold text-slate-900"
+              className="text-lg font-semibold text-neutral-900"
             >
               {title}
             </h2>
 
             {description && (
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-neutral-500">
                 {description}
               </p>
             )}
@@ -96,7 +96,7 @@ export function Modal({
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
           >
             <X className="h-5 w-5" />
           </button>
@@ -107,7 +107,7 @@ export function Modal({
         </div>
 
         {footer && (
-          <div className="flex items-center justify-end gap-3 border-t border-slate-200 px-5 py-4">
+          <div className="flex items-center justify-end gap-3 border-t border-neutral-200 px-5 py-4">
             {footer}
           </div>
         )}

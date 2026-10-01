@@ -57,7 +57,7 @@ export function Avatar({
       aria-label={alt ?? name ?? 'User avatar'}
       className={[
         'flex shrink-0 items-center justify-center rounded-full',
-        'bg-green-100 font-semibold text-green-700',
+        'bg-primary-100 font-semibold text-primary-700',
         sizeStyles[size],
         className,
       ]

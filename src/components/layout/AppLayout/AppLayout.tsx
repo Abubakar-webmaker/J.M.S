@@ -61,7 +61,7 @@ export function AppLayout() {
   }, [mobileMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Offline banner - always at top */}
       {!isOnline && (
         <div

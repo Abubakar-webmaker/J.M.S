@@ -93,8 +93,8 @@ export function Dropdown({
           'text-left text-sm transition-colors',
           'disabled:cursor-not-allowed disabled:opacity-50',
           item.danger
-            ? 'text-red-600 hover:bg-red-50'
-            : 'text-slate-700 hover:bg-slate-100',
+            ? 'text-danger-600 hover:bg-danger-50'
+            : 'text-neutral-700 hover:bg-neutral-100',
         ].join(' ')}
       >
         {item.icon && <span className="shrink-0">{item.icon}</span>}
@@ -111,7 +111,7 @@ export function Dropdown({
           role="menu"
           className={[
             'absolute z-[100] mt-2 min-w-44 rounded-lg',
-            'border border-slate-200 bg-white p-1 shadow-lg',
+            'border border-neutral-200 bg-surface p-1 shadow-lg',
             align === 'right' ? 'right-0' : 'left-0',
           ].join(' ')}
           onClick={() => setOpen(false)}

@@ -22,11 +22,11 @@ interface ToastProps {
 const variantStyles = {
   success: {
     icon: CheckCircle2,
-    iconClass: 'text-green-600',
+    iconClass: 'text-success-600',
   },
   error: {
     icon: AlertCircle,
-    iconClass: 'text-red-600',
+    iconClass: 'text-danger-600',
   },
   warning: {
     icon: AlertTriangle,
@@ -50,7 +50,7 @@ export function Toast({
   return (
     <div
       role="status"
-      className="pointer-events-auto flex w-full max-w-sm gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-lg"
+      className="pointer-events-auto flex w-full max-w-sm gap-3 rounded-lg border border-neutral-200 bg-surface p-4 shadow-lg"
     >
       <Icon
         aria-hidden="true"
@@ -58,12 +58,12 @@ export function Toast({
       />
 
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-slate-900">
+        <p className="text-sm font-semibold text-neutral-900">
           {title}
         </p>
 
         {message && (
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             {message}
           </p>
         )}
@@ -73,7 +73,7 @@ export function Toast({
         type="button"
         onClick={onClose}
         aria-label="Close notification"
-        className="h-7 w-7 shrink-0 rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+        className="h-7 w-7 shrink-0 rounded-md text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700"
       >
         <X className="mx-auto h-4 w-4" />
       </button>

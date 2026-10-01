@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MailCheck } from 'lucide-react';
 
@@ -29,7 +29,7 @@ export function VerifyOtpForm() {
   const cooldownRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<VerifyOtpFormValues>({
@@ -129,12 +129,21 @@ export function VerifyOtpForm() {
         noValidate
         className="space-y-2.5"
       >
-        <OtpInput
-          label="Verification code"
-          length={OTP_LENGTH}
-          error={errors.otp?.message}
-          required
-          {...register('otp')}
+        <Controller
+          name="otp"
+          control={control}
+          render={({ field }) => (
+            <OtpInput
+              label="Verification code"
+              length={OTP_LENGTH}
+              error={errors.otp?.message}
+              required
+              name="otp"
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+            />
+          )}
         />
 
         <Button

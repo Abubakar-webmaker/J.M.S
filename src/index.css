@@ -11,16 +11,17 @@
 
 @theme {
   /* ---------- COLORS ---------- */
-  --color-primary-50: #f0fdf4;
-  --color-primary-100: #dcfce7;
-  --color-primary-200: #bbf7d0;
-  --color-primary-300: #86efac;
-  --color-primary-400: #4ade80;
-  --color-primary-500: #22c55e;
-  --color-primary-600: #16a34a;
-  --color-primary-700: #15803d;
-  --color-primary-800: #166534;
-  --color-primary-900: #14532d;
+  /* Primary = brand green sampled from the logo (#0A8F20 core) */
+  --color-primary-50: #ecfdf0;
+  --color-primary-100: #d1fad9;
+  --color-primary-200: #a6f2b8;
+  --color-primary-300: #6ee58e;
+  --color-primary-400: #34d15e;
+  --color-primary-500: #12b03a;
+  --color-primary-600: #0a8f20;
+  --color-primary-700: #08741c;
+  --color-primary-800: #0a5c1b;
+  --color-primary-900: #094c19;
 
   --color-neutral-0: #ffffff;
   --color-neutral-50: #fafbfc;
@@ -41,6 +42,12 @@
   --color-success-600: #16a34a;
   --color-success-700: #15803d;
   --color-success-800: #166534;
+
+  /* Accent scale (brand green from the logo) */
+  --color-accent-300: #6ee58e;
+  --color-accent-400: #34d15e;
+  --color-accent-500: #12b03a;
+  --color-accent-600: #0a8f20;
 
   --color-warning-50: #fffbeb;
   --color-warning-100: #fef3c7;
@@ -77,6 +84,7 @@
   --color-background: #f9fafb;
   --color-surface: #ffffff;
   --color-surface-secondary: #f3f4f6;
+  --color-surface-elevated: #ffffff;
 
   --color-text-primary: #111827;
   --color-text-secondary: #4b5563;
@@ -104,6 +112,7 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.06);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.05);
   --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-glow: 0 0 0 1px rgb(10 143 32 / 0.15), 0 4px 16px -2px rgb(10 143 32 / 0.15);
 
   /* ---------- TRANSITIONS ---------- */
   --transition-fast: 100ms ease;
@@ -131,6 +140,79 @@
   --color-text: #111827;
   --color-border-light: #f3f4f6;
   --radius-full: 9999px;
+}
+
+.dark ::selection {
+  background: rgb(10 143 32 / 0.35);
+  color: #d1fad9;
+}
+
+.dark :focus-visible {
+  outline-color: var(--color-primary-500);
+}
+
+/* ============================================================
+   DARK THEME OVERRIDES
+   ------------------------------------------------------------
+   Redefine the semantic tokens (background / surface / text /
+   border) so existing utility classes (bg-surface, text-primary,
+   border-border, ...) automatically adapt. Brand hues (primary,
+   danger, etc.) stay constant for recognisability.
+   ============================================================ */
+
+.dark {
+  --color-background: #0a0a0a;
+  --color-surface: #141414;
+  --color-surface-secondary: #1a1a1a;
+  --color-surface-elevated: #1c1c1c;
+
+  --color-text-primary: #fafafa;
+  --color-text-secondary: #d4d4d4;
+  --color-text-muted: #a1a1a1;
+  --color-text-disabled: #6b6b6b;
+
+  --color-border: #262626;
+  --color-border-strong: #333333;
+
+  --color-text: #fafafa;
+  --color-border-light: #1f1f1f;
+
+  /* Brand green stays vivid on dark, brightened for contrast */
+  --color-primary-50: #08210f;
+  --color-primary-100: #0a3315;
+  --color-primary-200: #0c4a1e;
+  --color-primary-300: #0a6b26;
+  --color-primary-400: #0a8f20;
+  --color-primary-500: #12b03a;
+  --color-primary-600: #34d15e;
+  --color-primary-700: #6ee58e;
+  --color-primary-800: #a6f2b8;
+  --color-primary-900: #d1fad9;
+
+  /* Soften card shadows for the near-black canvas */
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.4), 0 1px 3px 0 rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55), 0 4px 6px -4px rgb(0 0 0 / 0.45);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+
+  color-scheme: dark;
+}
+
+/* Neutral scale flip: in dark mode the "neutral" scale is inverted so
+   components written with neutral-50..neutral-900 keep working. */
+.dark {
+  --color-neutral-0: #0a0a0a;
+  --color-neutral-50: #141414;
+  --color-neutral-100: #1a1a1a;
+  --color-neutral-200: #262626;
+  --color-neutral-300: #333333;
+  --color-neutral-400: #5c5c5c;
+  --color-neutral-500: #8a8a8a;
+  --color-neutral-600: #a1a1a1;
+  --color-neutral-700: #c4c4c4;
+  --color-neutral-800: #e0e0e0;
+  --color-neutral-900: #fafafa;
 }
 
 /* ========================================

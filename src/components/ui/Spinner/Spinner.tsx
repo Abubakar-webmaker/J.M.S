@@ -17,7 +17,7 @@ export function Spinner({
 }: SpinnerProps) {
   return (
     <Loader2
-      className={`${sizes[size]} animate-spin text-green-600`}
+      className={`${sizes[size]} animate-spin text-primary-600`}
       aria-label={label}
       role="status"
     />

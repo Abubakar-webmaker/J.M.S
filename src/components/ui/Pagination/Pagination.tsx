@@ -61,7 +61,7 @@ export function Pagination({
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={isFirstPage}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
           aria-label="Previous page"
         >
           <ChevronLeft className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
@@ -123,7 +123,7 @@ export function Pagination({
           type="button"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={isLastPage}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
           aria-label="Next page"
         >
           <ChevronRight className="h-5 w-5" strokeWidth={2} aria-hidden="true" />

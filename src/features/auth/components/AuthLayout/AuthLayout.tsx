@@ -57,7 +57,7 @@ export function AuthLayout({
           </Link>
 
           {/* Form Card */}
-          <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-lg shadow-neutral-900/5 sm:p-6">
+          <div className="rounded-2xl border border-neutral-200 bg-surface p-4 shadow-lg shadow-neutral-900/5 sm:p-6">
             {/* Title & Subtitle */}
             {(title || subtitle) && (
               <div className="mb-3 space-y-1 sm:mb-4">
