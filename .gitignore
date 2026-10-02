@@ -25,6 +25,9 @@ lerna-debug.log*
 # Coverage
 coverage
 
+# Reference documents (not part of the source tree)
+*.pdf
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

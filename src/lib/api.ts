@@ -29,6 +29,13 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (isAxiosError(error)) {
+      // Request was aborted (component unmount, param change, or React
+      // StrictMode double-invoke). Re-throw untouched so callers can
+      // detect and ignore it — do NOT convert to a "connection" error.
+      if (error.code === 'ERR_CANCELED') {
+        throw error;
+      }
+
       // Timeout
       if (error.code === 'ECONNABORTED') {
         throw new AppApiError(
