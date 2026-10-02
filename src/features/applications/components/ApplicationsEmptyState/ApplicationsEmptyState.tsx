@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Plus } from 'lucide-react';
+import { BriefcaseBusiness, Plus, SearchX } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { Button, EmptyState } from '@/components/ui';
@@ -22,12 +22,16 @@ export function ApplicationsEmptyState({
     return (
       <EmptyState
         icon={
-          <BriefcaseBusiness className="h-6 w-6" aria-hidden="true" />
+          <SearchX className="h-6 w-6" aria-hidden="true" />
         }
-        title="No applications found"
+        title="No matching applications"
         description={description}
         action={
-          <Button type="button" variant="outline" onClick={onResetFilters}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onResetFilters}
+          >
             Clear filters
           </Button>
         }
@@ -44,8 +48,7 @@ export function ApplicationsEmptyState({
       description="Start tracking your job search by adding your first application."
       action={
         <Link to="/app/applications/new">
-          <Button type="button">
-            <Plus className="h-4 w-4" aria-hidden="true" />
+          <Button type="button" leftIcon={<Plus className="h-4 w-4" />}>
             Add application
           </Button>
         </Link>

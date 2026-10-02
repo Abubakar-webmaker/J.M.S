@@ -1,4 +1,10 @@
-import { RotateCcw, Search } from 'lucide-react';
+import {
+  CalendarDays,
+  MapPin,
+  RotateCcw,
+  Search,
+  SlidersHorizontal,
+} from 'lucide-react';
 
 import { Button, Input, Select } from '@/components/ui';
 import {
@@ -16,7 +22,7 @@ interface ApplicationFiltersProps {
 
 /**
  * Application Filters Panel
- * 
+ *
  * Provides filtering for applications by:
  * - Search (company or job title)
  * - Status
@@ -30,18 +36,65 @@ export function ApplicationFilters({
   onReset,
   disabled = false,
 }: ApplicationFiltersProps) {
+  const activeCount = [
+    filters.search?.trim(),
+    filters.status,
+    filters.jobType,
+    filters.location?.trim(),
+    filters.applicationDateFrom,
+    filters.applicationDateTo,
+  ].filter(Boolean).length;
+
+  const hasInvalidRange = Boolean(
+    filters.applicationDateFrom &&
+      filters.applicationDateTo &&
+      filters.applicationDateFrom > filters.applicationDateTo,
+  );
+
   return (
-    <div className="rounded-lg border border-neutral-200 bg-surface p-5 shadow-sm">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {/* Search with inline icon */}
+    <section
+      aria-label="Application filters"
+      className="overflow-hidden rounded-xl border border-neutral-200 bg-surface shadow-sm"
+    >
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 bg-neutral-50/60 px-5 py-3.5">
+        <div className="flex items-center gap-2.5">
+          <SlidersHorizontal
+            className="h-4 w-4 text-neutral-500"
+            aria-hidden="true"
+          />
+
+          <h2 className="text-sm font-semibold text-neutral-900">
+            Filters
+          </h2>
+
+          {activeCount > 0 && (
+            <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary-100 px-1.5 text-xs font-semibold text-primary-700">
+              {activeCount}
+            </span>
+          )}
+        </div>
+
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={onReset}
+          disabled={disabled || activeCount === 0}
+          leftIcon={<RotateCcw className="h-3.5 w-3.5" strokeWidth={2} />}
+        >
+          Reset filters
+        </Button>
+      </header>
+
+      <div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2 lg:grid-cols-3">
         <Input
+          label="Search"
           placeholder="Company or job title"
           value={filters.search ?? ''}
           onChange={(event) =>
             onChange({ ...filters, search: event.target.value })
           }
           disabled={disabled}
-          aria-label="Search"
           leftIcon={<Search className="h-4 w-4" />}
         />
 
@@ -99,12 +152,14 @@ export function ApplicationFilters({
             onChange({ ...filters, location: event.target.value })
           }
           disabled={disabled}
+          leftIcon={<MapPin className="h-4 w-4" />}
         />
 
         <Input
           label="Applied from"
           type="date"
           value={filters.applicationDateFrom ?? ''}
+          max={filters.applicationDateTo || undefined}
           onChange={(event) =>
             onChange({
               ...filters,
@@ -112,12 +167,19 @@ export function ApplicationFilters({
             })
           }
           disabled={disabled}
+          leftIcon={<CalendarDays className="h-4 w-4" />}
         />
 
         <Input
           label="Applied to"
           type="date"
           value={filters.applicationDateTo ?? ''}
+          min={filters.applicationDateFrom || undefined}
+          error={
+            hasInvalidRange
+              ? '"Applied from" must be on or before "Applied to".'
+              : undefined
+          }
           onChange={(event) =>
             onChange({
               ...filters,
@@ -125,21 +187,9 @@ export function ApplicationFilters({
             })
           }
           disabled={disabled}
+          leftIcon={<CalendarDays className="h-4 w-4" />}
         />
       </div>
-
-      <div className="mt-5 flex justify-end">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={onReset}
-          disabled={disabled}
-          leftIcon={<RotateCcw className="h-4 w-4" strokeWidth={2} />}
-        >
-          Reset filters
-        </Button>
-      </div>
-    </div>
+    </section>
   );
 }

@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react';
+import { Plus, RefreshCw } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 
@@ -130,16 +130,18 @@ export default function ApplicationsPage() {
         title="Applications"
         description="Track and manage all your job applications."
         actions={
-          <Link to="/app/applications/new">
-            <Button className="w-full sm:w-auto">
-              <Plus className="h-4 w-4" aria-hidden="true" />
+          <Link to="/app/applications/new" className="w-full sm:w-auto">
+            <Button
+              className="w-full sm:w-auto"
+              leftIcon={<Plus className="h-4 w-4" strokeWidth={2} />}
+            >
               Add application
             </Button>
           </Link>
         }
       />
 
-      <div className="space-y-6">
+      <div className="space-y-5">
         <ApplicationFilters
           filters={filters}
           onChange={handleFilterChange}
@@ -156,6 +158,7 @@ export default function ApplicationsPage() {
                 type="button"
                 variant="outline"
                 onClick={() => void fetchApplications(params)}
+                leftIcon={<RefreshCw className="h-4 w-4" strokeWidth={2} />}
               >
                 Try again
               </Button>
