@@ -34,20 +34,20 @@ export function DesignSystemPage() {
   const { showToast } = useToast();
 
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Header */}
 
         <div className="mb-10">
-          <p className="mb-2 text-sm font-medium text-green-600">
+          <p className="mb-2 text-sm font-medium text-primary-600">
             Internal Development
           </p>
 
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-bold tracking-tight text-neutral-900">
             Design System
           </h1>
 
-          <p className="mt-2 max-w-2xl text-sm text-slate-500">
+          <p className="mt-2 max-w-2xl text-sm text-neutral-500">
             Reusable UI components and interaction states used
             throughout the Job Management System.
           </p>
@@ -264,7 +264,7 @@ export function DesignSystemPage() {
               trigger={
                 <button
                   type="button"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 bg-surface text-neutral-500 hover:bg-neutral-50"
                 >
                   <MoreVertical className="h-5 w-5" />
                 </button>
@@ -340,11 +340,11 @@ export function DesignSystemPage() {
             </>
           }
         >
-          <div className="rounded-lg bg-red-50 p-4">
+          <div className="rounded-lg bg-danger-50 p-4">
             <div className="flex gap-3">
-              <AlertTriangle className="h-5 w-5 shrink-0 text-red-600" />
+              <AlertTriangle className="h-5 w-5 shrink-0 text-danger-600" />
 
-              <p className="text-sm text-red-700">
+              <p className="text-sm text-danger-700">
                 All application data, notes and status
                 history will be permanently removed.
               </p>
@@ -439,7 +439,7 @@ export function DesignSystemPage() {
               <button
                 type="button"
                 aria-label="Mark complete"
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-500 hover:bg-neutral-50"
               >
                 <Check className="h-5 w-5" />
               </button>
@@ -460,11 +460,11 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-3">
-      <h2 className="text-lg font-semibold text-slate-900">
+      <h2 className="text-lg font-semibold text-neutral-900">
         {title}
       </h2>
 
-      <p className="mt-1 text-sm text-slate-500">
+      <p className="mt-1 text-sm text-neutral-500">
         {description}
       </p>
     </div>

@@ -31,17 +31,17 @@ export function ApplicationFilters({
   disabled = false,
 }: ApplicationFiltersProps) {
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
+    <div className="rounded-lg border border-neutral-200 bg-surface p-5 shadow-sm">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {/* Search with inline icon */}
         <Input
-          label="Search"
           placeholder="Company or job title"
           value={filters.search ?? ''}
           onChange={(event) =>
             onChange({ ...filters, search: event.target.value })
           }
           disabled={disabled}
+          aria-label="Search"
           leftIcon={<Search className="h-4 w-4" />}
         />
 

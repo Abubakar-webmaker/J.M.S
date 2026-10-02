@@ -52,7 +52,7 @@ export function ApplicationPagination({
               value={pagination.limit}
               onChange={(e) => onPageSizeChange(Number(e.target.value))}
               disabled={disabled}
-              className="rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 transition-colors hover:border-neutral-400 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100 disabled:bg-neutral-50 disabled:opacity-50"
+              className="rounded-lg border border-neutral-300 bg-surface px-3 py-2 text-sm text-neutral-900 transition-colors hover:border-neutral-400 focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-100 disabled:bg-neutral-50 disabled:opacity-50"
             >
               {PAGE_SIZE_OPTIONS.map((size) => (
                 <option key={size} value={size}>

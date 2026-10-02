@@ -1,114 +1,126 @@
-import { useNavigate } from 'react-router';
 import { Link } from 'react-router';
-import { ArrowRight } from 'lucide-react';
 
-import { APPLICATION_STATUS_CONFIG } from '@/constants/application';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import { EmptyState } from '@/components/ui/EmptyState';
+import { DASHBOARD_BADGE_STYLES } from '../../constants/dashboard.constants';
 
-import type { DashboardRecentApplication } from '../../types/dashboard.types';
-
-interface RecentApplicationsProps {
-  applications: DashboardRecentApplication[];
+interface CompanyRow {
+  name: string;
+  jobTitle: string;
+  status: 'Applied' | 'Screening' | 'Interview' | 'Offer' | 'Rejected';
+  date: string;
 }
+
+const ROWS: CompanyRow[] = [
+  {
+    name: 'Google',
+    jobTitle: 'Frontend Developer',
+    status: 'Interview',
+    date: 'Sep 18, 2026',
+  },
+  {
+    name: 'Microsoft',
+    jobTitle: 'Software Engineer',
+    status: 'Screening',
+    date: 'Sep 16, 2026',
+  },
+  {
+    name: 'Meta',
+    jobTitle: 'Full Stack Developer',
+    status: 'Applied',
+    date: 'Sep 15, 2026',
+  },
+  {
+    name: 'Apple',
+    jobTitle: 'iOS Developer',
+    status: 'Offer',
+    date: 'Sep 13, 2026',
+  },
+  {
+    name: 'Amazon',
+    jobTitle: 'Backend Developer',
+    status: 'Rejected',
+    date: 'Sep 10, 2026',
+  },
+];
 
 /**
  * Recent Applications Section
- * 
- * Displays last 5 applications with:
- * - Job title and company
- * - Application date
- * - Current status badge
- * - Link to full application details
+ *
+ * Table matching the JobManager spec: Company | Job Title | Status | Applied Date.
+ * Statuses use the spec badge palette; the Company column shows the name only.
  */
-export function RecentApplications({
-  applications,
-}: RecentApplicationsProps) {
-  const navigate = useNavigate();
-
+export function RecentApplications() {
   return (
     <section
       aria-labelledby="recent-apps-heading"
-      className="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm"
+      className="rounded-xl bg-surface p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
     >
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
         <h2
           id="recent-apps-heading"
-          className="text-lg font-bold text-neutral-900"
+          className="text-[15px] font-semibold text-neutral-900"
         >
-          Recent applications
+          Recent Applications
         </h2>
 
         <Link
           to="/app/applications"
-          className="inline-flex items-center gap-1 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded px-1 py-0.5"
+          className="text-[13px] font-medium text-primary-600 hover:underline"
         >
-          View all
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          View all →
         </Link>
       </div>
 
-      {applications.length === 0 ? (
-        <EmptyState
-          title="No applications yet"
-          description="Add your first job application to see it here."
-          action={
-            <Button
-              variant="primary"
-              onClick={() => void navigate('/app/applications/new')}
-              size="sm"
-            >
-              Add application
-            </Button>
-          }
-        />
-      ) : (
-        <ul className="divide-y divide-neutral-200" aria-label="Recent applications">
-          {applications.map((app) => {
-            const statusConfig =
-              APPLICATION_STATUS_CONFIG[
-                app.status as keyof typeof APPLICATION_STATUS_CONFIG
-              ];
-
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="bg-neutral-50">
+            <th className="rounded-l-md px-3 py-2.5 text-left text-[12px] font-medium uppercase tracking-[0.05em] text-neutral-500">
+              Company
+            </th>
+            <th className="px-3 py-2.5 text-left text-[12px] font-medium uppercase tracking-[0.05em] text-neutral-500">
+              Job Title
+            </th>
+            <th className="px-3 py-2.5 text-left text-[12px] font-medium uppercase tracking-[0.05em] text-neutral-500">
+              Status
+            </th>
+            <th className="rounded-r-md px-3 py-2.5 text-left text-[12px] font-medium uppercase tracking-[0.05em] text-neutral-500">
+              Applied Date
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {ROWS.map((row, index) => {
+            const badge = DASHBOARD_BADGE_STYLES[row.status];
             return (
-              <li key={app.id}>
-                <Link
-                  to={`/app/applications/${app.id}`}
-                  className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between py-4 px-2 transition-all hover:bg-neutral-50 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2"
-                >
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-neutral-900">
-                      {app.jobTitle}
-                    </p>
-                    <p className="truncate text-xs text-neutral-600 mt-1">
-                      {app.companyName}
-                    </p>
-                  </div>
-
-                  <div className="flex shrink-0 items-center gap-4">
-                    <time
-                      dateTime={app.applicationDate}
-                      className="hidden text-xs font-medium text-neutral-600 sm:block whitespace-nowrap"
-                    >
-                      {new Date(app.applicationDate).toLocaleDateString(
-                        'en-US',
-                        { dateStyle: 'short' },
-                      )}
-                    </time>
-
-                    {statusConfig && (
-                      <Badge variant={statusConfig.variant}>
-                        {statusConfig.label}
-                      </Badge>
-                    )}
-                  </div>
-                </Link>
-              </li>
+              <tr
+                key={row.name}
+                className={
+                  index === ROWS.length - 1
+                    ? ''
+                    : 'border-b border-neutral-200'
+                }
+              >
+                <td className="px-3 py-3.5 text-sm font-medium text-neutral-900">
+                  {row.name}
+                </td>
+                <td className="px-3 py-3.5 text-sm text-neutral-900">
+                  {row.jobTitle}
+                </td>
+                <td className="px-3 py-3.5">
+                  <span
+                    className="inline-block whitespace-nowrap rounded-full px-2.5 py-[3px] text-xs font-medium"
+                    style={{ backgroundColor: badge.bg, color: badge.text }}
+                  >
+                    {row.status}
+                  </span>
+                </td>
+                <td className="px-3 py-3.5 text-sm text-neutral-500">
+                  {row.date}
+                </td>
+              </tr>
             );
           })}
-        </ul>
-      )}
+        </tbody>
+      </table>
     </section>
   );
 }

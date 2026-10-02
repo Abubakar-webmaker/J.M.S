@@ -33,10 +33,10 @@ export function ChangePasswordPage() {
     <div className="mx-auto max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-2xl space-y-6">
         <header>
-          <h1 className="text-2xl font-semibold text-slate-900">
+          <h1 className="text-2xl font-semibold text-neutral-900">
             Change password
           </h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-neutral-500">
             Keep your account secure by using a strong password.
           </p>
         </header>

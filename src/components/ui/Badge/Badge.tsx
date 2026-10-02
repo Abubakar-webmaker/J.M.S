@@ -30,13 +30,13 @@ const variantStyles: Record<BadgeVariant, string> = {
   info: 'bg-info-50 text-info-700',
 
   /* Job Status */
-  applied: 'bg-blue-50 text-blue-700',
-  screening: 'bg-amber-50 text-amber-700',
-  interview: 'bg-purple-50 text-purple-700',
-  offer: 'bg-emerald-50 text-emerald-700',
-  rejected: 'bg-red-50 text-red-700',
-  ghosted: 'bg-gray-100 text-gray-700',
-  withdrawn: 'bg-gray-100 text-gray-700',
+  applied: 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300',
+  screening: 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300',
+  interview: 'bg-purple-50 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300',
+  offer: 'bg-primary-50 text-primary-700 dark:bg-primary-900/40 dark:text-primary-300',
+  rejected: 'bg-danger-50 text-danger-700 dark:bg-danger-950/40 dark:text-danger-300',
+  ghosted: 'bg-neutral-100 text-neutral-700',
+  withdrawn: 'bg-neutral-100 text-neutral-700',
 };
 
 /**

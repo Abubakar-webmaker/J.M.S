@@ -6,6 +6,7 @@ import App from './App';
 import { AppErrorBoundary } from '@/components/common/AppErrorBoundary/AppErrorBoundary';
 import { ToastProvider } from '@/components/ui';
 import { AuthProvider } from '@/features/auth/context/AuthProvider';
+import { ThemeProvider } from '@/features/theme';
 import './index.css';
 
 ReactDOM.createRoot(
@@ -16,15 +17,19 @@ ReactDOM.createRoot(
         render-time crashes before the router even mounts. It shows a static
         "Reload page" screen so it does not need router access. */}
     <AppErrorBoundary>
-      <BrowserRouter>
-        {/* AuthProvider is inside BrowserRouter so useNavigate works for
-            session-expiry redirects */}
-        <AuthProvider>
-          <ToastProvider>
-            <App />
-          </ToastProvider>
-        </AuthProvider>
-      </BrowserRouter>
+      {/* ThemeProvider is outermost so theme applies to every screen,
+          including error / loading states. */}
+      <ThemeProvider>
+        <BrowserRouter>
+          {/* AuthProvider is inside BrowserRouter so useNavigate works for
+              session-expiry redirects */}
+          <AuthProvider>
+            <ToastProvider>
+              <App />
+            </ToastProvider>
+          </AuthProvider>
+        </BrowserRouter>
+      </ThemeProvider>
     </AppErrorBoundary>
   </React.StrictMode>,
 );

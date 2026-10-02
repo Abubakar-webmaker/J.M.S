@@ -15,6 +15,7 @@ import ResumeDetailsPage from '@/pages/app/ResumeDetailsPage';
 import { DashboardPage } from '@/pages/app/dashboard/DashboardPage';
 import { ProfilePage } from '@/pages/app/profile/ProfilePage';
 import { ChangePasswordPage } from '@/pages/app/change-password/ChangePasswordPage';
+import { SettingsPage } from '@/pages/app/settings/SettingsPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/development/DesignSystemPage';
 
@@ -53,6 +54,9 @@ export function AppRoutes() {
           {/* Profile & Account */}
           <Route path="profile" element={<ProfilePage />} />
           <Route path="change-password" element={<ChangePasswordPage />} />
+
+          {/* Settings */}
+          <Route path="settings" element={<SettingsPage />} />
 
           {/* Any unknown /app/* route → 404 */}
           <Route path="*" element={<NotFoundPage />} />

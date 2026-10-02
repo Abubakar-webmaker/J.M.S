@@ -18,27 +18,32 @@ const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg fo
 
 const variantStyles: Record<ButtonVariant, { className: string; style: CSSProperties }> = {
   primary: {
-    className: 'text-white shadow-md hover:shadow-lg',
-    style: { backgroundColor: '#16a34a' },
+    className:
+      'bg-primary-600 text-white shadow-md hover:bg-primary-700 hover:shadow-glow focus-visible:ring-primary-500 dark:bg-primary-600 dark:text-neutral-900 dark:hover:bg-primary-500',
+    style: {},
   },
   secondary: {
-    className: 'text-neutral-900 hover:bg-neutral-200',
-    style: { backgroundColor: '#f3f4f6' },
+    className:
+      'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus-visible:ring-primary-400',
+    style: {},
   },
   outline: {
-    className: 'border-2 border-neutral-300 text-neutral-900 hover:bg-neutral-50',
+    className:
+      'border border-neutral-300 text-neutral-900 hover:bg-neutral-50 hover:border-neutral-400 focus-visible:ring-primary-400',
     style: {},
   },
   ghost: {
-    className: 'text-neutral-700 hover:bg-neutral-100',
+    className:
+      'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:ring-primary-400',
     style: {},
   },
   danger: {
-    className: 'text-white shadow-md hover:shadow-lg',
-    style: { backgroundColor: '#dc2626' },
+    className:
+      'bg-danger-600 text-white shadow-md hover:bg-danger-700 focus-visible:ring-danger-500',
+    style: {},
   },
   link: {
-    className: 'text-primary-600 hover:underline',
+    className: 'text-primary-600 hover:underline focus-visible:ring-primary-400',
     style: {},
   },
 };

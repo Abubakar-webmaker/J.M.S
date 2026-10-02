@@ -51,7 +51,7 @@ export function ProfileForm({
       <div>
         <label
           htmlFor="profile-name"
-          className="mb-1.5 block text-sm font-medium text-slate-700"
+          className="mb-1.5 block text-sm font-medium text-neutral-700"
         >
           Name
         </label>
@@ -69,7 +69,7 @@ export function ProfileForm({
           <p
             id="profile-name-error"
             role="alert"
-            className="mt-1.5 text-sm text-red-600"
+            className="mt-1.5 text-sm text-danger-600"
           >
             {errors.name.message}
           </p>
@@ -77,7 +77,7 @@ export function ProfileForm({
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-600">
+        <p role="alert" className="text-sm text-danger-600">
           {error}
         </p>
       )}

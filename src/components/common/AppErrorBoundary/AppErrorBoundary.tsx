@@ -35,10 +35,10 @@ export class AppErrorBoundary extends Component<Props, State> {
       return (
         <main className="flex min-h-screen items-center justify-center px-4">
           <div className="max-w-md text-center">
-            <h1 className="text-2xl font-semibold text-slate-900">
+            <h1 className="text-2xl font-semibold text-neutral-900">
               Something went wrong
             </h1>
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="mt-3 text-sm text-neutral-500">
               An unexpected error occurred. Please reload the page and try
               again.
             </p>

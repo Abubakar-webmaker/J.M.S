@@ -8,7 +8,7 @@ export function ProfileSkeleton() {
       className="grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_0.6fr]"
     >
       {/* Personal information card */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-neutral-200 bg-surface p-6 shadow-sm">
         <Skeleton className="h-6 w-44" />
         <Skeleton className="mt-2 h-4 w-64" />
         <div className="mt-8 space-y-5">
@@ -24,7 +24,7 @@ export function ProfileSkeleton() {
       </div>
 
       {/* Account info card */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-neutral-200 bg-surface p-6 shadow-sm">
         <Skeleton className="h-6 w-24" />
         <div className="mt-6 space-y-6">
           <div className="space-y-1">

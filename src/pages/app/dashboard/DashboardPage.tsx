@@ -1,5 +1,3 @@
-import { useSearchParams } from 'react-router';
-
 import { PageContainer } from '@/components/layout/PageContainer/PageContainer';
 
 import {
@@ -12,22 +10,9 @@ import {
   StatusDistributionChart,
   useDashboard,
 } from '@/features/dashboard';
-import { getDashboardPeriod } from '@/features/dashboard/utils/dashboard.utils';
-import type { DashboardPeriod } from '@/features/dashboard/types/dashboard.types';
 
 export function DashboardPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const period: DashboardPeriod = getDashboardPeriod(
-    searchParams.get('period'),
-  );
-
-  const { data, isLoading, isRefreshing, error, refresh } =
-    useDashboard(period);
-
-  function handlePeriodChange(next: DashboardPeriod) {
-    setSearchParams({ period: next });
-  }
+  const { data, isLoading, isRefreshing, error, refresh } = useDashboard();
 
   return (
     <PageContainer>
@@ -39,14 +24,12 @@ export function DashboardPage() {
               Dashboard
             </h1>
             <p className="mt-1 text-sm text-neutral-600">
-              Track your job search at a glance.
+              Here's your job application overview.
             </p>
           </div>
 
           <div className="flex shrink-0 items-center gap-3">
             <DashboardFilters
-              period={period}
-              onPeriodChange={handlePeriodChange}
               isRefreshing={isRefreshing}
               onRefresh={() => void refresh()}
             />
@@ -69,14 +52,14 @@ export function DashboardPage() {
             }
           >
             <div className="space-y-6">
-              <StatsGrid summary={data.summary} />
+              <StatsGrid />
 
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <ApplicationTrendChart data={data.applicationTrend} />
-                <StatusDistributionChart data={data.statusDistribution} />
+                <ApplicationTrendChart />
+                <StatusDistributionChart />
               </div>
 
-              <RecentApplications applications={data.recentApplications} />
+              <RecentApplications />
             </div>
           </div>
         )}

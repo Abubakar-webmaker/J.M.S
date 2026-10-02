@@ -28,7 +28,7 @@ export function ApplicationTable({
   applications,
 }: ApplicationTableProps) {
   return (
-    <div className="hidden overflow-hidden rounded-lg border border-neutral-200 bg-white md:block shadow-sm">
+    <div className="hidden overflow-hidden rounded-lg border border-neutral-200 bg-surface md:block shadow-sm">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] text-left text-sm">
           <caption className="sr-only">Job applications</caption>
