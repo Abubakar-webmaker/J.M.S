@@ -21,15 +21,16 @@ export function ApplicationActions({
   disabled = false,
 }: ApplicationActionsProps) {
   return (
-    <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
-      <Link to={`/app/applications/${applicationId}/edit`}>
+    <div className="flex flex-wrap items-center gap-2 max-sm:grid max-sm:grid-cols-1">
+      <Link to={`/app/applications/${applicationId}/edit`} className="sm:contents">
         <Button
           type="button"
           variant="outline"
+          size="sm"
           disabled={disabled || isDeleting}
+          leftIcon={<Pencil className="h-4 w-4" strokeWidth={2} />}
           className="w-full sm:w-auto"
         >
-          <Pencil className="h-4 w-4" aria-hidden="true" />
           Edit
         </Button>
       </Link>
@@ -37,34 +38,37 @@ export function ApplicationActions({
       <Button
         type="button"
         variant="outline"
+        size="sm"
         disabled={disabled || isDeleting}
         onClick={onChangeStatus}
+        leftIcon={<RefreshCw className="h-4 w-4" strokeWidth={2} />}
         className="w-full sm:w-auto"
       >
-        <RefreshCw className="h-4 w-4" aria-hidden="true" />
         Change status
       </Button>
 
       <Button
         type="button"
         variant="outline"
+        size="sm"
         disabled={disabled || isDeleting}
         onClick={onAddNote}
+        leftIcon={<MessageSquarePlus className="h-4 w-4" strokeWidth={2} />}
         className="w-full sm:w-auto"
       >
-        <MessageSquarePlus className="h-4 w-4" aria-hidden="true" />
         Add note
       </Button>
 
       <Button
         type="button"
         variant="danger"
+        size="sm"
         loading={isDeleting}
         disabled={disabled || isDeleting}
         onClick={onDelete}
+        leftIcon={<Trash2 className="h-4 w-4" strokeWidth={2} />}
         className="w-full sm:w-auto"
       >
-        <Trash2 className="h-4 w-4" aria-hidden="true" />
         Delete
       </Button>
     </div>

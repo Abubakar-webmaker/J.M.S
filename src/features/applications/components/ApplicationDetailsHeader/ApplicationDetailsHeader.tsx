@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Building2, CalendarDays, MapPin } from 'lucide-react';
 import { Link } from 'react-router';
 
 import {
@@ -11,6 +11,14 @@ interface ApplicationDetailsHeaderProps {
   application: Application;
 }
 
+function formatDate(value: string) {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(value));
+}
+
 export function ApplicationDetailsHeader({
   application,
 }: ApplicationDetailsHeaderProps) {
@@ -18,10 +26,10 @@ export function ApplicationDetailsHeader({
     APPLICATION_STATUS_CONFIG[application.status];
 
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-4">
       <Link
         to="/app/applications"
-        className="inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-text"
+        className="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900"
       >
         <ArrowLeft
           className="h-4 w-4"
@@ -30,9 +38,9 @@ export function ApplicationDetailsHeader({
         Back to applications
       </Link>
 
-      <div>
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-2xl font-bold tracking-tight text-text sm:text-3xl">
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <h1 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
             {application.jobTitle}
           </h1>
 
@@ -41,15 +49,26 @@ export function ApplicationDetailsHeader({
           </Badge>
         </div>
 
-        <p className="mt-2 text-base font-medium text-text-muted">
-          {application.companyName}
-        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-neutral-600">
+          <span className="inline-flex items-center gap-1.5">
+            <Building2 className="h-4 w-4 text-neutral-400" aria-hidden="true" />
+            <span className="font-medium text-neutral-900">
+              {application.companyName}
+            </span>
+          </span>
 
-        {application.location && (
-          <p className="mt-1 text-sm text-text-muted">
-            {application.location}
-          </p>
-        )}
+          {application.location && (
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin className="h-4 w-4 text-neutral-400" aria-hidden="true" />
+              {application.location}
+            </span>
+          )}
+
+          <span className="inline-flex items-center gap-1.5">
+            <CalendarDays className="h-4 w-4 text-neutral-400" aria-hidden="true" />
+            Applied {formatDate(application.applicationDate)}
+          </span>
+        </div>
       </div>
     </div>
   );

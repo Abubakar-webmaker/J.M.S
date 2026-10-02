@@ -1,6 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Save } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import {
+  Briefcase,
+  Building2,
+  FileText,
+  Save,
+  Wallet,
+} from 'lucide-react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
   Controller,
   useForm,
@@ -56,6 +62,39 @@ function getDefaultValues(
     notes: application.notes ?? '',
     resumeId: application.submittedResume?.id ?? '',
   };
+}
+
+interface FormSectionProps {
+  icon: ReactNode;
+  title: string;
+  description: string;
+  children: ReactNode;
+}
+
+function FormSection({
+  icon,
+  title,
+  description,
+  children,
+}: FormSectionProps) {
+  return (
+    <section className="overflow-hidden rounded-xl border border-neutral-200 bg-surface shadow-sm">
+      <header className="flex items-start gap-3 border-b border-neutral-200 bg-neutral-50/60 px-5 py-4">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-700">
+          {icon}
+        </span>
+
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold text-neutral-900">
+            {title}
+          </h2>
+          <p className="mt-0.5 text-xs text-neutral-500">{description}</p>
+        </div>
+      </header>
+
+      <div className="space-y-5 p-5">{children}</div>
+    </section>
+  );
 }
 
 export function ApplicationForm({
@@ -189,24 +228,20 @@ export function ApplicationForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8"
+      className="space-y-6"
       noValidate
     >
-      <section className="space-y-5">
-        <div>
-          <h2 className="text-lg font-semibold text-text">
-            Basic information
-          </h2>
-          <p className="mt-1 text-sm text-text-muted">
-            Enter the company and position details.
-          </p>
-        </div>
-
+      <FormSection
+        icon={<Building2 className="h-4 w-4" strokeWidth={2} aria-hidden="true" />}
+        title="Basic information"
+        description="Enter the company and position details."
+      >
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <Input
             label="Company"
             placeholder="e.g. Microsoft"
             autoComplete="organization"
+            required
             error={errors.companyName?.message}
             {...register('companyName')}
           />
@@ -214,24 +249,18 @@ export function ApplicationForm({
           <Input
             label="Job title"
             placeholder="e.g. Frontend Developer"
+            required
             error={errors.jobTitle?.message}
             {...register('jobTitle')}
           />
         </div>
-      </section>
+      </FormSection>
 
-      <div className="border-t border-border" />
-
-      <section className="space-y-5">
-        <div>
-          <h2 className="text-lg font-semibold text-text">
-            Job details
-          </h2>
-          <p className="mt-1 text-sm text-text-muted">
-            Keep the position information together with the application.
-          </p>
-        </div>
-
+      <FormSection
+        icon={<Briefcase className="h-4 w-4" strokeWidth={2} aria-hidden="true" />}
+        title="Job details"
+        description="Keep the position information together with the application."
+      >
         <Input
           label="Job posting URL"
           type="url"
@@ -250,6 +279,7 @@ export function ApplicationForm({
 
           <Select
             label="Job type"
+            required
             error={errors.jobType?.message}
             {...register('jobType')}
           >
@@ -263,12 +293,14 @@ export function ApplicationForm({
           <Input
             label="Application date"
             type="date"
+            required
             error={errors.applicationDate?.message}
             {...register('applicationDate')}
           />
 
           <Select
             label="Status"
+            required
             error={errors.status?.message}
             {...register('status')}
           >
@@ -279,26 +311,20 @@ export function ApplicationForm({
             ))}
           </Select>
         </div>
-      </section>
+      </FormSection>
 
-      <div className="border-t border-border" />
-
-      <section className="space-y-5">
-        <div>
-          <h2 className="text-lg font-semibold text-text">
-            Compensation
-          </h2>
-          <p className="mt-1 text-sm text-text-muted">
-            Add salary information when available.
-          </p>
-        </div>
-
+      <FormSection
+        icon={<Wallet className="h-4 w-4" strokeWidth={2} aria-hidden="true" />}
+        title="Compensation"
+        description="Add salary information when available."
+      >
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           <Input
             label="Minimum salary"
             type="number"
             min="0"
             step="1"
+            placeholder="0"
             error={errors.salaryMin?.message}
             {...register('salaryMin', {
               setValueAs: (value) =>
@@ -311,6 +337,7 @@ export function ApplicationForm({
             type="number"
             min="0"
             step="1"
+            placeholder="0"
             error={errors.salaryMax?.message}
             {...register('salaryMax', {
               setValueAs: (value) =>
@@ -326,20 +353,13 @@ export function ApplicationForm({
             {...register('salaryCurrency')}
           />
         </div>
-      </section>
+      </FormSection>
 
-      <div className="border-t border-border" />
-
-      <section className="space-y-5">
-        <div>
-          <h2 className="text-lg font-semibold text-text">
-            Description &amp; notes
-          </h2>
-          <p className="mt-1 text-sm text-text-muted">
-            Store useful information for this application.
-          </p>
-        </div>
-
+      <FormSection
+        icon={<FileText className="h-4 w-4" strokeWidth={2} aria-hidden="true" />}
+        title="Description & notes"
+        description="Store useful information for this application."
+      >
         <Textarea
           label="Job description"
           placeholder="Paste or summarize the job description..."
@@ -355,20 +375,13 @@ export function ApplicationForm({
           error={errors.notes?.message}
           {...register('notes')}
         />
-      </section>
+      </FormSection>
 
-      <div className="border-t border-border" />
-
-      <section className="space-y-4">
-        <div>
-          <h2 className="text-lg font-semibold text-text">
-            Submitted resume
-          </h2>
-          <p className="mt-1 text-sm text-text-muted">
-            Attach the resume you submitted with this application.
-          </p>
-        </div>
-
+      <FormSection
+        icon={<FileText className="h-4 w-4" strokeWidth={2} aria-hidden="true" />}
+        title="Submitted resume"
+        description="Attach the resume you submitted with this application."
+      >
         <Controller
           name="resumeId"
           control={control}
@@ -389,23 +402,33 @@ export function ApplicationForm({
             />
           )}
         />
-      </section>
+      </FormSection>
 
       {submitError && (
         <div
           role="alert"
-          className="rounded-lg border border-danger-200 bg-danger-50 px-4 py-3 text-sm text-danger-700"
+          className="flex items-start gap-3 rounded-xl border border-danger-200 bg-danger-50 px-4 py-3 text-sm text-danger-700"
         >
-          {submitError}
+          <span aria-hidden="true" className="mt-0.5 shrink-0">
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-13a1 1 0 011 1v4a1 1 0 11-2 0V6a1 1 0 011-1zm0 9a1 1 0 100-2 1 1 0 000 2z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </span>
+          <span>{submitError}</span>
         </div>
       )}
 
-      <div className="flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:justify-end">
+      <div className="flex flex-col-reverse gap-3 border-t border-neutral-200 pt-6 sm:flex-row sm:items-center sm:justify-end">
         <Button
           type="button"
           variant="outline"
           disabled={isSubmitting}
           onClick={handleCancel}
+          className="sm:mr-auto"
         >
           Cancel
         </Button>
@@ -413,8 +436,12 @@ export function ApplicationForm({
         <Button
           type="submit"
           loading={isSubmitting}
+          leftIcon={
+            isSubmitting ? undefined : (
+              <Save className="h-4 w-4" aria-hidden="true" />
+            )
+          }
         >
-          <Save className="h-4 w-4" aria-hidden="true" />
           {mode === 'create' ? 'Add application' : 'Save changes'}
         </Button>
       </div>
