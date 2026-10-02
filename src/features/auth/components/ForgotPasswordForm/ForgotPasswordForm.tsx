@@ -198,11 +198,7 @@ export function ForgotPasswordForm() {
             length={OTP_LENGTH}
             error={otpForm.formState.errors.otp?.message}
             required
-            {...otpForm.register('otp', {
-              onChange: (e) => {
-                e.target.value = e.target.value.replace(/\D/g, '');
-              },
-            })}
+            {...otpForm.register('otp')}
           />
 
           <Button
