@@ -127,18 +127,23 @@ export function ApplicationInfoCard({
           label="Job posting"
         >
           {application.jobUrl ? (
-            <a
-              href={application.jobUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-primary-600 transition-colors hover:text-primary-700"
-            >
-              Open posting
-              <ExternalLink
-                className="h-3.5 w-3.5"
-                aria-hidden="true"
-              />
-            </a>
+            <div className="flex flex-col gap-1">
+              <a
+                href={application.jobUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-primary-600 transition-colors hover:text-primary-700"
+              >
+                Open posting
+                <ExternalLink
+                  className="h-3.5 w-3.5"
+                  aria-hidden="true"
+                />
+              </a>
+              <span className="break-all text-xs font-normal text-neutral-500">
+                {application.jobUrl}
+              </span>
+            </div>
           ) : (
             <span className="font-normal text-neutral-500">
               Not provided

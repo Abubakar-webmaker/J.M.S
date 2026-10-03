@@ -25,9 +25,13 @@ export const applicationService = {
     return response.data;
   },
 
-  async getApplication(id: string): Promise<ApplicationDetailsResponse> {
+  async getApplication(
+    id: string,
+    signal?: AbortSignal,
+  ): Promise<ApplicationDetailsResponse> {
     const response = await api.get<ApplicationDetailsResponse>(
       `/applications/${id}`,
+      { signal },
     );
     return response.data;
   },
