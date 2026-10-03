@@ -22,10 +22,15 @@ export function useApplicationDetails(
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<AppApiError | null>(null);
 
-  const hasLoadedRef = useRef(false);
+  const requestIdRef = useRef(0);
 
   const load = useCallback(
-    async (applicationId: string, isRefresh = false) => {
+    async (
+      applicationId: string,
+      isRefresh = false,
+      signal?: AbortSignal,
+    ) => {
+      const requestId = ++requestIdRef.current;
       setError(null);
 
       if (isRefresh) {
@@ -35,11 +40,14 @@ export function useApplicationDetails(
       }
 
       try {
-        const data =
-          await applicationService.getApplication(applicationId);
+        const data = await applicationService.getApplication(
+          applicationId,
+          signal,
+        );
+        if (requestId !== requestIdRef.current) return;
         setApplication(data);
-        hasLoadedRef.current = true;
       } catch (requestError) {
+        if (requestId !== requestIdRef.current) return;
         const normalizedError =
           requestError instanceof AppApiError
             ? requestError
@@ -48,8 +56,10 @@ export function useApplicationDetails(
               );
         setError(normalizedError);
       } finally {
-        setIsLoading(false);
-        setIsRefreshing(false);
+        if (requestId === requestIdRef.current) {
+          setIsLoading(false);
+          setIsRefreshing(false);
+        }
       }
     },
     [],
@@ -61,11 +71,17 @@ export function useApplicationDetails(
       return;
     }
 
-    const run = async () => {
-      await load(id, false);
-    };
+    const controller = new AbortController();
+    // Defer so load()'s synchronous setState calls do not run during the
+    // effect body, which would trigger a cascading render.
+    const timer = window.setTimeout(() => {
+      void load(id, false, controller.signal);
+    }, 0);
 
-    void run();
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
   }, [id, load]);
 
   const refresh = useCallback(async () => {

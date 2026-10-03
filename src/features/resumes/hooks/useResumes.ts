@@ -56,8 +56,12 @@ export function useResumes(): UseResumesResult {
       } catch (requestError) {
         // Ignore aborted requests — the component unmounted or a new request started.
         if (
-          requestError instanceof Error &&
-          requestError.name === 'CanceledError'
+          (requestError instanceof Error &&
+            requestError.name === 'CanceledError') ||
+          (typeof requestError === 'object' &&
+            requestError !== null &&
+            'code' in requestError &&
+            (requestError as { code?: unknown }).code === 'ERR_CANCELED')
         ) {
           return;
         }

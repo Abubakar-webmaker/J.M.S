@@ -565,6 +565,26 @@ server.patch('/applications/:id', requireAuth, (req, res) => {
   delete updates.userId;
   delete updates.statusHistory;
 
+  // Resolve resumeId into the embedded submittedResume snapshot (same as POST).
+  if ('resumeId' in updates) {
+    const { resumeId } = updates;
+    delete updates.resumeId;
+
+    if (resumeId) {
+      const resume = db().get('resumes').find({ id: resumeId }).value();
+      if (resume) {
+        updates.submittedResume = {
+          id: resume.id,
+          name: resume.name,
+          fileName: resume.fileName,
+          url: resume.fileUrl,
+        };
+      }
+    } else {
+      updates.submittedResume = null;
+    }
+  }
+
   db()
     .get('applications')
     .find({ id: req.params.id })
