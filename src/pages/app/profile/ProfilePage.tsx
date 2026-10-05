@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+
 import { Card, useToast } from '@/components/ui';
 import { useAuth } from '@/features/auth/context/useAuth';
 import {
   AccountInfoCard,
+  DeleteAccountCard,
   ProfileError,
   ProfileForm,
   ProfileHeader,
@@ -9,17 +13,41 @@ import {
 } from '@/features/profile';
 import { useProfile } from '@/features/profile/hooks/useProfile';
 import { useProfileMutations } from '@/features/profile/hooks/useProfileMutations';
-import type { UpdateProfileFormValues } from '@/features/profile/schemas/profile.schemas';
-import { getProfileErrorMessage } from '@/features/profile/utils/profileError';
+import type { UpdateProfileInput } from '@/features/profile/types/profile.types';
+import {
+  getDeleteAccountErrorMessage,
+  getProfileErrorMessage,
+  isNotFound,
+  isUnauthorized,
+} from '@/features/profile/utils/profileError';
 
 export function ProfilePage() {
-  const { refreshSession } = useAuth();
+  const { refreshSession, logout } = useAuth();
+  const navigate = useNavigate();
   const { profile, isLoading, error, refresh, setProfile } = useProfile();
-  const { updateProfile, isUpdatingProfile, profileError } =
-    useProfileMutations();
+  const {
+    updateProfile,
+    deleteAccount,
+    isUpdatingProfile,
+    isDeletingAccount,
+    profileError,
+    deleteError,
+  } = useProfileMutations();
   const { showToast } = useToast();
 
-  const handleSubmit = async (values: UpdateProfileFormValues) => {
+  // 401 → session expired, redirect to login.
+  useEffect(() => {
+    if (error && isUnauthorized(error)) {
+      void logout().finally(() => {
+        navigate('/login', {
+          replace: true,
+          state: { sessionExpired: true },
+        });
+      });
+    }
+  }, [error, logout, navigate]);
+
+  const handleSubmit = async (values: UpdateProfileInput) => {
     const result = await updateProfile(values);
 
     if (result.data) {
@@ -31,12 +59,39 @@ export function ProfilePage() {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    const result = await deleteAccount();
+
+    if (!result.error) {
+      showToast({
+        variant: 'success',
+        title: 'Your account has been deleted.',
+      });
+      await logout();
+      navigate('/login', { replace: true });
+    }
+  };
+
   // Show skeleton on initial load (no data yet)
   if (isLoading && !profile) {
     return (
       <div className="mx-auto max-w-[1600px] space-y-6 px-4 py-6 sm:px-6 lg:px-8">
         <ProfileHeader />
         <ProfileSkeleton />
+      </div>
+    );
+  }
+
+  // 404 → the account no longer exists on the server.
+  if (error && !profile && isNotFound(error)) {
+    return (
+      <div className="mx-auto max-w-[1600px] space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+        <ProfileHeader />
+        <ProfileError
+          title="User not found"
+          message="We couldn't find your account. It may have been deleted."
+          onRetry={() => void refresh()}
+        />
       </div>
     );
   }
@@ -92,6 +147,16 @@ export function ProfilePage() {
         {/* Account info */}
         <AccountInfoCard profile={profile} />
       </div>
+
+      <DeleteAccountCard
+        isDeleting={isDeletingAccount}
+        error={
+          deleteError
+            ? getDeleteAccountErrorMessage(deleteError)
+            : undefined
+        }
+        onDelete={handleDeleteAccount}
+      />
     </div>
   );
 }

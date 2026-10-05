@@ -22,8 +22,10 @@ function normalizeError(err: unknown): AppApiError {
 export function useProfileMutations() {
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
   const [profileError, setProfileError] = useState<AppApiError | null>(null);
   const [passwordError, setPasswordError] = useState<AppApiError | null>(null);
+  const [deleteError, setDeleteError] = useState<AppApiError | null>(null);
 
   const updateProfile = useCallback(
     async (input: UpdateProfileInput): Promise<MutationResult<UserProfile>> => {
@@ -64,14 +66,33 @@ export function useProfileMutations() {
     [],
   );
 
+  const deleteAccount = useCallback(async (): Promise<MutationResult<null>> => {
+    setIsDeletingAccount(true);
+    setDeleteError(null);
+    try {
+      await profileService.deleteAccount();
+      return { data: null, error: null };
+    } catch (err) {
+      const error = normalizeError(err);
+      setDeleteError(error);
+      return { data: null, error };
+    } finally {
+      setIsDeletingAccount(false);
+    }
+  }, []);
+
   return {
     updateProfile,
     changePassword,
+    deleteAccount,
     isUpdatingProfile,
     isChangingPassword,
+    isDeletingAccount,
     profileError,
     passwordError,
+    deleteError,
     clearProfileError: useCallback(() => setProfileError(null), []),
     clearPasswordError: useCallback(() => setPasswordError(null), []),
+    clearDeleteError: useCallback(() => setDeleteError(null), []),
   };
 }

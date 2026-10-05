@@ -11,15 +11,17 @@ export function ProfileSkeleton() {
       <div className="rounded-xl border border-neutral-200 bg-surface p-6 shadow-sm">
         <Skeleton className="h-6 w-44" />
         <Skeleton className="mt-2 h-4 w-64" />
-        <div className="mt-8 space-y-5">
-          <div className="space-y-1.5">
-            <Skeleton className="h-4 w-16" />
-            <Skeleton className="h-10 w-full" />
-          </div>
-          <div className="flex justify-end gap-3">
-            <Skeleton className="h-10 w-20" />
-            <Skeleton className="h-10 w-28" />
-          </div>
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {Array.from({ length: 7 }).map((_, index) => (
+            <div key={index} className="space-y-1.5">
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-10 w-full" />
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 flex justify-end gap-3">
+          <Skeleton className="h-10 w-20" />
+          <Skeleton className="h-10 w-28" />
         </div>
       </div>
 
@@ -27,14 +29,12 @@ export function ProfileSkeleton() {
       <div className="rounded-xl border border-neutral-200 bg-surface p-6 shadow-sm">
         <Skeleton className="h-6 w-24" />
         <div className="mt-6 space-y-6">
-          <div className="space-y-1">
-            <Skeleton className="h-4 w-12" />
-            <Skeleton className="h-4 w-48" />
-          </div>
-          <div className="space-y-1">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="h-4 w-32" />
-          </div>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div key={index} className="space-y-1">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-4 w-40" />
+            </div>
+          ))}
         </div>
       </div>
 

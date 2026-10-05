@@ -11,7 +11,7 @@ import {
 } from '@/features/profile';
 import { useProfile } from '@/features/profile/hooks/useProfile';
 import { useProfileMutations } from '@/features/profile/hooks/useProfileMutations';
-import type { UpdateProfileFormValues } from '@/features/profile/schemas/profile.schemas';
+import type { UpdateProfileInput } from '@/features/profile/types/profile.types';
 import { getProfileErrorMessage } from '@/features/profile/utils/profileError';
 import {
   DangerZonePanel,
@@ -53,7 +53,7 @@ export function SettingsPage() {
   } = useProfileMutations();
   const { showToast } = useToast();
 
-  const handleProfileSubmit = async (values: UpdateProfileFormValues) => {
+  const handleProfileSubmit = async (values: UpdateProfileInput) => {
     const result = await updateProfile(values);
 
     if (result.data) {

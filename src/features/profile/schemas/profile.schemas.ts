@@ -2,8 +2,40 @@ import { z } from 'zod';
 
 import {
   PASSWORD_RULES,
+  PROFILE_FIELD_RULES,
   PROFILE_NAME_RULES,
 } from '../constants/profile.constants';
+
+/**
+ * Optional text field helper.
+ *
+ * Empty strings are normalised to `undefined` so a partial PATCH never
+ * clears a field the user simply left blank. Length is only enforced
+ * when a value is present.
+ */
+function optionalText(maxLength: number, label: string) {
+  return z
+    .string()
+    .trim()
+    .max(maxLength, `${label} must be ${maxLength} characters or less.`)
+    .optional();
+}
+
+/**
+ * Optional URL field helper. Accepts an empty string (treated as not set)
+ * and otherwise requires a valid http(s) URL.
+ */
+function optionalUrl(maxLength: number, label: string) {
+  return z
+    .string()
+    .trim()
+    .max(maxLength, `${label} must be ${maxLength} characters or less.`)
+    .refine(
+      (value) => value === '' || /^https?:\/\/\S+$/i.test(value),
+      `${label} must be a valid URL starting with http:// or https://.`,
+    )
+    .optional();
+}
 
 export const updateProfileSchema = z.object({
   name: z
@@ -16,7 +48,21 @@ export const updateProfileSchema = z.object({
     .max(
       PROFILE_NAME_RULES.maxLength,
       `Name must be ${PROFILE_NAME_RULES.maxLength} characters or less.`,
-    ),
+    )
+    .optional(),
+  phone: optionalText(PROFILE_FIELD_RULES.phone.maxLength, 'Phone'),
+  address: optionalText(PROFILE_FIELD_RULES.address.maxLength, 'Address'),
+  city: optionalText(PROFILE_FIELD_RULES.city.maxLength, 'City'),
+  country: optionalText(PROFILE_FIELD_RULES.country.maxLength, 'Country'),
+  linkedinUrl: optionalUrl(
+    PROFILE_FIELD_RULES.linkedinUrl.maxLength,
+    'LinkedIn URL',
+  ),
+  githubUrl: optionalUrl(
+    PROFILE_FIELD_RULES.githubUrl.maxLength,
+    'GitHub URL',
+  ),
+  bio: optionalText(PROFILE_FIELD_RULES.bio.maxLength, 'Bio'),
 });
 
 export const changePasswordSchema = z

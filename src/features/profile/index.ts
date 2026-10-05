@@ -1,4 +1,5 @@
 export { AccountInfoCard } from './components/AccountInfoCard/AccountInfoCard';
+export { DeleteAccountCard } from './components/DeleteAccountCard/DeleteAccountCard';
 export { PasswordChangeForm } from './components/PasswordChangeForm/PasswordChangeForm';
 export { PasswordRequirements } from './components/PasswordRequirements/PasswordRequirements';
 export { ProfileError } from './components/ProfileError/ProfileError';
