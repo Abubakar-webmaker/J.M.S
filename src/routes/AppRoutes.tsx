@@ -25,6 +25,10 @@ import { PublicOnlyRoute } from './PublicOnlyRoute';
 export function AppRoutes() {
   return (
     <Routes>
+      {/* Root — ProtectedRoute sends unauthenticated users to /login,
+          authenticated users get redirected on to /app/dashboard. */}
+      <Route path="/" element={<Navigate to="/app/dashboard" replace />} />
+
       {/* Public-only routes — redirect to dashboard if already logged in */}
       <Route element={<PublicOnlyRoute />}>
         <Route path="/login" element={<LoginPage />} />
