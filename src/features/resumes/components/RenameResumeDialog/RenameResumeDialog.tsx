@@ -94,7 +94,7 @@ export function RenameResumeDialog({
       <form
         id="rename-resume-form"
         onSubmit={handleSubmit(submit)}
-        className="space-y-5"
+        className="space-y-6"
         noValidate
       >
         <Input

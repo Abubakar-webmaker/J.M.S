@@ -83,7 +83,7 @@ export default function EditApplicationPage() {
         description={`Update details for ${application.jobTitle} at ${application.companyName}.`}
       />
 
-      <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-surface p-5 shadow-sm sm:p-8">
+      <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
         <ApplicationForm
           mode="edit"
           application={application}

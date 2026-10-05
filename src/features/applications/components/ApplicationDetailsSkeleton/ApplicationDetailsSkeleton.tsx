@@ -26,7 +26,7 @@ export function ApplicationDetailsSkeleton() {
           <section className="rounded-xl border border-border bg-surface p-6">
             <Skeleton className="h-6 w-40" />
 
-            <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {Array.from({ length: 6 }).map((_, index) => (
                 <div key={index} className="space-y-2">
                   <Skeleton className="h-3 w-24" />
@@ -71,7 +71,7 @@ export function ApplicationDetailsSkeleton() {
         <section className="h-fit rounded-xl border border-border bg-surface p-6">
           <Skeleton className="h-6 w-40" />
 
-          <div className="mt-5 flex items-center gap-3">
+          <div className="mt-6 flex items-center gap-3">
             <Skeleton className="h-10 w-10 rounded-lg" />
 
             <div className="flex-1 space-y-2">

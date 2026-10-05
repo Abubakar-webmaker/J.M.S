@@ -37,7 +37,7 @@ export function ApplicationListSkeleton() {
         {Array.from({ length: 5 }).map((_, index) => (
           <div
             key={index}
-            className="rounded-lg border border-neutral-200 bg-surface p-5 shadow-sm"
+            className="rounded-lg border border-neutral-200 bg-surface p-6 shadow-sm"
           >
             <div className="flex justify-between gap-4">
               <div className="flex-1 space-y-2">

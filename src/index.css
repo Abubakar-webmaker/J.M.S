@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 /* ============================================================
@@ -189,6 +190,39 @@
   --color-primary-800: #a6f2b8;
   --color-primary-900: #d1fad9;
 
+  /* Success, warning, danger and info follow the same pattern:
+     dark, low-luminance tints for the -50/-100/-200 backgrounds
+     and brighter hues for the -500..-800 text/icon scales. */
+  --color-success-50: #052e16;
+  --color-success-100: #0a3d1f;
+  --color-success-200: #14532d;
+  --color-success-500: #22c55e;
+  --color-success-600: #4ade80;
+  --color-success-700: #86efac;
+  --color-success-800: #bbf7d0;
+
+  --color-warning-50: #2b1c04;
+  --color-warning-100: #3d2708;
+  --color-warning-200: #54330b;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #fbbf24;
+  --color-warning-700: #fcd34d;
+  --color-warning-800: #fde68a;
+
+  --color-danger-50: #2b0d0d;
+  --color-danger-100: #3d1313;
+  --color-danger-200: #551b1b;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #f87171;
+  --color-danger-700: #fca5a5;
+  --color-danger-800: #fecaca;
+
+  --color-info-50: #0d1b3d;
+  --color-info-100: #122752;
+  --color-info-500: #3b82f6;
+  --color-info-600: #60a5fa;
+  --color-info-700: #93c5fd;
+
   /* Soften card shadows for the near-black canvas */
   --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.4), 0 1px 3px 0 rgb(0 0 0 / 0.3);
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
@@ -308,6 +342,23 @@ svg {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-neutral-400);
+}
+
+/* ========================================
+   MOBILE DRAWER
+   ======================================== */
+
+@keyframes drawer-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-drawer-in {
+  animation: drawer-slide-in 200ms ease-out;
 }
 
 /* ========================================

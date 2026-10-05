@@ -149,7 +149,7 @@ export function UploadResumeDialog({
       <form
         id="upload-resume-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-5"
+        className="space-y-6"
         noValidate
       >
         <Input
@@ -191,7 +191,7 @@ export function UploadResumeDialog({
                 type="button"
                 disabled={isUploading}
                 onClick={() => inputRef.current?.click()}
-                className="flex w-full flex-col items-center justify-center rounded-xl border border-dashed border-border px-5 py-8 text-center transition-colors hover:border-primary-400 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex w-full flex-col items-center justify-center rounded-xl border border-dashed border-border px-6 py-8 text-center transition-colors hover:border-primary-400 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
                   <Upload className="h-5 w-5" aria-hidden="true" />

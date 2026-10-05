@@ -82,7 +82,7 @@ export function ChangeStatusDialog({
       <form
         id="change-status-form"
         onSubmit={handleSubmit(submit)}
-        className="space-y-5"
+        className="space-y-6"
         noValidate
       >
         <Select

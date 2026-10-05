@@ -60,7 +60,7 @@ export default function ResumeDetailsPage() {
             Resume details
           </h2>
 
-          <dl className="mt-5 space-y-4">
+          <dl className="mt-6 space-y-4">
             <div>
               <dt className="text-xs font-medium uppercase text-text-muted">
                 File name
@@ -89,7 +89,7 @@ export default function ResumeDetailsPage() {
           </h2>
 
           {resume.applicationReferences?.length ? (
-            <div className="mt-5 space-y-3">
+            <div className="mt-6 space-y-3">
               {resume.applicationReferences.map(
                 (application) => (
                   <div
@@ -108,7 +108,7 @@ export default function ResumeDetailsPage() {
               )}
             </div>
           ) : (
-            <p className="mt-5 text-sm text-text-muted">
+            <p className="mt-6 text-sm text-text-muted">
               This resume is not currently attached to any
               applications.
             </p>

@@ -80,7 +80,7 @@ export function LoginForm() {
       {sessionExpired && (
         <div
           role="alert"
-          className="mb-5 flex gap-2.5 rounded-lg border border-warning-200 bg-warning-50 p-3.5 text-warning-800 sm:gap-3 sm:p-4"
+          className="mb-6 flex gap-3 rounded-lg border border-warning-200 bg-warning-50 p-4 text-warning-800"
         >
           <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-warning-600" aria-hidden="true" />
           <div className="min-w-0">
@@ -94,7 +94,7 @@ export function LoginForm() {
       {passwordReset && (
         <div
           role="status"
-          className="mb-5 flex gap-2.5 rounded-lg border border-success-200 bg-success-50 p-3.5 text-success-800 sm:gap-3 sm:p-4"
+          className="mb-6 flex gap-3 rounded-lg border border-success-200 bg-success-50 p-4 text-success-800"
         >
           <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-success-600" aria-hidden="true" />
           <div className="min-w-0">
@@ -108,7 +108,7 @@ export function LoginForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="space-y-4 sm:space-y-5"
+        className="space-y-4 sm:space-y-6"
       >
         {/* Email field */}
         <Input
@@ -161,7 +161,7 @@ export function LoginForm() {
       </form>
 
       {/* Register link */}
-      <p className="mt-5 text-center text-sm text-neutral-600 sm:mt-6">
+      <p className="mt-6 text-center text-sm text-neutral-600">
         Don't have an account?{' '}
         <Link
           to="/register"

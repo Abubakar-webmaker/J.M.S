@@ -10,7 +10,7 @@ export function DashboardSkeleton() {
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="rounded-xl bg-surface p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+            className="rounded-xl bg-surface p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
           >
             <Skeleton className="mb-3.5 h-10 w-10 rounded-lg bg-neutral-200" />
             <Skeleton className="h-3.5 w-28 rounded-md bg-neutral-200" />

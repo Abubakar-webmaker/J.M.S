@@ -76,7 +76,7 @@ export function TableRow({
   return (
     <tr
       className={`border-b border-neutral-200 transition-colors ${
-        isHoverable ? 'hover:bg-neutral-100' : ''
+        isHoverable ? 'hover:bg-neutral-50 dark:hover:bg-neutral-800' : ''
       } ${className || ''}`}
       {...props}
     >

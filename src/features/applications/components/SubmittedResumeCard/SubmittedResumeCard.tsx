@@ -18,7 +18,7 @@ export function SubmittedResumeCard({ resume }: SubmittedResumeCardProps) {
       </div>
 
       {resume ? (
-        <div className="mt-5 space-y-4">
+        <div className="mt-6 space-y-4">
           <div className="flex min-w-0 items-center gap-3 rounded-lg border border-border bg-neutral-50 p-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
               <FileText className="h-5 w-5" aria-hidden="true" />
@@ -69,7 +69,7 @@ export function SubmittedResumeCard({ resume }: SubmittedResumeCardProps) {
           </div>
         </div>
       ) : (
-        <div className="mt-5 rounded-lg border border-dashed border-border bg-neutral-50 p-5 text-center">
+        <div className="mt-6 rounded-lg border border-dashed border-border bg-neutral-50 p-6 text-center">
           <FileText
             className="mx-auto h-8 w-8 text-text-muted"
             aria-hidden="true"

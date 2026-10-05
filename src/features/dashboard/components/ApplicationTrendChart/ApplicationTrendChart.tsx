@@ -25,7 +25,7 @@ export function ApplicationTrendChart() {
   return (
     <section
       aria-labelledby="trend-chart-heading"
-      className="rounded-xl bg-surface p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+      className="rounded-xl bg-surface p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
     >
       <div className="mb-4 flex items-center justify-between">
         <h2
