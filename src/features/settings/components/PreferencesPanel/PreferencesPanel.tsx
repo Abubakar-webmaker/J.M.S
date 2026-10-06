@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Card, Checkbox, Select, useToast } from '@/components/ui';
-import { ThemeSelector } from '@/features/theme';
+import { ThemeToggleSwitch } from '@/features/theme';
 
 /**
  * Preferences Panel
@@ -36,7 +36,7 @@ export function PreferencesPanel() {
         </div>
 
         <div className="pt-6">
-          <ThemeSelector />
+          <ThemeToggleSwitch />
         </div>
       </Card>
 

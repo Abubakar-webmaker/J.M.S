@@ -1,6 +1,8 @@
 import { Menu, Bell, Search } from 'lucide-react';
 import { useState } from 'react';
 
+import { ThemeToggle } from '@/features/theme';
+
 import { UserMenu } from '../UserMenu/UserMenu';
 
 interface HeaderProps {
@@ -61,8 +63,11 @@ export function Header({ onMenuClick }: HeaderProps) {
           </div>
         </div>
 
-        {/* Right: Notifications + User menu (pushed to the end) */}
+        {/* Right: Theme toggle + Notifications + User menu (pushed to the end) */}
         <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+          {/* Theme toggle */}
+          <ThemeToggle />
+
           {/* Notifications button */}
           <div className="relative shrink-0">
             <button
