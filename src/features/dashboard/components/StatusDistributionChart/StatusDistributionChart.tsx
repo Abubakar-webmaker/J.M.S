@@ -17,7 +17,7 @@ export function StatusDistributionChart() {
   return (
     <section
       aria-labelledby="status-chart-heading"
-      className="rounded-xl bg-surface p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+      className="rounded-xl bg-surface p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
     >
       <h2
         id="status-chart-heading"
@@ -26,7 +26,7 @@ export function StatusDistributionChart() {
         Application Status
       </h2>
 
-      <div className="flex flex-col items-center gap-5 sm:flex-row">
+      <div className="flex flex-col items-center gap-4 sm:flex-row">
         <div className="relative h-[180px] w-[180px] shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>

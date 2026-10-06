@@ -79,7 +79,7 @@ function FormSection({
 }: FormSectionProps) {
   return (
     <section className="overflow-hidden rounded-xl border border-neutral-200 bg-surface shadow-sm">
-      <header className="flex items-start gap-3 border-b border-neutral-200 bg-neutral-50/60 px-5 py-4">
+      <header className="flex items-start gap-3 border-b border-neutral-200 bg-neutral-50/60 px-6 py-4">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-700">
           {icon}
         </span>
@@ -92,7 +92,7 @@ function FormSection({
         </div>
       </header>
 
-      <div className="space-y-5 p-5">{children}</div>
+      <div className="space-y-6 p-6">{children}</div>
     </section>
   );
 }
@@ -236,7 +236,7 @@ export function ApplicationForm({
         title="Basic information"
         description="Enter the company and position details."
       >
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Input
             label="Company"
             placeholder="e.g. Microsoft"
@@ -269,7 +269,7 @@ export function ApplicationForm({
           {...register('jobUrl')}
         />
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Input
             label="Location"
             placeholder="e.g. Karachi / Remote"
@@ -318,7 +318,7 @@ export function ApplicationForm({
         title="Compensation"
         description="Add salary information when available."
       >
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Input
             label="Minimum salary"
             type="number"

@@ -71,12 +71,12 @@ export function Modal({
         aria-modal="true"
         aria-labelledby="modal-title"
         className={[
-          'relative z-10 w-full overflow-hidden rounded-xl',
+          'relative z-10 w-full overflow-hidden rounded-2xl',
           'border border-neutral-200 bg-surface shadow-xl',
           sizeStyles[size],
         ].join(' ')}
       >
-        <div className="flex items-start justify-between border-b border-neutral-200 px-5 py-4">
+        <div className="flex items-start justify-between border-b border-neutral-200 px-6 py-4">
           <div className="pr-4">
             <h2
               id="modal-title"
@@ -102,12 +102,12 @@ export function Modal({
           </button>
         </div>
 
-        <div className="max-h-[70vh] overflow-y-auto px-5 py-5">
+        <div className="max-h-[70vh] overflow-y-auto px-6 py-6">
           {children}
         </div>
 
         {footer && (
-          <div className="flex items-center justify-end gap-3 border-t border-neutral-200 px-5 py-4">
+          <div className="flex items-center justify-end gap-3 border-t border-neutral-200 px-6 py-4">
             {footer}
           </div>
         )}

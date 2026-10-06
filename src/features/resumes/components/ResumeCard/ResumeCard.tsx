@@ -35,7 +35,7 @@ export function ResumeCard({
   const isInUse = (resume.applicationCount ?? 0) > 0;
 
   return (
-    <article className="rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md sm:p-5">
+    <article className="rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md sm:p-6">
       <div className="flex items-start gap-4">
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
           <FileText className="h-5 w-5" aria-hidden="true" />

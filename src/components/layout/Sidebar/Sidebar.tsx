@@ -63,7 +63,7 @@ export function Sidebar({
           <button
             type="button"
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600"
             aria-label="Close navigation menu"
           >
             <X className="h-5 w-5" aria-hidden="true" />
@@ -94,7 +94,7 @@ export function Sidebar({
                   onClick={onClose}
                   className={({ isActive }) =>
                     [
-                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
+                      'flex min-h-10 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
                       isActive
                         ? 'bg-primary-50 text-primary-700'
                         : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',
@@ -131,7 +131,7 @@ export function Sidebar({
           onClick={onClose}
           className={({ isActive }) =>
             [
-              'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
+              'flex min-h-10 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600',
               isActive
                 ? 'bg-primary-50 text-primary-700'
                 : 'text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900',

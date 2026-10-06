@@ -52,7 +52,7 @@ export function RecentApplications() {
   return (
     <section
       aria-labelledby="recent-apps-heading"
-      className="rounded-xl bg-surface p-5 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+      className="rounded-xl bg-surface p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
     >
       <div className="mb-4 flex items-center justify-between">
         <h2
@@ -70,7 +70,8 @@ export function RecentApplications() {
         </Link>
       </div>
 
-      <table className="w-full border-collapse">
+      <div className="overflow-x-auto">
+      <table className="w-full min-w-[560px] border-collapse">
         <thead>
           <tr className="bg-neutral-50">
             <th className="rounded-l-md px-3 py-2.5 text-left text-[12px] font-medium uppercase tracking-[0.05em] text-neutral-500">
@@ -93,11 +94,12 @@ export function RecentApplications() {
             return (
               <tr
                 key={row.name}
-                className={
-                  index === ROWS.length - 1
-                    ? ''
-                    : 'border-b border-neutral-200'
-                }
+                className={[
+                  'transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800',
+                  index === ROWS.length - 1 ? '' : 'border-b border-neutral-200',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
               >
                 <td className="px-3 py-3.5 text-sm font-medium text-neutral-900">
                   {row.name}
@@ -121,6 +123,7 @@ export function RecentApplications() {
           })}
         </tbody>
       </table>
+      </div>
     </section>
   );
 }

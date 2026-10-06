@@ -1,4 +1,4 @@
-import { Spinner } from '@/components/ui';
+import { Skeleton } from '@/components/ui';
 
 export function AppLoadingScreen() {
   return (
@@ -7,12 +7,11 @@ export function AppLoadingScreen() {
       aria-busy="true"
       aria-label="Loading application"
     >
-      <div className="flex flex-col items-center gap-3">
-        <Spinner size="lg" />
+      <div className="flex w-full max-w-sm flex-col items-center gap-4 px-6">
+        <Skeleton className="h-10 w-10 rounded-full" />
+        <Skeleton className="h-4 w-32" />
 
-        <p className="text-sm text-text-muted">
-          Loading...
-        </p>
+        <p className="sr-only">Loading...</p>
       </div>
     </main>
   );

@@ -88,7 +88,7 @@ export function ProfileForm({
   return (
     <form onSubmit={handleFormSubmit} className="space-y-6" noValidate>
       {/* Basic details */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input
           id="profile-name"
           label="Full name"
@@ -110,7 +110,7 @@ export function ProfileForm({
       </div>
 
       {/* Location */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input
           id="profile-city"
           label="City"
@@ -140,7 +140,7 @@ export function ProfileForm({
       />
 
       {/* Links */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Input
           id="profile-linkedin"
           label="LinkedIn URL"

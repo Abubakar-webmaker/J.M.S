@@ -155,7 +155,7 @@ export function Modal({
         }
         className={`relative z-modal w-full ${sizeClasses[size]} overflow-hidden rounded-2xl border border-border bg-surface shadow-lg`}
       >
-        <div className="border-b border-border px-5 py-4 sm:px-6">
+        <div className="border-b border-border px-6 py-4">
           <h2
             id="modal-title"
             className="text-lg font-semibold text-text"
@@ -173,12 +173,12 @@ export function Modal({
           )}
         </div>
 
-        <div className="max-h-[70vh] overflow-y-auto px-5 py-5 sm:px-6">
+        <div className="max-h-[70vh] overflow-y-auto px-6 py-6">
           {children}
         </div>
 
         {footer && (
-          <div className="border-t border-border px-5 py-4 sm:px-6">
+          <div className="border-t border-border px-6 py-4">
             {footer}
           </div>
         )}

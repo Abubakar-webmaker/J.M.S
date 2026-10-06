@@ -118,7 +118,7 @@ export function DesignSystemPage() {
           />
 
           <Card>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2">
               <Input
                 label="Company"
                 placeholder="Enter company name"

@@ -50,10 +50,12 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={[
-          'rounded-lg border border-neutral-200 bg-surface',
+          'rounded-xl border border-neutral-200 bg-surface',
           paddingStyles[padding],
           variantStyles[variant],
-          hover ? 'transition-all duration-200 cursor-pointer' : 'transition-shadow duration-200',
+          hover
+            ? 'cursor-pointer transition-shadow duration-150 hover:shadow-md'
+            : 'transition-shadow duration-150',
           className,
         ]
           .filter(Boolean)

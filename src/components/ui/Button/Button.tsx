@@ -14,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
 }
 
-const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50';
+const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-lg font-bold transition-all duration-200 hover:brightness-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50';
 
 const variantStyles: Record<ButtonVariant, { className: string; style: CSSProperties }> = {
   primary: {

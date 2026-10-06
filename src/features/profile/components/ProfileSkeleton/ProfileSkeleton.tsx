@@ -11,7 +11,7 @@ export function ProfileSkeleton() {
       <div className="rounded-xl border border-neutral-200 bg-surface p-6 shadow-sm">
         <Skeleton className="h-6 w-44" />
         <Skeleton className="mt-2 h-4 w-64" />
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {Array.from({ length: 7 }).map((_, index) => (
             <div key={index} className="space-y-1.5">
               <Skeleton className="h-4 w-20" />

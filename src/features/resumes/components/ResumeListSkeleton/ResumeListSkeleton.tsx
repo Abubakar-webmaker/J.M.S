@@ -6,7 +6,7 @@ export function ResumeListSkeleton() {
       {Array.from({ length: 6 }).map((_, index) => (
         <div
           key={index}
-          className="rounded-xl border border-border bg-surface p-5"
+          className="rounded-xl border border-border bg-surface p-6"
         >
           <div className="flex gap-4">
             <Skeleton className="h-11 w-11 shrink-0 rounded-lg" />

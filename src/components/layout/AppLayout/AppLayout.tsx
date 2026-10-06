@@ -91,7 +91,7 @@ export function AppLayout() {
             />
 
             {/* Sidebar drawer */}
-            <div className="relative z-50 h-full">
+            <div className="relative z-50 h-full animate-drawer-in">
               <Sidebar
                 mobile
                 onClose={() => setMobileMenuOpen(false)}

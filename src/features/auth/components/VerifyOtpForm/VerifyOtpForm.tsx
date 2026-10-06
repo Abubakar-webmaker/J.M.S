@@ -113,7 +113,7 @@ export function VerifyOtpForm() {
 
   return (
     <>
-      <div className="mb-5 flex gap-2.5 rounded-lg border border-primary-200 bg-primary-50 p-3.5 text-primary-800 sm:gap-3 sm:p-4">
+      <div className="mb-6 flex gap-3 rounded-lg border border-primary-200 bg-primary-50 p-4 text-primary-800">
         <MailCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary-600" aria-hidden="true" />
         <div className="min-w-0">
           <p className="text-sm font-semibold">Check your email</p>
@@ -169,7 +169,7 @@ export function VerifyOtpForm() {
         </button>
       </div>
 
-      <p className="mt-5 text-center text-sm text-neutral-600 sm:mt-6">
+      <p className="mt-6 text-center text-sm text-neutral-600">
         Wrong email?{' '}
         <Link
           to="/register"

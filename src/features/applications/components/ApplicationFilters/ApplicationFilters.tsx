@@ -56,7 +56,7 @@ export function ApplicationFilters({
       aria-label="Application filters"
       className="overflow-hidden rounded-xl border border-neutral-200 bg-surface shadow-sm"
     >
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 bg-neutral-50/60 px-5 py-3.5">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-200 bg-neutral-50/60 px-6 py-4">
         <div className="flex items-center gap-2.5">
           <SlidersHorizontal
             className="h-4 w-4 text-neutral-500"
@@ -86,7 +86,7 @@ export function ApplicationFilters({
         </Button>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 lg:grid-cols-3">
         <Input
           label="Search"
           placeholder="Company or job title"
