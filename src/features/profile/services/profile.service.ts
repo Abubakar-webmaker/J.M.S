@@ -17,6 +17,10 @@ export const profileService = {
     return response.data;
   },
 
+  async deleteAccount(): Promise<void> {
+    await api.delete('/users/me');
+  },
+
   async changePassword(input: {
     currentPassword: string;
     newPassword: string;

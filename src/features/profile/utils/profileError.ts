@@ -40,6 +40,35 @@ export function getProfileErrorMessage(error: AppApiError): string {
   return error.message || 'Something went wrong. Please try again.';
 }
 
+export function getDeleteAccountErrorMessage(error: AppApiError): string {
+  if (error.status === 401) {
+    return 'Your session has expired. Please sign in again.';
+  }
+  if (error.status === 404) {
+    return 'This account no longer exists.';
+  }
+  if (error.status === 429) {
+    return 'Too many requests. Please wait and try again.';
+  }
+  if (error.status === 500 || error.status === 503) {
+    return 'Unable to delete your account right now. Please try again.';
+  }
+  if (!error.status) {
+    return 'Please check your internet connection and try again.';
+  }
+  return error.message || 'Something went wrong. Please try again.';
+}
+
+/** True when the API reported the user is no longer authenticated. */
+export function isUnauthorized(error: AppApiError): boolean {
+  return error.status === 401;
+}
+
+/** True when the API reported the user record could not be found. */
+export function isNotFound(error: AppApiError): boolean {
+  return error.status === 404;
+}
+
 export function getPasswordErrorMessage(error: AppApiError): string {
   if (error.status === 401) {
     return 'Current password is incorrect.';

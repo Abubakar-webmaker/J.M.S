@@ -3,6 +3,16 @@ export const PROFILE_NAME_RULES = {
   maxLength: 100,
 } as const;
 
+export const PROFILE_FIELD_RULES = {
+  phone: { maxLength: 30 },
+  address: { maxLength: 200 },
+  city: { maxLength: 100 },
+  country: { maxLength: 100 },
+  linkedinUrl: { maxLength: 255 },
+  githubUrl: { maxLength: 255 },
+  bio: { maxLength: 500 },
+} as const;
+
 export const PASSWORD_RULES = {
   minLength: 8,
   maxLength: 128,

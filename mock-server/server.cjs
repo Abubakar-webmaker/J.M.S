@@ -14,8 +14,9 @@
  *   Resumes:      GET  /resumes   GET /resumes/:id
  *                 POST /resumes   PATCH /resumes/:id
  *                 DELETE /resumes/:id
- *   Profile:      GET  /users/me   PATCH /users/me
- *                 POST /users/me/password
+ *   Profile:      GET    /users/me   PATCH /users/me
+ *                 DELETE /users/me
+ *                 POST   /users/me/password
  */
 
 const jsonServer = require('json-server');
@@ -63,8 +64,20 @@ function clearSessionCookie(res) {
 }
 
 function safeUser(user) {
-  const { password: _pw, ...rest } = user;
-  return rest;
+  const { password: _pw, isVerified, ...rest } = user;
+
+  return {
+    // Preserve the API contract: `isEmailVerified` is the public field.
+    isEmailVerified: Boolean(isVerified),
+    phone: null,
+    address: null,
+    city: null,
+    country: null,
+    linkedinUrl: null,
+    githubUrl: null,
+    bio: null,
+    ...rest,
+  };
 }
 
 function json(res, status, body) {
@@ -172,6 +185,13 @@ server.post('/auth/register', (req, res) => {
     email,
     password,
     avatarUrl: null,
+    phone: null,
+    address: null,
+    city: null,
+    country: null,
+    linkedinUrl: null,
+    githubUrl: null,
+    bio: null,
     isVerified: false,
     createdAt: now(),
     updatedAt: now(),
@@ -779,19 +799,61 @@ server.get('/users/me', requireAuth, (req, res) => {
   return json(res, 200, safeUser(req.currentUser));
 });
 
-// PATCH /users/me
+// PATCH /users/me — partial update; only provided fields are changed.
 server.patch('/users/me', requireAuth, (req, res) => {
-  const { name } = req.body || {};
-  if (!name) return json(res, 400, { message: 'Name is required.' });
+  const body = req.body || {};
+
+  const EDITABLE_FIELDS = [
+    'name',
+    'phone',
+    'address',
+    'city',
+    'country',
+    'linkedinUrl',
+    'githubUrl',
+    'bio',
+  ];
+
+  const updates = {};
+  for (const field of EDITABLE_FIELDS) {
+    if (field in body) updates[field] = body[field];
+  }
+
+  if ('name' in updates && !updates.name) {
+    return json(res, 400, { message: 'Name cannot be empty.' });
+  }
+
+  if (Object.keys(updates).length === 0) {
+    return json(res, 400, { message: 'No valid fields to update.' });
+  }
+
+  updates.updatedAt = now();
 
   db()
     .get('users')
     .find({ id: req.currentUser.id })
-    .assign({ name, updatedAt: now() })
+    .assign(updates)
     .write();
 
   const updated = db().get('users').find({ id: req.currentUser.id }).value();
   return json(res, 200, safeUser(updated));
+});
+
+// DELETE /users/me — permanently remove the account and all owned data.
+server.delete('/users/me', requireAuth, (req, res) => {
+  const userId = req.currentUser.id;
+
+  db().get('applications').remove({ userId }).write();
+  db().get('resumes').remove({ userId }).write();
+  db().get('users').remove({ id: userId }).write();
+
+  // Invalidate every session belonging to this user.
+  for (const [token, id] of sessions.entries()) {
+    if (id === userId) sessions.delete(token);
+  }
+
+  clearSessionCookie(res);
+  return res.status(204).end();
 });
 
 // POST /users/me/password

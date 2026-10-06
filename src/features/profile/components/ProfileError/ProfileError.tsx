@@ -3,14 +3,19 @@ import { RefreshCw } from 'lucide-react';
 import { Button, ErrorState } from '@/components/ui';
 
 interface ProfileErrorProps {
+  title?: string;
   message: string;
   onRetry: () => void;
 }
 
-export function ProfileError({ message, onRetry }: ProfileErrorProps) {
+export function ProfileError({
+  title = 'Unable to load profile',
+  message,
+  onRetry,
+}: ProfileErrorProps) {
   return (
     <ErrorState
-      title="Unable to load profile"
+      title={title}
       description={message}
       action={
         <Button
