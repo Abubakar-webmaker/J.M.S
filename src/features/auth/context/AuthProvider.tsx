@@ -32,7 +32,7 @@ export function AuthProvider({
   const refreshSession = useCallback(async () => {
     try {
       const response = await authService.getSession();
-      const currentUser = response.user ?? null;
+      const currentUser = response.data.user ?? null;
       setUser(currentUser);
       return currentUser;
     } catch {
@@ -73,8 +73,8 @@ export function AuthProvider({
   const login = useCallback(
     async (data: LoginInput) => {
       const response = await authService.login(data);
-      setUser(response.user);
-      return response.user;
+      setUser(response.data.user);
+      return response.data.user;
     },
     [],
   );
