@@ -35,7 +35,7 @@ export function ForgotPasswordForm() {
 
   const [step, setStep] = useState<Step>('email');
   const [email, setEmail] = useState('');
-  const [resetToken, setResetToken] = useState('');
+  const [otp, setOtp] = useState('');
 
   // ── Step 1: request OTP by email ─────────────────────────────────────
   const emailForm = useForm<ForgotPasswordFormValues>({
@@ -46,12 +46,12 @@ export function ForgotPasswordForm() {
   const onRequestOtp = async (values: ForgotPasswordFormValues) => {
     try {
       const result = await authService.forgotPassword(values);
-      setEmail(result.email);
+      setEmail(result.data.email);
       setStep('otp');
       showToast({
         variant: 'success',
         title: 'Code sent',
-        message: `We sent a ${OTP_LENGTH}-digit code to ${result.email}.`,
+        message: `We sent a ${OTP_LENGTH}-digit code to ${result.data.email}.`,
       });
     } catch (error) {
       if (error instanceof AppApiError) {
@@ -76,11 +76,7 @@ export function ForgotPasswordForm() {
 
   const onVerifyOtp = async (values: ResetPasswordOtpFormValues) => {
     try {
-      const result = await authService.verifyResetOtp({
-        email,
-        otp: values.otp,
-      });
-      setResetToken(result.resetToken);
+      setOtp(values.otp);
       setStep('password');
     } catch (error) {
       if (error instanceof AppApiError) {
@@ -104,7 +100,7 @@ export function ForgotPasswordForm() {
 
   const onResetPassword = async (values: ResetPasswordFormValues) => {
     try {
-      await authService.resetPassword({ resetToken, ...values });
+      await authService.resetPassword({ email, otp, password: values.password, confirmPassword: values.confirmPassword });
 
       navigate('/login', {
         replace: true,

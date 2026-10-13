@@ -35,7 +35,7 @@ export function VerifyOtpForm() {
   } = useForm<VerifyOtpFormValues>({
     resolver: zodResolver(verifyOtpSchema),
     mode: 'onTouched',
-    defaultValues: { otp: '' },
+    defaultValues: { email, otp: '' },
   });
 
   // Redirect back to register if there is no email to verify
@@ -93,7 +93,7 @@ export function VerifyOtpForm() {
       showToast({
         variant: 'success',
         title: 'Code sent',
-        message: `A new code was sent to ${result.email}.`,
+        message: `A new code was sent to ${result.data.email}.`,
       });
     } catch (error) {
       if (error instanceof AppApiError) {
