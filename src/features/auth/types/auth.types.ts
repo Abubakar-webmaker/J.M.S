@@ -45,7 +45,10 @@ export interface ResendOtpInput {
 }
 
 export interface AuthResponse {
-  user: User;
+  message: string;
+  data: {
+    user: User;
+  };
 }
 
 /**
@@ -76,5 +79,8 @@ export interface ResendOtpResponse {
 }
 
 export interface SessionResponse {
-  user: User | null;
+  message?: string;
+  data: {
+    user: User | null;
+  };
 }
