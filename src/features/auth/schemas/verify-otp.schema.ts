@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const OTP_LENGTH = 6;
 
 export const verifyOtpSchema = z.object({
+  email: z.string().email('Please enter a valid email address.'),
   otp: z
     .string()
     .trim()

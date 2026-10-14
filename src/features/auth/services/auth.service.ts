@@ -12,8 +12,6 @@ import type {
   SessionResponse,
   VerifyOtpInput,
   VerifyOtpResponse,
-  VerifyResetOtpInput,
-  VerifyResetOtpResponse,
 } from '../types/auth.types';
 
 export const authService = {
@@ -75,17 +73,6 @@ export const authService = {
   ): Promise<ForgotPasswordResponse> {
     const response = await api.post<ForgotPasswordResponse>(
       '/auth/forgot-password',
-      data,
-    );
-
-    return response.data;
-  },
-
-  async verifyResetOtp(
-    data: VerifyResetOtpInput,
-  ): Promise<VerifyResetOtpResponse> {
-    const response = await api.post<VerifyResetOtpResponse>(
-      '/auth/verify-reset-otp',
       data,
     );
 

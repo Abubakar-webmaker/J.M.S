@@ -91,7 +91,7 @@ export function AuthProvider({
   const verifyOtp = useCallback(
     async (data: VerifyOtpInput) => {
       const response = await authService.verifyOtp(data);
-      setUser(response.user);
+      setUser(response.data.user);
       return response;
     },
     [],

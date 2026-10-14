@@ -45,11 +45,11 @@ export function RegisterForm() {
       showToast({
         variant: 'success',
         title: 'Verify your email',
-        message: `We sent a ${OTP_LENGTH}-digit code to ${result.email}.`,
+        message: `We sent a ${OTP_LENGTH}-digit code to ${result.data.email}.`,
       });
 
       navigate(
-        `/verify-otp?email=${encodeURIComponent(result.email)}`,
+        `/verify-otp?email=${encodeURIComponent(result.data.email)}`,
         { replace: true },
       );
     } catch (error) {
