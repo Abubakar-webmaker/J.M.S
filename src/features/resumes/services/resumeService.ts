@@ -4,6 +4,7 @@ import { RESUME_UPLOAD_CONFIG } from '@/features/resumes/constants';
 import type {
   Resume,
   ResumeDetails,
+  ResumePagination,
   ResumeListParams,
   ResumeListResponse,
   UpdateResumeInput,
@@ -22,18 +23,21 @@ export const resumeService = {
     params?: ResumeListParams,
     signal?: AbortSignal,
   ): Promise<ResumeListResponse> {
-    const response = await api.get<ResumeListResponse>('/resumes', {
+    const response = await api.get<{ message: string; data: Resume[]; pagination: ResumePagination }>('/resumes', {
       params: buildResumeParams(params),
       signal,
     });
 
-    return response.data;
+    return {
+      data: response.data.data,
+      pagination: response.data.pagination,
+    };
   },
 
   async getResume(id: string): Promise<ResumeDetails> {
-    const response = await api.get<ResumeDetails>(`/resumes/${id}`);
+    const response = await api.get<{ message: string; data: ResumeDetails }>(`/resumes/${id}`);
 
-    return response.data;
+    return response.data.data;
   },
 
   async uploadResume(
@@ -51,7 +55,7 @@ export const resumeService = {
       formData.append('name', data.name.trim());
     }
 
-    const response = await api.post<Resume>('/resumes', formData, {
+    const response = await api.post<{ message: string; data: Resume }>('/resumes', formData, {
       timeout: RESUME_UPLOAD_CONFIG.timeoutMs,
       signal: options?.signal,
 
@@ -72,15 +76,15 @@ export const resumeService = {
       },
     });
 
-    return response.data;
+    return response.data.data;
   },
 
   async updateResume(id: string, data: UpdateResumeInput): Promise<Resume> {
-    const response = await api.patch<Resume>(`/resumes/${id}`, {
+    const response = await api.patch<{ message: string; data: Resume }>(`/resumes/${id}`, {
       name: data.name.trim(),
     });
 
-    return response.data;
+    return response.data.data;
   },
 
   async deleteResume(id: string): Promise<void> {

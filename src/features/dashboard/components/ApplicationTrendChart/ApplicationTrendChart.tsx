@@ -8,19 +8,37 @@ import {
   YAxis,
 } from 'recharts';
 
-import { DASHBOARD_ACTIVITY_DATA } from '../../constants/dashboard.constants';
+import type { ApplicationTrendPoint } from '../../types/dashboard.types';
+
+interface ApplicationTrendChartProps {
+  data?: ApplicationTrendPoint[];
+}
 
 /**
  * Application Activity Chart
  *
- * Line chart with green area fill, matching the JobManager spec.
- * X-axis: Jan–Sep, Y-axis: 0–40 step 10, dashed grid, no legend.
+ * Line chart with green area fill showing actual application trends.
+ * X-axis: dates, Y-axis: application counts, dashed grid, no legend.
  */
-export function ApplicationTrendChart() {
-  const chartData = DASHBOARD_ACTIVITY_DATA.labels.map((label, i) => ({
-    label,
-    count: DASHBOARD_ACTIVITY_DATA.values[i],
-  }));
+export function ApplicationTrendChart({ data = [] }: ApplicationTrendChartProps) {
+  if (!data || data.length === 0) {
+    return (
+      <section
+        aria-labelledby="trend-chart-heading"
+        className="rounded-xl bg-surface p-6 shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+      >
+        <h2
+          id="trend-chart-heading"
+          className="text-[15px] font-semibold text-neutral-900"
+        >
+          Application Activity
+        </h2>
+        <div className="h-[260px] flex items-center justify-center text-neutral-500">
+          No data available
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -35,13 +53,13 @@ export function ApplicationTrendChart() {
           Application Activity
         </h2>
 
-        <span className="text-xs text-neutral-500">Last 6 months</span>
+        <span className="text-xs text-neutral-500">Last {data.length} days</span>
       </div>
 
       <div className="h-[260px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={chartData}
+            data={data}
             margin={{ top: 4, right: 8, left: -20, bottom: 0 }}
           >
             <defs>
@@ -56,14 +74,12 @@ export function ApplicationTrendChart() {
               vertical={false}
             />
             <XAxis
-              dataKey="label"
+              dataKey="date"
               tick={{ fontSize: 11, fill: '#9CA3AF' }}
               tickLine={false}
               axisLine={false}
             />
             <YAxis
-              domain={[0, 40]}
-              ticks={[0, 10, 20, 30, 40]}
               tick={{ fontSize: 11, fill: '#9CA3AF' }}
               tickLine={false}
               axisLine={false}
@@ -77,6 +93,7 @@ export function ApplicationTrendChart() {
                 color: '#111827',
               }}
               cursor={{ stroke: '#D1D5DB' }}
+              formatter={(value) => [`${value} applications`, 'Count']}
             />
             <Area
               type="monotone"

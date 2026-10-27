@@ -100,7 +100,7 @@ export function ForgotPasswordForm() {
 
   const onResetPassword = async (values: ResetPasswordFormValues) => {
     try {
-      await authService.resetPassword({ email, otp, password: values.password, confirmPassword: values.confirmPassword });
+      await authService.resetPassword({ email, otp, newPassword: values.password });
 
       navigate('/login', {
         replace: true,

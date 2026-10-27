@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { OTP_LENGTH } from './verify-otp.schema';
 
 export const resetPasswordOtpSchema = z.object({
-  email: z.string().email('Please enter a valid email address.'),
   otp: z
     .string()
     .trim()
