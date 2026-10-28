@@ -31,8 +31,7 @@ export interface ForgotPasswordResponse {
 export interface ResetPasswordInput {
   email: string;
   otp: string;
-  password: string;
-  confirmPassword: string;
+  newPassword: string;
 }
 
 export interface VerifyOtpInput {

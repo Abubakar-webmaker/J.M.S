@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import { Button, Card, Input, Modal } from '@/components/ui';
+import { Button, Card, Input, Modal, useToast } from '@/components/ui';
+import { useProfileMutations } from '@/features/profile/hooks/useProfileMutations';
+import { useAuth } from '@/features/auth/context/useAuth';
 
 /**
  * Danger Zone Panel
@@ -11,8 +14,36 @@ import { Button, Card, Input, Modal } from '@/components/ui';
 export function DangerZonePanel() {
   const [open, setOpen] = useState(false);
   const [confirmation, setConfirmation] = useState('');
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+  const { logout } = useAuth();
+  const { deleteAccount, isDeletingAccount, deleteError } = useProfileMutations();
 
   const canDelete = confirmation.trim() === 'DELETE';
+
+  const handleDeleteAccount = async () => {
+    const result = await deleteAccount();
+
+    if (result.data === null && result.error === null) {
+      // Success
+      showToast({
+        variant: 'success',
+        title: 'Account deleted successfully.',
+      });
+      
+      // Logout and redirect
+      setTimeout(async () => {
+        await logout();
+        navigate('/');
+      }, 1000);
+    } else if (result.error) {
+      showToast({
+        variant: 'error',
+        title: 'Failed to delete account',
+        description: result.error.message,
+      });
+    }
+  };
 
   return (
     <>
@@ -65,8 +96,12 @@ export function DangerZonePanel() {
             >
               Cancel
             </Button>
-            <Button variant="danger" disabled={!canDelete}>
-              Delete account
+            <Button
+              variant="danger"
+              disabled={!canDelete || isDeletingAccount}
+              onClick={handleDeleteAccount}
+            >
+              {isDeletingAccount ? 'Deleting...' : 'Delete account'}
             </Button>
           </>
         }
@@ -77,6 +112,12 @@ export function DangerZonePanel() {
             applications, resumes, and all related data. This cannot be
             reversed.
           </p>
+
+          {deleteError && (
+            <div className="rounded-md bg-danger-50 p-3 text-sm text-danger-700">
+              {deleteError.message}
+            </div>
+          )}
 
           <Input
             id="delete-confirmation"

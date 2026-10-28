@@ -52,14 +52,17 @@ export function DashboardPage() {
             }
           >
             <div className="space-y-6">
-              <StatsGrid />
+              <StatsGrid summary={data.summary} />
 
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <ApplicationTrendChart />
-                <StatusDistributionChart />
+                <ApplicationTrendChart data={data.applicationTrend} />
+                <StatusDistributionChart 
+                  statusDistribution={data.statusDistribution}
+                  total={data.summary.totalApplications}
+                />
               </div>
 
-              <RecentApplications />
+              <RecentApplications applications={data.recentApplications} />
             </div>
           </div>
         )}

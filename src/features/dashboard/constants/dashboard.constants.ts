@@ -1,65 +1,23 @@
 import type { DashboardPeriod } from '../types/dashboard.types';
 
 export const DASHBOARD_PERIODS = [
-  { label: 'Last 6 months', value: 'month' },
+  { label: 'Last Week', value: 'week' as const },
+  { label: 'Last Month', value: 'month' as const },
+  { label: 'Last Quarter', value: 'quarter' as const },
+  { label: 'Last Year', value: 'year' as const },
 ] satisfies Array<{ value: DashboardPeriod; label: string }>;
 
 export const DEFAULT_DASHBOARD_PERIOD: DashboardPeriod = 'month';
 
-export const DASHBOARD_RECENT_APPLICATION_LIMIT = 5;
-
-/**
- * Static stat-card definitions matching the JobManager dashboard spec.
- */
-export const DASHBOARD_STATS = [
-  {
-    id: 'total',
-    title: 'Total Applications',
-    value: 108,
-    trend: '+12% from last month',
-    icon: 'briefcase',
-  },
-  {
-    id: 'week',
-    title: 'This Week',
-    value: 12,
-    trend: '+20% from last week',
-    icon: 'calendar',
-  },
-  {
-    id: 'interviews',
-    title: 'Interviews',
-    value: 8,
-    trend: '+14% from last month',
-    icon: 'message',
-  },
-  {
-    id: 'offers',
-    title: 'Offers',
-    value: 3,
-    trend: '+50% from last month',
-    icon: 'star',
-  },
-] as const;
-
-/** Line-chart data for "Application Activity". */
-export const DASHBOARD_ACTIVITY_DATA = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-  values: [3, 5, 4, 8, 10, 14, 18, 24, 30],
+// Map frontend period values to backend period values
+export const DASHBOARD_PERIOD_MAPPING: Record<DashboardPeriod, string> = {
+  'week': '7d',
+  'month': '30d',
+  'quarter': '90d',
+  'year': 'month', // Note: backend doesn't have a 'year' option, using 'month' as fallback
 };
 
-/** Donut-chart segments for "Application Status". */
-export const DASHBOARD_STATUS_DATA = [
-  { label: 'Applied', value: 32, color: '#3B82F6' },
-  { label: 'Screening', value: 18, color: '#93C5FD' },
-  { label: 'Interview', value: 15, color: '#14B8A6' },
-  { label: 'Offer', value: 15, color: '#22C55E' },
-  { label: 'Rejected', value: 20, color: '#F97316' },
-  { label: 'Ghosted', value: 10, color: '#EAB308' },
-  { label: 'Withdrawn', value: 5, color: '#9CA3AF' },
-] as const;
-
-export const DASHBOARD_STATUS_TOTAL = 108;
+export const DASHBOARD_RECENT_APPLICATION_LIMIT = 5;
 
 /** Badge color tokens by status. */
 export const DASHBOARD_BADGE_STYLES: Record<
