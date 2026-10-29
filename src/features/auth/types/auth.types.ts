@@ -18,25 +18,20 @@ export interface ForgotPasswordInput {
 
 /** Returned after requesting a password reset. An OTP is emailed instead of a link. */
 export interface ForgotPasswordResponse {
-  email: string;
-  otpExpiresAt: string;
+  message: string;
+  data: {
+    email: string;
+    otpExpiresAt: string;
+  };
 }
 
 /** Verifies the password-reset OTP before allowing a new password to be set. */
-export interface VerifyResetOtpInput {
-  email: string;
-  otp: string;
-}
 
-/** Returned once the reset OTP is confirmed; carries a one-time reset ticket. */
-export interface VerifyResetOtpResponse {
-  resetToken: string;
-}
 
 export interface ResetPasswordInput {
-  resetToken: string;
-  password: string;
-  confirmPassword: string;
+  email: string;
+  otp: string;
+  newPassword: string;
 }
 
 export interface VerifyOtpInput {
@@ -49,7 +44,10 @@ export interface ResendOtpInput {
 }
 
 export interface AuthResponse {
-  user: User;
+  message: string;
+  data: {
+    user: User;
+  };
 }
 
 /**
@@ -57,20 +55,31 @@ export interface AuthResponse {
  * active until the emailed OTP is verified, so no session is issued.
  */
 export interface RegisterResponse {
-  email: string;
-  otpExpiresAt: string;
-  requiresVerification: true;
+  message: string;
+  data: {
+    email: string;
+    otpExpiresAt: string;
+  };
 }
 
 export interface VerifyOtpResponse {
-  user: User;
+  message: string;
+  data: {
+    user: User;
+  };
 }
 
 export interface ResendOtpResponse {
-  email: string;
-  otpExpiresAt: string;
+  message: string;
+  data: {
+    email: string;
+    otpExpiresAt: string;
+  };
 }
 
 export interface SessionResponse {
-  user: User | null;
+  message?: string;
+  data: {
+    user: User | null;
+  };
 }

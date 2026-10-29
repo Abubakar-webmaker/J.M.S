@@ -1,4 +1,6 @@
 import type { ApplicationListParams } from '@/features/applications/types';
+import { toBackendJobType } from '@/constants/job';
+import { toBackendApplicationStatus } from '@/constants/application';
 
 export function buildApplicationParams(
   params: ApplicationListParams = {},
@@ -10,7 +12,8 @@ export function buildApplicationParams(
   }
 
   if (params.status) {
-    result.status = params.status;
+    // Convert frontend status (e.g., "Applied") to backend format (e.g., "APPLIED")
+    result.status = toBackendApplicationStatus(params.status);
   }
 
   if (params.location?.trim()) {
@@ -18,15 +21,17 @@ export function buildApplicationParams(
   }
 
   if (params.jobType) {
-    result.jobType = params.jobType;
+    // Convert frontend jobType (e.g., "Full-time") to backend format (e.g., "FULL_TIME")
+    result.jobType = toBackendJobType(params.jobType);
   }
 
+  // Backend expects 'fromDate' and 'toDate', not 'applicationDateFrom' and 'applicationDateTo'
   if (params.applicationDateFrom) {
-    result.applicationDateFrom = params.applicationDateFrom;
+    result.fromDate = params.applicationDateFrom;
   }
 
   if (params.applicationDateTo) {
-    result.applicationDateTo = params.applicationDateTo;
+    result.toDate = params.applicationDateTo;
   }
 
   if (params.page !== undefined) {

@@ -13,3 +13,8 @@ export const resetPasswordOtpSchema = z.object({
 export type ResetPasswordOtpFormValues = z.infer<
   typeof resetPasswordOtpSchema
 >;
+
+export type ResetPasswordOtpInput = {
+  email: string;
+  otp: string;
+};

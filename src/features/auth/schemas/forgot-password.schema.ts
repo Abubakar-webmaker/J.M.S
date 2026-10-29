@@ -10,3 +10,9 @@ export const forgotPasswordSchema = z.object({
 export type ForgotPasswordFormValues = z.infer<
   typeof forgotPasswordSchema
 >;
+
+export const resendOtpSchema = forgotPasswordSchema;
+
+export type ResendOtpFormValues = z.infer<
+  typeof resendOtpSchema
+>;

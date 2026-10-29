@@ -60,15 +60,20 @@ export function ProfilePage() {
   };
 
   const handleDeleteAccount = async () => {
+    console.log('[ProfilePage] Delete account handler called');
     const result = await deleteAccount();
+    console.log('[ProfilePage] Delete result:', result);
 
     if (!result.error) {
+      console.log('[ProfilePage] Delete successful');
       showToast({
         variant: 'success',
         title: 'Your account has been deleted.',
       });
       await logout();
       navigate('/login', { replace: true });
+    } else {
+      console.error('[ProfilePage] Delete error:', result.error.message);
     }
   };
 

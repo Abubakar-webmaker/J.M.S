@@ -30,7 +30,13 @@ export function DeleteAccountCard({
   };
 
   const handleDelete = async () => {
-    await onDelete();
+    console.log('[DeleteAccountCard] Delete button clicked');
+    try {
+      await onDelete();
+      console.log('[DeleteAccountCard] Delete completed successfully');
+    } catch (err) {
+      console.error('[DeleteAccountCard] Delete error:', err);
+    }
   };
 
   return (
