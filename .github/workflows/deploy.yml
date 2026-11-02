@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/jms-frontend:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/jms-frontend:latest
+          build-args: |
+            VITE_API_URL=${{ vars.VITE_API_URL }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            set -e
+            IMG=${{ secrets.DOCKERHUB_USERNAME }}/jms-frontend
+            NEW=$IMG:${{ github.sha }}
+            SA="${{ vars.SITE_ADDRESS }}"
+            ENVARG=""
+            [ -n "$SA" ] && ENVARG="-e SITE_ADDRESS=$SA"
+            PREV=$(docker inspect -f '{{.Config.Image}}' jms-frontend 2>/dev/null || true)
+            docker pull $NEW
+            docker rm -f jms-frontend 2>/dev/null || true
+            docker run -d --name jms-frontend --restart unless-stopped \
+              -p 80:80 -p 443:443 -v caddy_data:/data $ENVARG $NEW
+            sleep 8
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost || true)
+            case "$CODE" in
+              200|301|308) echo "Deploy OK ($CODE)" ;;
+              *)
+                echo "Health check failed ($CODE), rolling back"
+                docker rm -f jms-frontend || true
+                [ -n "$PREV" ] && docker run -d --name jms-frontend --restart unless-stopped \
+                  -p 80:80 -p 443:443 -v caddy_data:/data $ENVARG $PREV
+                exit 1 ;;
+            esac
+            docker image prune -f
