@@ -2,7 +2,19 @@ import { describe, expect, it } from 'vitest';
 import { AxiosError, AxiosHeaders } from 'axios';
 
 import { AppApiError } from '@/types/api';
-import api from './api';
+import api, { resolveApiUrl } from './api';
+
+describe('API URL resolver', () => {
+  it('resolves backend API URLs beneath the configured API base path', () => {
+    const viewUrl = new URL(resolveApiUrl('resumes/id/file'));
+    const downloadUrl = new URL(resolveApiUrl('resumes/id/file?download=true'));
+
+    expect(viewUrl.origin).toBe(new URL(import.meta.env.VITE_API_URL).origin);
+    expect(viewUrl.pathname).toBe('/api/resumes/id/file');
+    expect(downloadUrl.pathname).toBe('/api/resumes/id/file');
+    expect(downloadUrl.searchParams.get('download')).toBe('true');
+  });
+});
 
 /** Pull the response interceptor's rejected handler off the axios instance. */
 function rejectHandler() {

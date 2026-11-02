@@ -8,8 +8,8 @@ import {
 } from 'lucide-react';
 
 import { Badge, Button, Dropdown } from '@/components/ui';
-import { formatFileSize } from '@/features/resumes/utils';
 import type { Resume } from '@/features/resumes/types';
+import { resolveApiUrl } from '@/lib/api';
 
 interface ResumeCardProps {
   resume: Resume;
@@ -33,6 +33,7 @@ export function ResumeCard({
   disabled = false,
 }: ResumeCardProps) {
   const isInUse = (resume.applicationCount ?? 0) > 0;
+  const resumeUrl = resolveApiUrl(resume.fileUrl);
 
   return (
     <article className="rounded-xl border border-border bg-surface p-4 shadow-sm transition-shadow hover:shadow-md sm:p-6">
@@ -57,10 +58,6 @@ export function ResumeCard({
           </p>
 
           <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-text-muted">
-            <span>{formatFileSize(resume.fileSize)}</span>
-
-            <span aria-hidden="true">•</span>
-
             <time dateTime={resume.createdAt}>
               {formatDate(resume.createdAt)}
             </time>
@@ -94,7 +91,7 @@ export function ResumeCard({
           }
         >
           <a
-            href={resume.fileUrl}
+            href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${resume.name}`}
@@ -105,7 +102,7 @@ export function ResumeCard({
           </a>
 
           <a
-            href={resume.fileUrl}
+            href={`${resumeUrl}?download=true`}
             download
             aria-label={`Download ${resume.name}`}
             className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-100"

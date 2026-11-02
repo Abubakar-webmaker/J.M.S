@@ -4,14 +4,22 @@ import { AppApiError, type FieldError } from '@/types/api';
 
 import { isAuthEndpoint } from './authEndpoints';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: API_BASE_URL,
   withCredentials: true,
   timeout: 15_000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+export const resolveApiUrl = (url: string): string =>
+  new URL(
+    url.replace(/^\/+/, ''),
+    `${API_BASE_URL.replace(/\/+$/, '')}/`,
+  ).toString();
 
 // Only set Content-Type: application/json when the request body is NOT FormData.
 // For FormData (file uploads) we let Axios set the multipart/form-data boundary automatically.

@@ -6,8 +6,7 @@ export interface Resume {
 
   fileUrl: string;
 
-  mimeType: string;
-  fileSize: number;
+  fileType: string;
 
   applicationCount?: number;
 
@@ -23,7 +22,7 @@ export interface ResumeApplicationReference {
 }
 
 export interface ResumeDetails extends Resume {
-  applicationReferences: ResumeApplicationReference[];
+  applicationReferences?: ResumeApplicationReference[];
 }
 
 export interface UploadResumeInput {

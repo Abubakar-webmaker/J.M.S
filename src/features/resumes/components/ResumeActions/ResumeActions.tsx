@@ -7,6 +7,7 @@ import {
 
 import { Button, Dropdown } from '@/components/ui';
 import type { Resume } from '@/features/resumes/types';
+import { resolveApiUrl } from '@/lib/api';
 
 interface ResumeActionsProps {
   resume: Resume;
@@ -19,6 +20,8 @@ export function ResumeActions({
   onRename,
   disabled = false,
 }: ResumeActionsProps) {
+  const resumeUrl = resolveApiUrl(resume.fileUrl);
+
   return (
     <Dropdown
       trigger={
@@ -38,7 +41,7 @@ export function ResumeActions({
       }
     >
       <a
-        href={resume.fileUrl}
+        href={resumeUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 px-3 py-2 text-sm text-text hover:bg-neutral-50"
@@ -51,7 +54,7 @@ export function ResumeActions({
       </a>
 
       <a
-        href={resume.fileUrl}
+        href={`${resumeUrl}?download=true`}
         download
         className="flex items-center gap-2 px-3 py-2 text-sm text-text hover:bg-neutral-50"
       >
