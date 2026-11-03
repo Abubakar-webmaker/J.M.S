@@ -40,7 +40,7 @@ export function DangerZonePanel() {
       showToast({
         variant: 'error',
         title: 'Failed to delete account',
-        description: result.error.message,
+        message: result.error.message,
       });
     }
   };
