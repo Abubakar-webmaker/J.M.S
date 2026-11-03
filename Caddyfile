@@ -1,6 +1,14 @@
 {$SITE_ADDRESS::80} {
-    root * /srv
     encode gzip
-    try_files {path} /index.html
-    file_server
+
+    @backend path /api/* /uploads/*
+    handle @backend {
+        reverse_proxy jms-backend:5000
+    }
+
+    handle {
+        root * /srv
+        try_files {path} /index.html
+        file_server
+    }
 }
