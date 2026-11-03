@@ -3,8 +3,6 @@ import api from '@/lib/api';
 import type {
   DashboardResponse,
   GetDashboardParams,
-  StatusDistributionItem,
-  DashboardRecentApplication,
 } from '../types/dashboard.types';
 import { toFrontendApplicationStatus } from '@/constants/application';
 import { DASHBOARD_PERIOD_MAPPING } from '../constants/dashboard.constants';
