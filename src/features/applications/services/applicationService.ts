@@ -54,6 +54,24 @@ function convertApplicationFromBackend(backendApp: any): Application {
     (converted as any).notes = (converted as any).Notes;
     delete (converted as any).Notes;
   }
+
+  // API returns the referenced Resume as `resume`. The UI reads `submittedResume`.
+  if (!('submittedResume' in converted) && 'resume' in converted) {
+    const resume = (converted as any).resume;
+    (converted as any).submittedResume = resume
+      ? {
+          id: resume.id,
+          name: resume.name,
+          fileName: resume.fileName,
+          url: resume.url ?? resume.fileUrl ?? '',
+          uploadedAt: resume.uploadedAt ?? resume.createdAt,
+        }
+      : null;
+  }
+
+  if ('resume' in converted) {
+    delete (converted as any).resume;
+  }
   
   return converted as Application;
 }
@@ -119,9 +137,8 @@ function convertApplicationToBackend(frontendData: any): any {
     converted.currency = converted.salaryCurrency;
     delete converted.salaryCurrency;
   }
-  
-  if ('notes' in converted) {
-    converted.Notes = converted.notes;
+
+  if ('notes' in converted && converted.notes === undefined) {
     delete converted.notes;
   }
   
