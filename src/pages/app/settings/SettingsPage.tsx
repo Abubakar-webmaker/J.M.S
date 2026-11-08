@@ -143,6 +143,7 @@ export function SettingsPage() {
             error={
               passwordError ? getProfileErrorMessage(passwordError) : undefined
             }
+            showRecoveryButton
             onSubmit={handlePasswordSubmit}
           />
         </div>
