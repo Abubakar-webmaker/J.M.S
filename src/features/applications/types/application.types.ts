@@ -105,7 +105,7 @@ export interface UpdateApplicationInput {
   salaryCurrency?: string;
 
   jobDescription?: string;
-  notes?: string;
+  notes?: string | null;
 
   resumeId?: string | null;
 }

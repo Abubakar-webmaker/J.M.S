@@ -1,4 +1,4 @@
-import api from '@/lib/api';
+import api, { getApiUrl } from '@/lib/api';
 
 import type {
   AddApplicationNoteInput,
@@ -7,6 +7,7 @@ import type {
   ApplicationListParams,
   ApplicationListResponse,
   ApplicationPagination,
+  ApplicationResume,
   ChangeApplicationStatusInput,
   CreateApplicationInput,
   UpdateApplicationInput,
@@ -15,6 +16,30 @@ import type {
 import { buildApplicationParams } from '@/features/applications/utils/applicationParams';
 import { toFrontendApplicationStatus, toBackendApplicationStatus } from '@/constants/application';
 import { toFrontendJobType, toBackendJobType } from '@/constants/job';
+
+interface BackendResume {
+  id: string;
+  name: string;
+  fileName: string;
+  createdAt?: string;
+  uploadedAt?: string;
+}
+
+function convertResumeFromBackend(
+  backendResume: BackendResume | null | undefined,
+): ApplicationResume | null {
+  if (!backendResume) {
+    return null;
+  }
+
+  return {
+    id: backendResume.id,
+    name: backendResume.name,
+    fileName: backendResume.fileName,
+    url: getApiUrl(`/resumes/${backendResume.id}/file`),
+    uploadedAt: backendResume.createdAt ?? backendResume.uploadedAt,
+  };
+}
 
 // Helper function to convert backend application data to frontend format
 function convertApplicationFromBackend(backendApp: any): Application {
@@ -53,6 +78,15 @@ function convertApplicationFromBackend(backendApp: any): Application {
   if ('Notes' in converted && !('notes' in converted)) {
     (converted as any).notes = (converted as any).Notes;
     delete (converted as any).Notes;
+  }
+
+  if ('resume' in converted) {
+    converted.submittedResume = convertResumeFromBackend(converted.resume);
+    delete converted.resume;
+  } else if ('submittedResume' in converted) {
+    converted.submittedResume = convertResumeFromBackend(
+      converted.submittedResume,
+    );
   }
   
   return converted as Application;
@@ -118,11 +152,6 @@ function convertApplicationToBackend(frontendData: any): any {
   if ('salaryCurrency' in converted) {
     converted.currency = converted.salaryCurrency;
     delete converted.salaryCurrency;
-  }
-  
-  if ('notes' in converted) {
-    converted.Notes = converted.notes;
-    delete converted.notes;
   }
   
   return converted;
