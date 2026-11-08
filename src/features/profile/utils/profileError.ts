@@ -84,3 +84,10 @@ export function getPasswordErrorMessage(error: AppApiError): string {
   }
   return error.message || 'Something went wrong. Please try again.';
 }
+
+export function isIncorrectCurrentPassword(error: AppApiError): boolean {
+  return (
+    error.status === 400 &&
+    error.message === 'Current password is incorrect'
+  );
+}
