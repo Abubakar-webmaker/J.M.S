@@ -2,7 +2,10 @@ import { Card, useToast } from '@/components/ui';
 import { PasswordChangeForm } from '@/features/profile';
 import { useProfileMutations } from '@/features/profile/hooks/useProfileMutations';
 import type { ChangePasswordFormValues } from '@/features/profile/schemas/profile.schemas';
-import { getPasswordErrorMessage } from '@/features/profile/utils/profileError';
+import {
+  getPasswordErrorMessage,
+  isIncorrectCurrentPassword,
+} from '@/features/profile/utils/profileError';
 
 export function ChangePasswordPage() {
   const { changePassword, isChangingPassword, passwordError } =
@@ -48,6 +51,11 @@ export function ChangePasswordPage() {
               passwordError
                 ? getPasswordErrorMessage(passwordError)
                 : undefined
+            }
+            showForgotPasswordLink={
+              passwordError
+                ? isIncorrectCurrentPassword(passwordError)
+                : false
             }
             onSubmit={handleSubmit}
           />

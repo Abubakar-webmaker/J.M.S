@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
+import { Link } from 'react-router';
 
 import { Button, PasswordInput } from '@/components/ui';
 
@@ -12,6 +13,7 @@ import { PasswordRequirements } from '../PasswordRequirements/PasswordRequiremen
 interface PasswordChangeFormProps {
   isSubmitting: boolean;
   error?: string;
+  showForgotPasswordLink?: boolean;
   /** Returns true on success so the form can reset sensitive fields */
   onSubmit: (values: ChangePasswordFormValues) => Promise<boolean>;
 }
@@ -19,6 +21,7 @@ interface PasswordChangeFormProps {
 export function PasswordChangeForm({
   isSubmitting,
   error,
+  showForgotPasswordLink = false,
   onSubmit,
 }: PasswordChangeFormProps) {
   const {
@@ -93,9 +96,17 @@ export function PasswordChangeForm({
       />
 
       {error && (
-        <p role="alert" className="text-sm text-danger-600">
-          {error}
-        </p>
+        <div role="alert" className="space-y-1 text-sm text-danger-600">
+          <p>{error}</p>
+          {showForgotPasswordLink && (
+            <Link
+              to="/forgot-password"
+              className="font-medium text-primary-700 underline hover:text-primary-800"
+            >
+              Forgot password?
+            </Link>
+          )}
+        </div>
       )}
 
       <div className="flex justify-end">
