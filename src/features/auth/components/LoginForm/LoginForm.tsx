@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,6 +19,7 @@ import {
 } from '@/features/auth/schemas/login.schema';
 
 export function LoginForm() {
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
@@ -51,6 +53,8 @@ export function LoginForm() {
   });
 
   const onSubmit = async (values: LoginFormValues) => {
+    setInvalidCredentials(false);
+
     try {
       await login(values);
 
@@ -62,6 +66,14 @@ export function LoginForm() {
       navigate(from, { replace: true });
     } catch (error) {
       if (error instanceof AppApiError) {
+        if (
+          error.status === 401 &&
+          error.message === 'Invalid Credentials'
+        ) {
+          setInvalidCredentials(true);
+          return;
+        }
+
         showToast({ variant: 'error', title: 'Error', message: error.message });
         return;
       }
@@ -148,6 +160,21 @@ export function LoginForm() {
             {...register('password')}
           />
         </div>
+
+        {invalidCredentials && (
+          <div
+            role="alert"
+            className="rounded-lg border border-danger-200 bg-danger-50 p-3 text-sm text-danger-700"
+          >
+            <p>Email or password is incorrect.</p>
+            <Link
+              to="/forgot-password"
+              className="mt-1 inline-block font-semibold text-primary-700 underline hover:text-primary-800"
+            >
+              Forgot password? Reset it with an email verification code.
+            </Link>
+          </div>
+        )}
 
         {/* Submit button */}
         <Button

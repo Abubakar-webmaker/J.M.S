@@ -29,12 +29,15 @@ export function AppRoutes() {
           authenticated users get redirected on to /app/dashboard. */}
       <Route path="/" element={<Navigate to="/app/dashboard" replace />} />
 
+      {/* Password recovery is available to signed-in users who cannot verify
+          their current password, as well as signed-out users. */}
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
       {/* Public-only routes — redirect to dashboard if already logged in */}
       <Route element={<PublicOnlyRoute />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verify-otp" element={<VerifyOtpPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Route>
 

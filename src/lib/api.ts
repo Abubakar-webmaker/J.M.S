@@ -13,6 +13,10 @@ const api = axios.create({
   },
 });
 
+export function getApiUrl(path: string): string {
+  return api.getUri({ url: path });
+}
+
 // Only set Content-Type: application/json when the request body is NOT FormData.
 // For FormData (file uploads) we let Axios set the multipart/form-data boundary automatically.
 api.interceptors.request.use((config) => {

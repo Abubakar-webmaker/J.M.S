@@ -1,4 +1,4 @@
-import api from '@/lib/api';
+import api, { getApiUrl } from '@/lib/api';
 
 import { RESUME_UPLOAD_CONFIG } from '@/features/resumes/constants';
 import type {
@@ -11,6 +11,13 @@ import type {
   UploadResumeInput,
 } from '@/features/resumes/types';
 import { buildResumeParams } from '@/features/resumes/utils';
+
+function withApiFileUrl<T extends Resume>(resume: T): T {
+  return {
+    ...resume,
+    fileUrl: getApiUrl(resume.fileUrl),
+  };
+}
 
 export interface ResumeUploadProgress {
   loaded: number;
@@ -29,7 +36,7 @@ export const resumeService = {
     });
 
     return {
-      data: response.data.data,
+      data: response.data.data.map(withApiFileUrl),
       pagination: response.data.pagination,
     };
   },
@@ -37,7 +44,7 @@ export const resumeService = {
   async getResume(id: string): Promise<ResumeDetails> {
     const response = await api.get<{ message: string; data: ResumeDetails }>(`/resumes/${id}`);
 
-    return response.data.data;
+    return withApiFileUrl(response.data.data);
   },
 
   async uploadResume(
@@ -76,7 +83,7 @@ export const resumeService = {
       },
     });
 
-    return response.data.data;
+    return withApiFileUrl(response.data.data);
   },
 
   async updateResume(id: string, data: UpdateResumeInput): Promise<Resume> {
@@ -84,7 +91,7 @@ export const resumeService = {
       name: data.name.trim(),
     });
 
-    return response.data.data;
+    return withApiFileUrl(response.data.data);
   },
 
   async deleteResume(id: string): Promise<void> {

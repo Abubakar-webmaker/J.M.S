@@ -190,7 +190,7 @@ export function ApplicationForm({
       salaryMax: data.salaryMax,
       salaryCurrency: data.salaryCurrency?.trim() || undefined,
       jobDescription: data.jobDescription?.trim() || undefined,
-      notes: data.notes?.trim() || undefined,
+      notes: data.notes?.trim() || null,
       resumeId: data.resumeId?.trim() || null,
     };
 
